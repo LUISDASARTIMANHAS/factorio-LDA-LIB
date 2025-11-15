@@ -1,14 +1,14 @@
 {
-    "name": "MOD-name",
+    "name": "LDA-LIB",
     "version": "0.0.1",
-    "title": "MOD name",
+    "title": "LUIS DAS ARTIMANHAS - Biblioteca Utilitária",
     "author": "LUISDASARTIMANHAS",
     "contact": "luisaugustodesouza785@gmail.com",
     "homepage": "https://github.com/LUISDASARTIMANHAS",
-    "description": "MOD description.",
+    "description": "Biblioteca utilitária para criação rápida de itens, receitas e outros protótipos Factorio..",
     "factorio_version": "2.0",
     "dependencies": [
-        "base",
+        "base >= 2.0.0",
         "flib",
         "stdlib"
     ],
