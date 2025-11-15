@@ -8,11 +8,11 @@ local createItemWithRecipe = require("generic-functions.create-item-with-recipe"
 
 local Module = {}
 
-function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients)
+function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients,crafted_in)
     local results = {
         {type = "item", name = name, amount = qtde}
     }
-    local crafted_in = "smelting-facility"
+    local crafted_in = "smelting"
     local subgroup = "natural-resources"
     local size = 200
 
