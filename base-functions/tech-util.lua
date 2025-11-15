@@ -113,47 +113,60 @@ function Module.processUnlocks(unlocks,modtag)
     return processed_unlocks
 end
 
---- Processa a entrada 'ingredients' para garantir a nomenclatura "DSP-" correta.
--- Aceita a lista de ingredientes e adiciona o prefixo "DSP-" para itens do mod,
--- enquanto mantém os nomes originais para itens do jogo base.
--- @param ingredients table A lista de ingredientes no formato {{"item-name", amount}, ...}.
--- @return table A lista de ingredientes formatada corretamente.
+--- Processa uma lista de ingredientes em formato compacto ou detalhado.
+-- @param ingredients table Lista original de ingredientes.
+-- @return table Lista convertida no formato padronizado {"item", quantidade}.
 function Module.processIngredients(ingredients)
     local processed_ingredients = {}
+
     if ingredients then
         for i, ingredient in ipairs(ingredients) do
-            -- Validar se o ingrediente é uma tabela e tem pelo menos 2 elementos
-            if not (type(ingredient) == "table" and #ingredient >= 2) then
-                error("LDA TECH-UTIL ERR: O ingrediente no índice " .. i .. " não está formatado corretamente. Ele deve ser uma tabela com pelo menos um nome e uma quantidade, por exemplo, {'nome-do-item', 1}.")
+
+            local item_name
+            local item_amount
+
+            -- FORMATO DETALHADO: { name="iron-plate", amount=3 }
+            if type(ingredient) == "table" and ingredient.name and ingredient.amount then
+                item_name = ingredient.name
+                item_amount = ingredient.amount
+
+            -- FORMATO COMPACTO: { "iron-plate", 3 }
+            elseif type(ingredient) == "table" and #ingredient >= 2 then
+                item_name = ingredient[1]
+                item_amount = ingredient[2]
+
+            else
+                error(
+                    "LDA TECH-UTIL ERR: O ingrediente no índice " .. i ..
+                    " está mal formatado. Suportado: {'item', 1} ou {name='item', amount=1}."
+                )
             end
 
-            local item_name = ingredient[1]
-            local item_amount = ingredient[2]
-            local final_item_name = item_name
-
-            -- Validar se o nome e a quantidade existem e estão nos tipos corretos
-            if not (type(item_name) == "string" and type(item_amount) == "number") then
-                error("LDA TECH-UTIL ERR: O ingrediente no índice " .. i .. " tem tipos incorretos. O nome deve ser uma string e a quantidade deve ser um número.")
+            -- Valida tipos
+            if type(item_name) ~= "string" or type(item_amount) ~= "number" then
+                error(
+                    "LDA TECH-UTIL ERR: Ingrediente inválido no índice " .. i ..
+                    ". 'name' deve ser string e 'amount' um número."
+                )
             end
 
-            -- Se o item não está na lista de exceções, adicione o prefixo
-            if not base_game_recipes_and_items[item_name] then
-                final_item_name =  item_name
-            end
+            -- Prefixos especiais (sua lógica original)
+            local final_item_name = base_game_recipes_and_items[item_name]
+                and item_name
+                or item_name
+
             table.insert(
                 processed_ingredients,
-                {
-                    final_item_name,
-                    item_amount
-                }
+                {final_item_name, item_amount}
             )
         end
+
     else
-        -- pacote de ciencia padrão padrão se 'unlocks' for nil
         processed_ingredients = {
             {"automation-science-pack", 1}
         }
     end
+
     return processed_ingredients
 end
 

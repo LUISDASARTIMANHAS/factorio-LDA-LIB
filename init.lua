@@ -8,25 +8,25 @@ local LDA = {}
 -- IMPORTAÇÕES DOS MÓDULOS
 ---------------------------------------------------------------------
 -- BASE FUNCTIONS
-local CO   = require("base-functions.create-ore")
-local CI   = require("base-functions.create-item")
-local CBI  = require("base-functions.create-block-item")
-local CF   = require("base-functions.create-fluid")
-local CG   = require("base-functions.create-gas")
-local CR   = require("base-functions.create-recipe")
+local CO = require("base-functions.create-ore")
+local CI = require("base-functions.create-item")
+local CBI = require("base-functions.create-block-item")
+local CF = require("base-functions.create-fluid")
+local CG = require("base-functions.create-gas")
+local CR = require("base-functions.create-recipe")
+local CIS = require("base-functions.create-item-search")
 
 -- GENERIC FUNCTIONS
-local CIR  = require("generic-functions/create-item-with-recipe")
-local CFR  = require("generic-functions/create-fluid-with-recipe")
+local CIR = require("generic-functions/create-item-with-recipe")
+local CFR = require("generic-functions/create-fluid-with-recipe")
 local CBIR = require("generic-functions.create-block-item-with-recipe")
-local CGR  = require("generic-functions.create-generic-recipe")
+local CGR = require("generic-functions.create-generic-recipe")
 
 -- ADVANCED FUNCTIONS
 local CSIR = require("functions.create-smelting-item-with-recipe")
 local CAIR = require("functions.create-assembler-item-with-recipe")
 local TECH = require("functions.create-technology")
 local TECHTRIGGER = require("functions.create-technology-trigger")
-
 
 ---------------------------------------------------------------------
 -- API PÚBLICA
@@ -39,6 +39,7 @@ local TECHTRIGGER = require("functions.create-technology-trigger")
 --- @field createFluid fun(...) Cria um fluido.
 --- @field createGas fun(...) Cria um gás.
 --- @field createRecipe fun(...) Cria uma receita.
+--- @field createItemSearch fun(...) Cria itens de pesquisa como kits cientificos.
 --- @field createItemWithRecipe fun(...) Item + receita.
 --- @field createFluidWithRecipe fun(...) Fluido + receita.
 --- @field createBlockItemWithRecipe fun(...) Bloco + receita.
@@ -61,6 +62,7 @@ LDA.functions = {
     createAssemblerItemWithRecipe = CAIR.createAssemblerItemWithRecipe,
     createTechnology = TECH.createTechnology,
     createTechnologyTrigger = TECHTRIGGER.createTechnologyTrigger,
+    createItemSearch = CIS.createItemSearch,
     createGenericRecipe = CGR.createGenericRecipe
 }
 
