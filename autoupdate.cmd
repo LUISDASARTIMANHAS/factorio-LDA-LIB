@@ -89,7 +89,7 @@ set "AUTO_SEND=%AUTO_SEND: =%"
 
 if /i "%AUTO_SEND%"=="False" (
     echo Compactacao terminada. Auto publicar desativado. Saindo...
-    pause
+    timeout /T 10
     exit /b 0
 )
 :: Publica o mod no Factorio
