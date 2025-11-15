@@ -1,5 +1,5 @@
 local path_main = "__Dyson-Sphere-Program-Lib__/"
-local techUtil = require("functions.generic-functions.tech-util")
+local techUtil = require("generic-functions.tech-util")
 local Module = {}
 
 -- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").

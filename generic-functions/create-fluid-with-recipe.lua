@@ -1,5 +1,5 @@
-local createFluid = require("functions.generic-functions.create-fluid")
-local createRecipe = require("functions.generic-functions.create-recipe")
+local createFluid = require("generic-functions.create-fluid")
+local createRecipe = require("generic-functions.create-recipe")
 
 local Module = {}
 

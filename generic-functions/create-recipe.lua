@@ -1,5 +1,5 @@
 local Module = {}
-local techUtil = require("functions.generic-functions.tech-util")
+local techUtil = require("generic-functions.tech-util")
 
 
 function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results)

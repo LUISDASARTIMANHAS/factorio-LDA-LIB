@@ -1,5 +1,5 @@
-local createBlock = require("functions.generic-functions.create-block-item")
-local createRecipe = require("functions.generic-functions.create-recipe")
+local createBlock = require("generic-functions.create-block-item")
+local createRecipe = require("generic-functions.create-recipe")
 
 local Module = {}
 

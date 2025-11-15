@@ -1,5 +1,5 @@
-local createItemSearch = require("functions.generic-functions.create-item-search")
-local createRecipe = require("functions.generic-functions.create-recipe")
+local createItemSearch = require("generic-functions.create-item-search")
+local createRecipe = require("generic-functions.create-recipe")
 
 -- category = "science-matrices" feito em Matrix Lab
 
