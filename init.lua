@@ -23,9 +23,7 @@ local CGR  = require("__LDA-LIB__/generic-functions/create-generic-recipe")
 
 -- ADVANCED FUNCTIONS
 local CSIR = require("__LDA-LIB__/functions/create-smelting-item-with-recipe")
-local CIRM = require("__LDA-LIB__/functions/create-item-with-recipe-matrix")   -- SE EXISTIR
 local CAIR = require("__LDA-LIB__/functions/create-assembler-item-with-recipe")
-local CPCIR = require("__LDA-LIB__/functions/create-particle-collider-item-with-recipe")
 local TECH = require("__LDA-LIB__/functions/create-technology")
 
 
