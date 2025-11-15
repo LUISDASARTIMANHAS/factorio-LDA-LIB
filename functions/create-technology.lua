@@ -21,7 +21,7 @@ function Module.createTechnology(name, ingredients, prerequisites, unlocks, pack
     local final_unlocks = techUtil.processUnlocks(unlocks)
 
     -- Processar os desbloqueios (unlocks) usando a sub-função
-    local final_ingredients = techUtil.processIngredients(ingredients)
+    local final_ingredients = techUtil.processUnlockIngredients(ingredients)
 
     return {
         type = "technology",
@@ -39,5 +39,42 @@ function Module.createTechnology(name, ingredients, prerequisites, unlocks, pack
         order = "a-b-c".. name
     }
 end
+
+-- example return
+--   {
+--     type = "technology",
+--     name = "physical-projectile-damage-2",
+--     icons = util.technology_icon_constant_damage(physical_projectile_damage_1_icon),
+--     effects =
+--     {
+--       {
+--         type = "ammo-damage",
+--         ammo_category = "bullet",
+--         modifier = 0.1
+--       },
+--       {
+--         type = "turret-attack",
+--         turret_id = "gun-turret",
+--         modifier = 0.1
+--       },
+--       {
+--         type = "ammo-damage",
+--         ammo_category = "shotgun-shell",
+--         modifier = 0.1
+--       }
+--     },
+--     prerequisites = {"physical-projectile-damage-1", "logistic-science-pack"},
+--     unit =
+--     {
+--       count = 100 * 2,
+--       ingredients =
+--       {
+--         {"automation-science-pack", 1},
+--         {"logistic-science-pack", 1}
+--       },
+--       time = 30
+--     },
+--     upgrade = true
+--   }
 
 return Module

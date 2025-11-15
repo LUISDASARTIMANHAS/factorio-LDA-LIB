@@ -1,10 +1,9 @@
 local Module = {}
-local techUtil = require("base-functions.tech-util")
 local getModPath = require("base-functions.get-mod-path")
 local path_main = getModPath()
 
 
-function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results)
+function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results,alternative_unlock_methods)
     for _, v in ipairs(ingredients) do
         if v.type ~= "item" and v.type ~= "fluid" then
             error("Tipo de ingrediente inválido: '" .. tostring(v.type) .. "' em " .. name)
@@ -26,12 +25,12 @@ function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, resu
         energy_required = time,
         icon = icon_path,
         icon_size = 128,
-        ingredients = techUtil.processIngredients(ingredients),
+        ingredients = ingredients,
         results = results,
         maximum_productivity = 2,
         allow_quality = true,
         allowed_module_categories = {"productivity", "speed"},
-        alternative_unlock_methods = {"tech-dyson-sphere-program"}
+        alternative_unlock_methods = alternative_unlock_methods
     }
 end
 

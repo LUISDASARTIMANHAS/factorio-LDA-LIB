@@ -78,6 +78,7 @@ end
 -- @param modtag string (mymod-) usado para verificar se a receita está na lista de exceções do jogo base
 -- @return table A tabela de efeitos no formato Factorio.
 function Module.processUnlocks(unlocks,modtag)
+    local modtag = "DPS-"
     local processed_unlocks = {}
     if unlocks then
         -- Verificar se 'unlocks' é uma lista simples de nomes de receitas (strings)
@@ -113,39 +114,37 @@ function Module.processUnlocks(unlocks,modtag)
     return processed_unlocks
 end
 
---- Processa uma lista de ingredientes em formato compacto ou detalhado.
+--- Processa uma lista de pacotes de ciencias em formato compacto. por ex:
+--- {
+--     {"electromagnetic-matrix", 1}
+-- },
 -- @param ingredients table Lista original de ingredientes.
 -- @return table Lista convertida no formato padronizado {"item", quantidade}.
-function Module.processIngredients(ingredients)
-    local processed_ingredients = {}
+function Module.processUnlockIngredients(scienceIngredients)
+    local processed_scienceIngredients = {}
 
-    if ingredients then
-        for i, ingredient in ipairs(ingredients) do
+    if scienceIngredients then
+        for i, scienceIngredient in ipairs(scienceIngredients) do
 
             local item_name
             local item_amount
 
-            -- FORMATO DETALHADO: { name="iron-plate", amount=3 }
-            if type(ingredient) == "table" and ingredient.name and ingredient.amount then
-                item_name = ingredient.name
-                item_amount = ingredient.amount
-
             -- FORMATO COMPACTO: { "iron-plate", 3 }
-            elseif type(ingredient) == "table" and #ingredient >= 2 then
-                item_name = ingredient[1]
-                item_amount = ingredient[2]
+            if type(scienceIngredient) == "table" and #scienceIngredient >= 2 then
+                item_name = scienceIngredient[1]
+                item_amount = scienceIngredient[2]
 
             else
                 error(
                     "LDA TECH-UTIL ERR: O ingrediente no índice " .. i ..
-                    " está mal formatado. Suportado: {'item', 1} ou {name='item', amount=1}."
+                    " está mal formatado. Suportado: { iron-plate', 3 }."
                 )
             end
 
             -- Valida tipos
             if type(item_name) ~= "string" or type(item_amount) ~= "number" then
                 error(
-                    "LDA TECH-UTIL ERR: Ingrediente inválido no índice " .. i ..
+                    "LDA TECH-UTIL ERR: science Ingredient inválido no índice " .. i ..
                     ". 'name' deve ser string e 'amount' um número."
                 )
             end
@@ -156,22 +155,18 @@ function Module.processIngredients(ingredients)
                 or item_name
 
             table.insert(
-                processed_ingredients,
+                processed_scienceIngredients,
                 {final_item_name, item_amount}
             )
         end
 
     else
-        processed_ingredients = {
+        processed_scienceIngredients = {
             {"automation-science-pack", 1}
         }
     end
 
-    return processed_ingredients
+    return processed_scienceIngredients
 end
 
 return Module
-
---  a função processUnlocks está automaticamente adicionando o prefixo "DSP-" a todas as receitas, mesmo aquelas que já existem no jogo base, como transport-belt. Isso faz com que o jogo procure por uma receita que não existe (DSP-transport-belt) e cause um erro.
-
--- A solução é exatamente o que você sugeriu: criar uma "lista negra" ou, mais precisamente, uma lista de receitas do jogo base que não devem receber o prefixo. A função processUnlocks precisa verificar se o nome da receita está nessa lista antes de adicionar "DSP-".
