@@ -1,48 +1,72 @@
 --- LDA-LIB - Init
---- Carrega automaticamente todas as funções da lib de forma modular.
+--- Biblioteca central que exporta todas as funções utilitárias.
+--- Segue o padrão estático obrigatório do Factorio (require explícito).
 
 local LDA = {}
 
---- Log formatado
--- @param msg string
-local function log_debug(msg)
-    if settings.startup["lda-lib-debug"] and settings.startup["lda-lib-debug"].value then
-        log("[LDA-LIB]: " .. msg)
-    end
-end
+---------------------------------------------------------------------
+-- IMPORTAÇÕES DOS MÓDULOS
+---------------------------------------------------------------------
 
---- Importa todas as funções de um diretório dentro do mod.
--- @param path string Caminho para a pasta
--- @return table Tabela com os módulos carregados
-local function import_directory(path)
-    local modules = {}
+local CO = require("__LDA-LIB__/generic-functions/create-ore")
+local CI = require("__LDA-LIB__/generic-functions/create-item")
+local CBI = require("__LDA-LIB__/generic-functions/create-block-item")
+local CBIR = require("__LDA-LIB__/generic-functions/create-block-item-with-recipe")
+local CF = require("__LDA-LIB__/generic-functions/create-fluid")
+local CG = require("__LDA-LIB__/generic-functions/create-gas")
+local CR = require("__LDA-LIB__/generic-functions/create-recipe")
+local CIR = require("__LDA-LIB__/generic-functions/create-item-with-recipe")
+local CFR = require("__LDA-LIB__/generic-functions/create-fluid-with-recipe")
+local CGR = require("__LDA-LIB__/generic-functions/create-generic-recipe")
 
-    -- Obtém todos os arquivos da pasta
-    for _, file in pairs(require("util").get_file_list(path)) do
-        local module_name = file:gsub("%.lua$", "")
-        local file_path = path .. "/" .. module_name
+-- funções avançadas
+local CSIR = require("__LDA-LIB__/functions/create-smelting-item-with-recipe")
+local CIRM = require("__LDA-LIB__/functions/create-item-with-recipe-matrix")
+local CAIR = require("__LDA-LIB__/functions/create-assembler-item-with-recipe")
+local CPCIR = require("__LDA-LIB__/functions/create-particle-collider-item-with-recipe")
+local TECH = require("__LDA-LIB__/functions/create-technology")
 
-        local ok, module = pcall(require, file_path)
+---------------------------------------------------------------------
+-- API PÚBLICA
+---------------------------------------------------------------------
 
-        if ok then
-            modules[module_name] = module
-            log_debug("Carregado: " .. file_path)
-        else
-            log("ERRO ao carregar módulo " .. file_path .. ": " .. module)
-        end
-    end
+--- @class LDA.Functions
+--- @field createOre fun(...) Cria um minério básico.
+--- @field createItem fun(...) Cria um item simples.
+--- @field createBlockItem fun(...) Cria um bloco estruturado.
+--- @field createFluid fun(...) Cria um fluido.
+--- @field createGas fun(...) Cria um gás.
+--- @field createRecipe fun(...) Cria uma receita.
+--- @field createItemWithRecipe fun(...) Item + receita.
+--- @field createFluidWithRecipe fun(...) Fluido + receita.
+--- @field createBlockItemWithRecipe fun(...) Bloco + receita.
+--- @field createSmeltingItemWithRecipe fun(...) Item especial de fundição.
+--- @field createItemWithRecipeMatrix fun(...) Matrizes de receitas complexas.
+--- @field createAssemblerItemWithRecipe fun(...) Máquina montadora customizada.
+--- @field createParticleColiderItemWithRecipe fun(...) Item + receita para colisor.
+--- @field createTechnology fun(...) Cria tecnologias completas.
+--- @field createGenericRecipe fun(...) Cria receita genérica flexível.
 
-    return modules
-end
+LDA.functions = {
+    createOre = CO.createOre,
+    createItem = CI.createItem,
+    createBlockItem = CBI.createBlockItem,
+    createFluid = CF.createFluid,
+    createGas = CG.createGas,
+    createRecipe = CR.createRecipe,
+    createItemWithRecipe = CIR.createItemWithRecipe,
+    createFluidWithRecipe = CFR.createFluidWithRecipe,
+    createBlockItemWithRecipe = CBIR.createBlockItemWithRecipe,
+    createSmeltingItemWithRecipe = CSIR.createSmeltingItemWithRecipe,
+    createItemWithRecipeMatrix = CIRM.createItemWithRecipeMatrix,
+    createAssemblerItemWithRecipe = CAIR.createAssemblerItemWithRecipe,
+    createParticleColiderItemWithRecipe = CPCIR.createParticleColiderItemWithRecipe,
+    createTechnology = TECH.createTechnology,
+    createGenericRecipe = CGR.createGenericRecipe
+}
 
--- Carrega todas as funções genéricas
-LDA.generic = import_directory("generic-functions")
-
--- Carrega funções avançadas
-LDA.fn = import_directory("functions")
-
-script.on_init(function()
-    log_debug("Inicializado LDA-LIB")
-end)
+---------------------------------------------------------------------
+-- RETORNO
+---------------------------------------------------------------------
 
 return LDA

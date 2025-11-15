@@ -11,18 +11,19 @@ d-----        15/11/2025     11:28                generic-functions
 d-----        15/11/2025     11:41                locale                                                               
 -a----        15/11/2025     11:26             25 .env                                                                 
 -a----        21/07/2025     19:44             52 .gitignore                                                           
--a----        15/11/2025     11:27           3065 autoupdate.cmd                                                       
+-a----        15/11/2025     12:00           3055 autoupdate.cmd                                                       
 -a----        15/11/2025     11:06            170 changelog.txt                                                        
+-a----        15/11/2025     12:30            622 control.lua                                                          
 -a----        21/07/2025     19:45             79 exclusions.txt                                                       
 -a----        15/11/2025     11:56            128 generate-structure.cmd                                               
--a----        15/11/2025     11:22            588 info.json                                                            
--a----        15/11/2025     11:38           1337 init.lua                                                             
--a----        15/11/2025     11:40          35397 LDA-LIB_0.0.1.zip                                                    
+-a----        15/11/2025     11:59            569 info.json                                                            
+-a----        15/11/2025     12:38           3636 init.lua                                                             
+-a----        15/11/2025     12:31        1851467 LDA-LIB_0.0.1.zip                                                    
 -a----        15/11/2025     11:06          35823 LICENSE                                                              
 -a----        15/11/2025     11:06            171 README.md                                                            
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        15/11/2025     11:56              0 structure.txt                                                        
+-a----        15/11/2025     12:38              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
 
 
