@@ -2,13 +2,12 @@ local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 
-function Module.createItemSearch(name, stack_size)
-    local path_main = "__Dyson-Sphere-Program-Lib__/"
+function Module.createItemSearch(name, stack_size,path_main)
     local icon_path = path_main .. "graficos/itens/" .. name .. ".png"
     return {
         type = "tool",
         durability = 1,
-        name = "DSP-" .. name,
+        name =  name,
         icon = icon_path,
         icon_size = 128,
         color_hint = {text = "1"},

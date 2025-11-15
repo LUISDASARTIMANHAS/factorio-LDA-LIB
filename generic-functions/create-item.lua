@@ -1,9 +1,10 @@
 local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
+local getModPath = require("generic-functions.get-mod-path")
+local path_main = getModPath()
 
 function Module.createItem(name, subgroup, stack_size)
-    local path_main = "__Dyson-Sphere-Program-Lib__/"
     local icon_path = path_main .. "graficos/itens/" .. name .. ".png"
     return {
         type = "item",

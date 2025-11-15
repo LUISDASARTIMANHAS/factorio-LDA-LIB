@@ -74,9 +74,10 @@ function Module.removeDuplicates(prerequisites_list)
     return unique_prerequisites
 end
 
--- @param unlocks table (opcional) Uma lista de nomes de receitas (strings) OU uma tabela de efeitos no formato Factorio.
+-- @param unlocks table Uma lista de nomes de receitas (strings) OU uma tabela de efeitos no formato Factorio.
+-- @param modtag string (mymod-) usado para verificar se a receita está na lista de exceções do jogo base
 -- @return table A tabela de efeitos no formato Factorio.
-function Module.processUnlocks(unlocks)
+function Module.processUnlocks(unlocks,modtag)
     local processed_unlocks = {}
     if unlocks then
         -- Verificar se 'unlocks' é uma lista simples de nomes de receitas (strings)
@@ -85,7 +86,7 @@ function Module.processUnlocks(unlocks)
                 local final_recipe_name = recipe_name
                 -- Verifica se a receita está na lista de exceções do jogo base
                 if not base_game_recipes_and_items[recipe_name] then
-                    final_recipe_name = "DSP-" .. recipe_name
+                    final_recipe_name = modtag .. recipe_name
                 end
 
                 table.insert(
@@ -137,7 +138,7 @@ function Module.processIngredients(ingredients)
 
             -- Se o item não está na lista de exceções, adicione o prefixo
             if not base_game_recipes_and_items[item_name] then
-                final_item_name = "DSP-" .. item_name
+                final_item_name =  item_name
             end
             table.insert(
                 processed_ingredients,

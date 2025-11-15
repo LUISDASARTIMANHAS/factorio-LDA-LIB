@@ -1,5 +1,7 @@
 local Module = {}
 local techUtil = require("generic-functions.tech-util")
+local getModPath = require("generic-functions.get-mod-path")
+local path_main = getModPath()
 
 
 function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results)
@@ -14,12 +16,11 @@ function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, resu
         end
     end
 
-    local path_main = "__Dyson-Sphere-Program-Lib__/"
     local icon_path = path_main .. "graficos/" .. typeIcon .. "/" .. name .. ".png"
 
     return {
         type = "recipe",
-        name = "DSP-" .. name,
+        name =  name,
         category = crafted_in,
         enabled = false,
         energy_required = time,

@@ -1,7 +1,8 @@
 local Module = {}
+local getModPath = require("generic-functions.get-mod-path")
+local path_main = getModPath()
 
 function Module.createFluid(name, energy)
-    local path_main = "__Dyson-Sphere-Program-Lib__/"
     local icon_path = path_main .. "graficos/fluids/" .. name .. ".png"
     return {
         type = "fluid",

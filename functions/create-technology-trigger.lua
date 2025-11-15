@@ -1,4 +1,5 @@
-local path_main = "__Dyson-Sphere-Program-Lib__/"
+local getModPath = require("generic-functions.get-mod-path")
+local path_main = getModPath()
 local techUtil = require("generic-functions.tech-util")
 
 local Module = {}
@@ -22,7 +23,7 @@ function Module.createTechnologyTrigger(name, unlocks, prerequisites, research_t
     return {
         type = "technology",
         name = "tech-dyson-" .. name,
-        icon = path_main .. "graficos/technology/tech-dyson-" .. name .. ".png",
+        icon = path_main .. "graficos/technology/" .. name .. ".png",
         icon_size = 128,
         icon_mipmaps = 4,
         prerequisites = unique_final_prerequisites,

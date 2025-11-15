@@ -1,4 +1,4 @@
-local createItemWithRecipe = require("generic-functions.create-item-with-recipe")
+local createItemWithRecipe = require("functions.create-item-with-recipe")
 -- category = "science-matrices" feito em Matrix Lab
 -- category = "advanced-crafting" maquinas de montagem tier 2 e 3
 -- category = "basic-crafting" maquinas de montagem tier 1
@@ -10,7 +10,7 @@ local Module = {}
 
 function Module.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size)
     local results = {
-        {type = "item", name = "DSP-"..name, amount = qtde}
+        {type = "item", name = name, amount = qtde}
     }
     local crafted_in = "advanced-crafting"
     local subgroup = "intermediate-products"

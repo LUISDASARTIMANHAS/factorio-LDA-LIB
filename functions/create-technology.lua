@@ -1,4 +1,5 @@
-local path_main = "__Dyson-Sphere-Program-Lib__/"
+local getModPath = require("generic-functions.get-mod-path")
+local path_main = getModPath()
 local techUtil = require("generic-functions.tech-util")
 local Module = {}
 
