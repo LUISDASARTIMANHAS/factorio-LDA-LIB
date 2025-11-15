@@ -7,24 +7,27 @@ local LDA = {}
 ---------------------------------------------------------------------
 -- IMPORTAÇÕES DOS MÓDULOS
 ---------------------------------------------------------------------
+-- BASE FUNCTIONS
+local CO   = require("__LDA-LIB__/base-functions/create-ore")
+local CI   = require("__LDA-LIB__/base-functions/create-item")
+local CBI  = require("__LDA-LIB__/base-functions/create-block-item")
+local CF   = require("__LDA-LIB__/base-functions/create-fluid")
+local CG   = require("__LDA-LIB__/base-functions/create-gas")
+local CR   = require("__LDA-LIB__/base-functions/create-recipe")
 
-local CO = require("__LDA-LIB__/generic-functions/create-ore")
-local CI = require("__LDA-LIB__/generic-functions/create-item")
-local CBI = require("__LDA-LIB__/generic-functions/create-block-item")
+-- GENERIC FUNCTIONS
+local CIR  = require("__LDA-LIB__/generic-functions/create-item-with-recipe")
+local CFR  = require("__LDA-LIB__/generic-functions/create-fluid-with-recipe")
 local CBIR = require("__LDA-LIB__/generic-functions/create-block-item-with-recipe")
-local CF = require("__LDA-LIB__/generic-functions/create-fluid")
-local CG = require("__LDA-LIB__/generic-functions/create-gas")
-local CR = require("__LDA-LIB__/generic-functions/create-recipe")
-local CIR = require("__LDA-LIB__/generic-functions/create-item-with-recipe")
-local CFR = require("__LDA-LIB__/generic-functions/create-fluid-with-recipe")
-local CGR = require("__LDA-LIB__/generic-functions/create-generic-recipe")
+local CGR  = require("__LDA-LIB__/generic-functions/create-generic-recipe")
 
--- funções avançadas
+-- ADVANCED FUNCTIONS
 local CSIR = require("__LDA-LIB__/functions/create-smelting-item-with-recipe")
-local CIRM = require("__LDA-LIB__/functions/create-item-with-recipe-matrix")
+local CIRM = require("__LDA-LIB__/functions/create-item-with-recipe-matrix")   -- SE EXISTIR
 local CAIR = require("__LDA-LIB__/functions/create-assembler-item-with-recipe")
 local CPCIR = require("__LDA-LIB__/functions/create-particle-collider-item-with-recipe")
 local TECH = require("__LDA-LIB__/functions/create-technology")
+
 
 ---------------------------------------------------------------------
 -- API PÚBLICA
@@ -41,9 +44,7 @@ local TECH = require("__LDA-LIB__/functions/create-technology")
 --- @field createFluidWithRecipe fun(...) Fluido + receita.
 --- @field createBlockItemWithRecipe fun(...) Bloco + receita.
 --- @field createSmeltingItemWithRecipe fun(...) Item especial de fundição.
---- @field createItemWithRecipeMatrix fun(...) Matrizes de receitas complexas.
 --- @field createAssemblerItemWithRecipe fun(...) Máquina montadora customizada.
---- @field createParticleColiderItemWithRecipe fun(...) Item + receita para colisor.
 --- @field createTechnology fun(...) Cria tecnologias completas.
 --- @field createGenericRecipe fun(...) Cria receita genérica flexível.
 
@@ -58,9 +59,7 @@ LDA.functions = {
     createFluidWithRecipe = CFR.createFluidWithRecipe,
     createBlockItemWithRecipe = CBIR.createBlockItemWithRecipe,
     createSmeltingItemWithRecipe = CSIR.createSmeltingItemWithRecipe,
-    createItemWithRecipeMatrix = CIRM.createItemWithRecipeMatrix,
     createAssemblerItemWithRecipe = CAIR.createAssemblerItemWithRecipe,
-    createParticleColiderItemWithRecipe = CPCIR.createParticleColiderItemWithRecipe,
     createTechnology = TECH.createTechnology,
     createGenericRecipe = CGR.createGenericRecipe
 }

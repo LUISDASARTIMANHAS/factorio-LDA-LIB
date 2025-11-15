@@ -1,5 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+Date: 15/11/2025
+  fixes:
+    - __LDA-LIB__/init.lua:26: module __LDA-LIB__/functions/create-item-with-recipe-matrix not found;  no such file __LDA-LIB__/functions/create-item-with-recipe-matrix.luastack traceback:	[C]: in function 'require'	__LDA-LIB__/init.lua:26: in main chunk	[C]: in function 'require'	__LDA-LIB__/control.lua:2: in main chunk.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.1
-Date: 09/07/2024
+Date: 15/11/2025
   Changes:
     - initial commit.
