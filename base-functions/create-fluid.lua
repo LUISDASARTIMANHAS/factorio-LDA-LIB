@@ -1,5 +1,5 @@
 local Module = {}
-local getModPath = require("generic-functions.get-mod-path")
+local getModPath = require("base-functions.get-mod-path")
 local path_main = getModPath()
 
 function Module.createFluid(name, energy)

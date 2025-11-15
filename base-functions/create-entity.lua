@@ -2,7 +2,7 @@ local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local hit_effects = require("__base__.prototypes.entity.hit-effects")
-local getModPath = require("generic-functions.get-mod-path")
+local getModPath = require("base-functions.get-mod-path")
 local path_main = getModPath()
 
 function Module.createBlockItem(typeEntity, name, subgroup, stack_size)

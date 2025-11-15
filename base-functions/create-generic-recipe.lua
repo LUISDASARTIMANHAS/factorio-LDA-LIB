@@ -3,8 +3,8 @@
 
 local Module = {}
 
-local createItem = require("generic-functions.create-item")
-local createRecipe = require("generic-functions.create-recipe")
+local createItem = require("base-functions.create-item")
+local createRecipe = require("base-functions.create-recipe")
 
 
 -- @param name string O nome do item e receita (ex: "solar-painel").

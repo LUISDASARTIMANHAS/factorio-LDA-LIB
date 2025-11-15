@@ -1,6 +1,6 @@
-local getModPath = require("generic-functions.get-mod-path")
+local getModPath = require("base-functions.get-mod-path")
 local path_main = getModPath()
-local techUtil = require("generic-functions.tech-util")
+local techUtil = require("base-functions.tech-util")
 local Module = {}
 
 -- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").

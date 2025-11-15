@@ -1,6 +1,6 @@
 local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
-local getModPath = require("generic-functions.get-mod-path")
+local getModPath = require("base-functions.get-mod-path")
 local path_main = getModPath()
 
 function Module.createOre(name, stack_size, fuel_category, fuel_value)

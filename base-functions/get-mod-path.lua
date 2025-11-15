@@ -1,7 +1,7 @@
 --- Utilitário para detectar automaticamente o nome do mod atual
 --- Funciona exclusivamente no data stage (data.lua, data-updates.lua, data-final-fixes.lua)
 --- Uso:
----     local path_main = require("generic-functions.get-mod-path")()
+---     local path_main = require("base-functions.get-mod-path")()
 ---
 --- @return string Caminho formatado do mod atual, ex: "__LDA-LIB__/"
 

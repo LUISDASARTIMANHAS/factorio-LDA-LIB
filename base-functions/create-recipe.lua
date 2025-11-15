@@ -1,6 +1,6 @@
 local Module = {}
-local techUtil = require("generic-functions.tech-util")
-local getModPath = require("generic-functions.get-mod-path")
+local techUtil = require("base-functions.tech-util")
+local getModPath = require("base-functions.get-mod-path")
 local path_main = getModPath()
 
 
