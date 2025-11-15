@@ -6,7 +6,7 @@ function Module.createFluid(name, energy)
     local icon_path = path_main .. "graficos/fluids/" .. name .. ".png"
     return {
         type = "fluid",
-        name = "DSP-".. name,
+        name =  name,
         subgroup = "natural-resources",
         default_temperature = 15,
         max_temperature = 100,

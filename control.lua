@@ -1,12 +1,15 @@
 -- Carrega a lib uma única vez (permitido)
 local lda = require("__LDA-LIB__/init")
 
+-- Garante que lda.functions exista
+lda.functions = lda.functions or {}
+
 -- Gera lista serializável de funções
 storage.lda = storage.lda or {
     function_names = {}
 }
 
--- Registra novamente caso o jogo tenha recriado o estado
+-- Limpa e registra novamente o estado
 storage.lda.function_names = {}
 
 for name, _ in pairs(lda.functions) do

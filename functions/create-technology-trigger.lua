@@ -22,7 +22,7 @@ function Module.createTechnologyTrigger(name, unlocks, prerequisites, research_t
 
     return {
         type = "technology",
-        name = "tech-dyson-" .. name,
+        name = name,
         icon = path_main .. "graficos/technology/" .. name .. ".png",
         icon_size = 128,
         icon_mipmaps = 4,
@@ -30,7 +30,7 @@ function Module.createTechnologyTrigger(name, unlocks, prerequisites, research_t
         effects = final_unlocks,
         -- so e permitido 1 trigger
         research_trigger = research_trigger,
-        order = "Dyson-Sphere-Program-Lib"
+        order = "a-b-" .. name
     }
 end
 

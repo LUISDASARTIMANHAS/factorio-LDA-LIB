@@ -8,23 +8,24 @@ local LDA = {}
 -- IMPORTAÇÕES DOS MÓDULOS
 ---------------------------------------------------------------------
 -- BASE FUNCTIONS
-local CO   = require("__LDA-LIB__/base-functions/create-ore")
-local CI   = require("__LDA-LIB__/base-functions/create-item")
-local CBI  = require("__LDA-LIB__/base-functions/create-block-item")
-local CF   = require("__LDA-LIB__/base-functions/create-fluid")
-local CG   = require("__LDA-LIB__/base-functions/create-gas")
-local CR   = require("__LDA-LIB__/base-functions/create-recipe")
+local CO   = require("base-functions.create-ore")
+local CI   = require("base-functions.create-item")
+local CBI  = require("base-functions.create-block-item")
+local CF   = require("base-functions.create-fluid")
+local CG   = require("base-functions.create-gas")
+local CR   = require("base-functions.create-recipe")
 
 -- GENERIC FUNCTIONS
-local CIR  = require("__LDA-LIB__/generic-functions/create-item-with-recipe")
-local CFR  = require("__LDA-LIB__/generic-functions/create-fluid-with-recipe")
-local CBIR = require("__LDA-LIB__/generic-functions/create-block-item-with-recipe")
-local CGR  = require("__LDA-LIB__/generic-functions/create-generic-recipe")
+local CIR  = require("generic-functions/create-item-with-recipe")
+local CFR  = require("generic-functions/create-fluid-with-recipe")
+local CBIR = require("generic-functions.create-block-item-with-recipe")
+local CGR  = require("generic-functions.create-generic-recipe")
 
 -- ADVANCED FUNCTIONS
-local CSIR = require("__LDA-LIB__/functions/create-smelting-item-with-recipe")
-local CAIR = require("__LDA-LIB__/functions/create-assembler-item-with-recipe")
-local TECH = require("__LDA-LIB__/functions/create-technology")
+local CSIR = require("functions.create-smelting-item-with-recipe")
+local CAIR = require("functions.create-assembler-item-with-recipe")
+local TECH = require("functions.create-technology")
+local TECHTRIGGER = require("functions.create-technology-trigger")
 
 
 ---------------------------------------------------------------------
@@ -59,6 +60,7 @@ LDA.functions = {
     createSmeltingItemWithRecipe = CSIR.createSmeltingItemWithRecipe,
     createAssemblerItemWithRecipe = CAIR.createAssemblerItemWithRecipe,
     createTechnology = TECH.createTechnology,
+    createTechnologyTrigger = TECHTRIGGER.createTechnologyTrigger,
     createGenericRecipe = CGR.createGenericRecipe
 }
 
@@ -66,4 +68,4 @@ LDA.functions = {
 -- RETORNO
 ---------------------------------------------------------------------
 
-return LDA
+return LDA.functions

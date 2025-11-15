@@ -8,7 +8,7 @@ function Module.createOre(name, stack_size, fuel_category, fuel_value)
     return {
         {
             type = "item",
-            name = "DSP-".. name.."-ore",
+            name =  name.."-ore",
             icon = icon_path,
             icon_size = 128,
             pictures = {
@@ -31,7 +31,7 @@ function Module.createOre(name, stack_size, fuel_category, fuel_value)
         },
         {
             type = "autoplace-control",
-            name ="DSP-".. name .. "-ore",
+            name = name .. "-ore",
             localised_name = {"", "[entity="..name .. "-ore".."] ", {"entity-name."..name .. "-ore"}},
             richness = true,
             order = "a-d",

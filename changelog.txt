@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 15/11/2025
+  fixes:
+    - attempt to call field 'anyFunction' (a nil value)
+    - Falha ao carregar mods: __Dyson-Sphere-Program-Lib__/data/recursos.lua:11: attempt to call field 'createOre' (a nil value) stack traceback: __Dyson-Sphere-Program-Lib__/data/recursos.lua:11: in main chunk	[C]: in function 'require'	__Dyson-Sphere-Program-Lib__/data.lua:5: in main chunk
+---------------------------------------------------------------------------------------------------
 Version: 0.0.2
 Date: 15/11/2025
   fixes:

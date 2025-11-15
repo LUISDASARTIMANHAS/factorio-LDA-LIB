@@ -124,7 +124,7 @@ function Module.processIngredients(ingredients)
         for i, ingredient in ipairs(ingredients) do
             -- Validar se o ingrediente é uma tabela e tem pelo menos 2 elementos
             if not (type(ingredient) == "table" and #ingredient >= 2) then
-                error("DYSON TECH-UTIL ERR: O ingrediente no índice " .. i .. " não está formatado corretamente. Ele deve ser uma tabela com pelo menos um nome e uma quantidade, por exemplo, {'nome-do-item', 1}.")
+                error("LDA TECH-UTIL ERR: O ingrediente no índice " .. i .. " não está formatado corretamente. Ele deve ser uma tabela com pelo menos um nome e uma quantidade, por exemplo, {'nome-do-item', 1}.")
             end
 
             local item_name = ingredient[1]
@@ -133,7 +133,7 @@ function Module.processIngredients(ingredients)
 
             -- Validar se o nome e a quantidade existem e estão nos tipos corretos
             if not (type(item_name) == "string" and type(item_amount) == "number") then
-                error("DYSON TECH-UTIL ERR: O ingrediente no índice " .. i .. " tem tipos incorretos. O nome deve ser uma string e a quantidade deve ser um número.")
+                error("LDA TECH-UTIL ERR: O ingrediente no índice " .. i .. " tem tipos incorretos. O nome deve ser uma string e a quantidade deve ser um número.")
             end
 
             -- Se o item não está na lista de exceções, adicione o prefixo

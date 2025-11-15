@@ -25,8 +25,8 @@ function Module.createTechnology(name, ingredients, prerequisites, unlocks, pack
 
     return {
         type = "technology",
-        name = "tech-dyson-" .. name,
-        icon = path_main .. "graficos/technology/tech-dyson-" .. name .. ".png",
+        name = name,
+        icon = path_main .. "graficos/technology/" .. name .. ".png",
         icon_size = 128,
         icon_mipmaps = 4,
         prerequisites = unique_final_prerequisites, -- Usar os pré-requisitos ajustados e únicos
@@ -36,7 +36,7 @@ function Module.createTechnology(name, ingredients, prerequisites, unlocks, pack
             time = 30,
             ingredients = final_ingredients
         },
-        order = "Dyson-Sphere-Program-Lib"
+        order = "a-b-c".. name
     }
 end
 

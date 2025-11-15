@@ -10,7 +10,7 @@ local createRecipe = require("base-functions.create-recipe")
 -- @param name string O nome do item e receita (ex: "solar-painel").
 function Module.createGenericRecipe(name)
     local results = {
-        {type = "item", name = "DSP-"..name, amount = 1}
+        {type = "item", name = name, amount = 1}
     }
     local ingredients = {
         {type = "item", name = "iron-plate", amount = 1}

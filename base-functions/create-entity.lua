@@ -9,7 +9,7 @@ function Module.createBlockItem(typeEntity, name, subgroup, stack_size)
     local icon_path = path_main .. "graficos/blocos/" .. name .. ".png"
     return {
         type = typeEntity,
-        name = "DSP-".. name,
+        name =  name,
         icon = icon_path,
         icon_size = 128,
         flags = {"placeable-neutral", "player-creation"},
