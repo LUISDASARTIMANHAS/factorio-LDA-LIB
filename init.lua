@@ -21,6 +21,7 @@ local CIS = require("base-functions.create-item-search")
 local CIR = require("generic-functions/create-item-with-recipe")
 local CFR = require("generic-functions/create-fluid-with-recipe")
 local CBIR = require("generic-functions.create-block-item-with-recipe")
+local CEIR = require("generic-functions.create-equipment-item-with-recipe")
 local CGR = require("generic-functions.create-generic-recipe")
 
 -- ADVANCED FUNCTIONS
@@ -62,6 +63,7 @@ LDA.functions = {
     createItemWithRecipe = CIR.createItemWithRecipe,
     createFluidWithRecipe = CFR.createFluidWithRecipe,
     createBlockItemWithRecipe = CBIR.createBlockItemWithRecipe,
+    createEquipmentItemWithRecipe = CEIR.createEquipmentItemWithRecipe,
     createSmeltingItemWithRecipe = CSIR.createSmeltingItemWithRecipe,
     createAssemblerItemWithRecipe = CAIR.createAssemblerItemWithRecipe,
     createTechnology = TECH.createTechnology,

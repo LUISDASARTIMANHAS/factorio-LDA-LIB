@@ -1,4 +1,4 @@
-local createBlock = require("base-functions.create-block-item")
+local createEquipment = require("base-functions.create-equipment-item")
 local createRecipe = require("base-functions.create-recipe")
 
 local Module = {}
@@ -10,8 +10,8 @@ local Module = {}
 -- @param time tempo que demora para ser construido em segundos (ex: 10) 10s.
 -- @param ingredients tabela de ingredientes que são necessarios para construir o item.
 -- @param results tabela de saidas depois de construido o item .
-function Module.createBlockItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results)
-    local item = createBlock.createBlockItem(name,subgroup, stack_size)
+function Module.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results)
+    local item = createEquipment.createEquipmentItem(name,subgroup, weight)
     local recipe = createRecipe.createRecipe("blocos",name, crafted_in, time, ingredients, results)
 
     return {item, recipe}
@@ -20,19 +20,16 @@ end
 
 -- example 
 -- {
---     type = "item",
---     name = "assembling-machine-1",
---     icon = "__base__/graphics/icons/assembling-machine-1.png",
---     subgroup = "production-machine",
---     color_hint = { text = "1" },
---     order = "a[assembling-machine-1]",
---     inventory_move_sound = item_sounds.mechanical_inventory_move,
---     pick_sound = item_sounds.mechanical_inventory_pickup,
---     drop_sound = item_sounds.mechanical_inventory_move,
---     place_result = "assembling-machine-1",
---     stack_size = 50,
---     random_tint_color = item_tints.iron_rust
---   },
+--             type = "item",
+--             name = "quantum-teleporter-equipment",
+--             icon = path_main .. "graficos/itens/quantum-teleporter-equipment-128.png",
+--             icon_size = 128,
+--             subgroup = "itens",
+--             -- diz pro jogo que o equipamento deve ser colocado com o item especificado
+--             place_as_equipment_result = "quantum-teleporter-equipment",
+--             order = "a[quantum-teleporter-item]",
+--             stack_size = 1
+--         },
 --         {
 --             type = "recipe",
 --             name = "quantum-teleporter-equipment",
