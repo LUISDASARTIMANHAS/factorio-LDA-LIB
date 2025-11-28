@@ -11,6 +11,7 @@ local LDA = {}
 local CO = require("base-functions.create-ore")
 local CI = require("base-functions.create-item")
 local CBI = require("base-functions.create-block-item")
+local CEI = require("base-functions.create-equipment-item")
 local CF = require("base-functions.create-fluid")
 local CG = require("base-functions.create-gas")
 local CR = require("base-functions.create-recipe")
@@ -36,6 +37,7 @@ local TECHTRIGGER = require("functions.create-technology-trigger")
 --- @field createOre fun(...) Cria um minério básico.
 --- @field createItem fun(...) Cria um item simples.
 --- @field createBlockItem fun(...) Cria um bloco estruturado.
+--- @field createEquipmentItem fun(...) Cria um bloco estruturado.
 --- @field createFluid fun(...) Cria um fluido.
 --- @field createGas fun(...) Cria um gás.
 --- @field createRecipe fun(...) Cria uma receita.
@@ -48,9 +50,11 @@ local TECHTRIGGER = require("functions.create-technology-trigger")
 --- @field createTechnology fun(...) Cria tecnologias completas.
 --- @field createGenericRecipe fun(...) Cria receita genérica flexível.
 
+-- ISSO E NECESSARIO PORQUE CASO PRECISE ALTERAR UMA FUNÇÃO O USUARIO FINAL NÃO TERA SEU PROJETO QUEBRADO, POIS ISSO CRIA UMA CAMADA DE ABSTRAÇÃO.
 LDA.functions = {
     createOre = CO.createOre,
     createItem = CI.createItem,
+    createEquipmentItem = CEI.createEquipmentItem,
     createBlockItem = CBI.createBlockItem,
     createFluid = CF.createFluid,
     createGas = CG.createGas,

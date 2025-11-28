@@ -28,3 +28,5 @@ commands.add_command("lda-list", "Lista funções da lib LDA", function()
         game.print("[LDA] " .. name)
     end
 end)
+
+game.print("[LDA-LIB] LOADED LIB.");
