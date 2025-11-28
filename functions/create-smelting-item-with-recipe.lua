@@ -8,7 +8,7 @@ local createItemWithRecipe = require("generic-functions.create-item-with-recipe"
 
 local Module = {}
 
-function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients,crafted_in)
+function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients,crafted_in,alternative_unlock_methods)
     local results = {
         {type = "item", name = name, amount = qtde}
     }
@@ -17,7 +17,7 @@ function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients,craft
     local size = 200
 
     local itemAndRecipe =
-        createItemWithRecipe.createItemWithRecipe(name,subgroup, size, crafted_in, time, ingredients, results)
+        createItemWithRecipe.createItemWithRecipe(name,subgroup, size, crafted_in, time, ingredients, results,alternative_unlock_methods)
 
     return itemAndRecipe
 end

@@ -4,6 +4,7 @@ Date: 28/11/2025
   changes:
     - Create a function to generate equipment prototypes.
     - Create a function to generate prototypes of equipment with a recipe.
+    - Optional added: alternative_unlock_methods
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.3
 Date: 15/11/2025

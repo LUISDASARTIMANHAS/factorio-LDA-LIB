@@ -8,7 +8,7 @@ local createItemWithRecipe = require("generic-functions.create-item-with-recipe"
 
 local Module = {}
 
-function Module.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size)
+function Module.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size,alternative_unlock_methods)
     local results = {
         {type = "item", name = name, amount = qtde}
     }
@@ -17,7 +17,7 @@ function Module.createAssemblerItemWithRecipe(name, time, qtde, ingredients, sta
     local size = stack_size or 200
 
     local itemAndRecipe =
-        createItemWithRecipe.createItemWithRecipe(name,subgroup, size, crafted_in, time, ingredients, results)
+        createItemWithRecipe.createItemWithRecipe(name,subgroup, size, crafted_in, time, ingredients, results,alternative_unlock_methods)
 
     return itemAndRecipe
 end
