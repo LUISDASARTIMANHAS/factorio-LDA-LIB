@@ -5,6 +5,11 @@ Date: 28/11/2025
     - Create a function to generate equipment prototypes.
     - Create a function to generate prototypes of equipment with a recipe.
     - Optional added: alternative_unlock_methods
+  fixes:
+    - general bugs
+    - subgroup itens
+    - fixed functions create a equipment, incorrect equipment subgroup 
+    - __LDA-LIB__/control.lua:32: attempt to index global 'game' (a nil value)
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.3
 Date: 15/11/2025

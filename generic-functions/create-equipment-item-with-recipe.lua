@@ -12,7 +12,7 @@ local Module = {}
 -- @param results tabela de saidas depois de construido o item .
 function Module.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results,alternative_unlock_methods)
     local item = createEquipment.createEquipmentItem(name,subgroup, weight)
-    local recipe = createRecipe.createRecipe("blocos",name, crafted_in, time, ingredients, results,alternative_unlock_methods)
+    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods)
 
     return {item, recipe}
 end

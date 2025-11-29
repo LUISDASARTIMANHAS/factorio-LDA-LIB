@@ -6,13 +6,13 @@ local controlGetModPath = require("base-functions.control-get-mod-path")
 function Module.createEquipmentItem(name, subgroup, weight)
     local path_main = controlGetModPath.getModPath()
 
-    local icon_path = path_main .. "graficos/blocos/" .. name .. ".png"
+    local icon_path = path_main .. "graficos/itens/" .. name .. ".png"
     return {
         type = "item",
         name = name,
         icon = icon_path,
         icon_size = 128,
-        subgroup = subgroup or "production",
+        subgroup = subgroup or "equipment",
         order = "a[" .. name .. "]",
         -- inventory_move_sound = item_sounds.mechanical_inventory_move,
         -- pick_sound = item_sounds.mechanical_inventory_pickup,
