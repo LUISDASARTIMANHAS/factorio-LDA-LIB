@@ -1,9 +1,9 @@
 local Module = {}
 local getModPath = require("base-functions.get-mod-path")
-local path_main = getModPath()
 
 
 function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results,alternative_unlock_methods)
+    local path_main = getModPath()
     for _, v in ipairs(ingredients) do
         if v.type ~= "item" and v.type ~= "fluid" then
             error("Tipo de ingrediente inválido: '" .. tostring(v.type) .. "' em " .. name)

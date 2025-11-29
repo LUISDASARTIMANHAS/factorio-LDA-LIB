@@ -2,9 +2,9 @@ local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local getModPath = require("base-functions.get-mod-path")
-local path_main = getModPath()
 
 function Module.createEquipmentItem(name, subgroup, weight)
+    local path_main = getModPath()
 
     local icon_path = path_main .. "graficos/blocos/" .. name .. ".png"
     return {

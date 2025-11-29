@@ -1,8 +1,8 @@
 local Module = {}
+local getModPath = require("base-functions.get-mod-path")
 
 function Module.createGas(name, energy)
-    local getModPath = require("base-functions.get-mod-path")
-local path_main = getModPath()
+    local path_main = getModPath()
     local icon_path = path_main .. "graficos/itens/" .. name .. ".png"
     return {
         type = "fluid",

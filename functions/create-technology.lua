@@ -1,5 +1,4 @@
 local getModPath = require("base-functions.get-mod-path")
-local path_main = getModPath()
 local techUtil = require("base-functions.tech-util")
 local Module = {}
 
@@ -8,6 +7,7 @@ local Module = {}
 -- @param unlocks tabela de receitasa a desbloquear tecnologia (ex: "processor").
 -- @param prerequisites tabela de pre requisitos necessarios para pesquisar essa pesquisa (ex: "tech-dyston-sphere-program").
 function Module.createTechnology(name, ingredients, prerequisites, unlocks, pack_count)
+    local path_main = getModPath()
     -- Copiar os pré-requisitos existentes primeiro
     local final_prerequisites = techUtil.copyPrerequisites(prerequisites)
 
