@@ -69,16 +69,3 @@ O que fica de lição?
 Factorio deixou de permitir introspecção do mod chamador.
 
 Mas você ainda pode centralizar configuração no mod dependente e manter sua biblioteca limpa.
-
-É possível implementar via código?
-
-Sim, totalmente.
-E posso gerar o patch completo da sua LDA-LIB nesse padrão em poucos segundos.
-
-Se quiser, posso te entregar:
-
-arquivo init.lua ajustado
-
-trecho de exemplo para Quantum-Teleporter
-
-patch para todas as funções base da sua biblioteca.
