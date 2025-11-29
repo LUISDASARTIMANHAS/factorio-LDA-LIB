@@ -13,7 +13,7 @@ function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients,craft
         {type = "item", name = name, amount = qtde}
     }
     local crafted_in = "smelting"
-    local subgroup = "natural-resources"
+    local subgroup = "raw-resource"
     local size = 200
 
     local itemAndRecipe =

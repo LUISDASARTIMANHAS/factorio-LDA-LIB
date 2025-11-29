@@ -2,6 +2,54 @@ local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local controlGetModPath = require("base-functions.control-get-mod-path")
+-- stone-brick
+-- subgroup = terrain 
+
+-- wood,coal,iron-ore
+-- subgroup = raw-resource
+
+-- iron-plate, copper-plate
+-- subgroup = raw-material
+
+-- copper-cable,iron-stick,iron-gear-wheel
+-- subgroup = intermediate-product
+
+-- wooden-chest,
+-- subgroup = storage
+
+-- stone-furnace
+-- subgroup = rawsmelting-machine
+
+-- burner-mining-drill,electric-mining-drill
+-- subgroup = extraction-machine
+
+-- burner-inserter,inserter
+-- subgroup = inserter
+
+-- pipe,small-electric-pole
+-- subgroup = energy-pipe-distribution
+
+-- boiler,steam-engine
+-- subgroup = energy
+
+-- radar
+-- subgroup = defensive-structure
+
+-- small-lamp
+-- subgroup = circuit-network
+
+-- assembling-machine-1
+-- subgroup = production-machine
+
+-- red-wire,green-wire
+-- subgroup = spawnables
+
+-- repair-pack,automation-science-pack
+-- subgroup = tool
+
+-- car
+-- subgroup = transport
+
 
 function Module.createItem(name, subgroup, stack_size)
     local path_main = controlGetModPath.getModPath()

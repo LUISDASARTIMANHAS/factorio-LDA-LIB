@@ -9,7 +9,7 @@ function Module.getModPath()
     local path = Module.basePath  -- agora é global para biblioteca inteira
     -- caso o mod dependente não tenha definido o setBasePath
     if path == nil then
-        error("path não definido! por favor defina o caminho do mod logo abaixo da importação dele por exemplo: \n local LDA = require('__LDA-LIB__/init') \n local PATH = LDA.setBasePath('__Quantum-Teleporter__/')")
+        error("path não definido! por favor defina o caminho do mod logo abaixo da importação dele por exemplo: \n local LDA = require('__LDA-LIB__/init') \n local PATH = LDA.setBasePath('Quantum-Teleporter')")
     end
 
     if not path then

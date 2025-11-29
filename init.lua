@@ -7,6 +7,8 @@ local LDA = {}
 ---------------------------------------------------------------------
 -- IMPORTAÇÕES DOS MÓDULOS
 ---------------------------------------------------------------------
+local controlGetModPath = require("base-functions.control-get-mod-path")
+
 -- BASE FUNCTIONS
 local CO = require("base-functions.create-ore")
 local CI = require("base-functions.create-item")
@@ -53,6 +55,8 @@ local TECHTRIGGER = require("functions.create-technology-trigger")
 
 -- ISSO E NECESSARIO PORQUE CASO PRECISE ALTERAR UMA FUNÇÃO O USUARIO FINAL NÃO TERA SEU PROJETO QUEBRADO, POIS ISSO CRIA UMA CAMADA DE ABSTRAÇÃO.
 LDA.functions = {
+    getBasePath = controlGetModPath.getModPath,
+    setBasePath = controlGetModPath.setBasePath,
     createOre = CO.createOre,
     createItem = CI.createItem,
     createEquipmentItem = CEI.createEquipmentItem,

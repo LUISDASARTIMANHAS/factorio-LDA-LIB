@@ -13,7 +13,7 @@ function Module.createAssemblerItemWithRecipe(name, time, qtde, ingredients, sta
         {type = "item", name = name, amount = qtde}
     }
     local crafted_in = "advanced-crafting"
-    local subgroup = "intermediate-products"
+    local subgroup = "intermediate-product"
     local size = stack_size or 200
 
     local itemAndRecipe =
