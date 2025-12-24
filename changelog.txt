@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.5
-Date: 28/11/2025
+Date: 24/12/2025
   changes:
     - Additional function for creating groups of items.
     - Adds a function to format lists of results.
