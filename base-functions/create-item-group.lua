@@ -26,7 +26,7 @@ function Module.createItemGroup(group_name, group_order, icon_filename, icon_siz
         name = group_name,
         order = group_order,
         icon = icon_path,
-        icon_size = icon_size or 32, -- Padrão 32 se não for especificado
+        icon_size = icon_size or 126, -- Padrão 32 se não for especificado
         -- Adiciona icon_mipmaps apenas se for um número válido
         icon_mipmaps = type(icon_mipmaps) == "number" and icon_mipmaps or nil
     }
