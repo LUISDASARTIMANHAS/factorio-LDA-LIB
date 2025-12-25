@@ -1,7 +1,7 @@
 local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
-local controlGetModPath = require("base-functions.control-get-mod-path")
+local controlGetModPath = require("utils.control-get-mod-path")
 -- stone-brick
 -- subgroup = terrain 
 

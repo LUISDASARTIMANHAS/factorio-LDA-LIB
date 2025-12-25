@@ -1,4 +1,4 @@
-local controlGetModPath = require("base-functions.control-get-mod-path")
+local controlGetModPath = require("utils.control-get-mod-path")
 local techUtil = require("base-functions.tech-util")
 
 local Module = {}

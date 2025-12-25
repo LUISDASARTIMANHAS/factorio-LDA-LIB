@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.6
+Date: 25/12/2025
+  changes:
+    - Função Privada: Cria o objeto hr_version, calculando as dimensões.
+    - Função Pública: Cria uma única camada (layer) de animação.
+    - Função que Cria a estrutura completa de animação para um protótipo, a partir de uma ou mais layers. (Esta função permaneceu inalterada, pois já tinha responsabilidade única)
+    - throw-in-water adicionado
+    - Funções utils adicionado (getSequentialAudioList,getAudio)
+---------------------------------------------------------------------------------------------------
 Version: 0.0.5
 Date: 24/12/2025
   changes:

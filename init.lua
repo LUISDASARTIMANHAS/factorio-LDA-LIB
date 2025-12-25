@@ -7,7 +7,9 @@ local LDA = {}
 ---------------------------------------------------------------------
 -- IMPORTAÇÕES DOS MÓDULOS
 ---------------------------------------------------------------------
-local controlGetModPath = require("base-functions.control-get-mod-path")
+local controlGetModPath = require("utils.control-get-mod-path")
+local utils = require("utils.control-utils")
+local CANI = require("utils.control-animations")
 
 -- BASE FUNCTIONS
 local CO = require("base-functions.create-ore")
@@ -56,6 +58,8 @@ local TECHTRIGGER = require("functions.create-technology-trigger")
 
 -- ISSO E NECESSARIO PORQUE CASO PRECISE ALTERAR UMA FUNÇÃO O USUARIO FINAL NÃO TERA SEU PROJETO QUEBRADO, POIS ISSO CRIA UMA CAMADA DE ABSTRAÇÃO.
 LDA.functions = {
+    utilsAnimations = CANI,
+    utils = utils,
     getBasePath = controlGetModPath.getModPath,
     setBasePath = controlGetModPath.setBasePath,
     createOre = CO.createOre,
@@ -75,7 +79,7 @@ LDA.functions = {
     createTechnology = TECH.createTechnology,
     createTechnologyTrigger = TECHTRIGGER.createTechnologyTrigger,
     createItemSearch = CIS.createItemSearch,
-    createGenericRecipe = CGR.createGenericRecipe
+    createGenericRecipe = CGR.createGenericRecipe,
 }
 
 ---------------------------------------------------------------------

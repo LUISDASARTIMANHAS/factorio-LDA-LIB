@@ -1,5 +1,5 @@
 local Module = {}
-local controlGetModPath = require("base-functions.control-get-mod-path")
+local controlGetModPath = require("utils.control-get-mod-path")
 
 
 function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results,alternative_unlock_methods)

@@ -1,5 +1,5 @@
 local Module = {}
-local controlGetModPath = require("base-functions.control-get-mod-path")
+local controlGetModPath = require("utils.control-get-mod-path")
 
 function Module.createGas(name, energy)
     local path_main = controlGetModPath.getModPath()

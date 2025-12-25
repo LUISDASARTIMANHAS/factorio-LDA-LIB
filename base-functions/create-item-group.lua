@@ -1,5 +1,5 @@
 local Module = {}
-local controlGetModPath = require("base-functions.control-get-mod-path")
+local controlGetModPath = require("utils.control-get-mod-path")
 
 --- Cria a definição para um Item Group (Categoria Principal) e seus Item Subgroups (Subgrupos) no Factorio.
 -- @param group_name {string} O nome único (ID) do Item Group (Categoria). Ex: "AE2-category".
