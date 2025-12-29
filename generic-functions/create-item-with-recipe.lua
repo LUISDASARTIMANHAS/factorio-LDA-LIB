@@ -9,10 +9,12 @@ local Module = {}
 -- @param crafted_in categoria onde o item pode ser construido (ex: "advanced-crafting").
 -- @param time tempo que demora para ser construido em segundos (ex: 10) 10s.
 -- @param ingredients tabela de ingredientes que são necessarios para construir o item.
--- @param results tabela de saidas depois de construido o item .
-function Module.createItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results,alternative_unlock_methods)
+-- @param results tabela de saidas depois de construido o item.
+-- @param alternative_unlock_methods quais outras techs desbloqueiam esse item.
+-- @param isEnabled se o item ja deve vir com a receita desbloqueada.
+function Module.createItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
     local item = createItem.createItem(name,subgroup, stack_size)
-    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods)
+    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
 
     return {item, recipe}
 end

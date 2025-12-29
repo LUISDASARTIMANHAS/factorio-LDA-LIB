@@ -3,9 +3,9 @@ local createRecipe = require("base-functions.create-recipe")
 
 local Module = {}
 
-function Module.createFluidWithRecipe(name, heatEnergy, crafted_in, time, ingredients, results,alternative_unlock_methods)
+function Module.createFluidWithRecipe(name, heatEnergy, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
     local item = createFluid.createFluid(name, heatEnergy)
-    local recipe = createRecipe.createRecipe("fluids",name, crafted_in, time, ingredients, results,alternative_unlock_methods)
+    local recipe = createRecipe.createRecipe("fluids",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
 
     return {item, recipe}
 end

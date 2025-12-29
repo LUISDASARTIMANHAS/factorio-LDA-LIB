@@ -2,9 +2,9 @@
 -- Este arquivo define a entidade Assembling Machine customizada para o processo de "Throw In Water".
 local utils = require("utils.control-utils")
 local utilsAnimations = require("utils.control-animations")
-local controlCreateItemWithRecipe = require("generic-functions.create-item-with-recipe")
+local controlCreateBlocItemWithRecipe = require("generic-functions.create-block-item-with-recipe")
 local controlGetModPath = require("utils.control-get-mod-path")
-local PATH = controlGetModPath.setBasePath('LDA-LIB')
+local PATH = controlGetModPath.setBasePath("LDA-LIB")
 
 data:extend(
     {
@@ -89,7 +89,7 @@ data:extend(
 -- 2. Definição do Item de Colocação (Obrigatório, senão a entidade não pode ser colocada)
 -- Assumimos que o item tem o mesmo nome da entidade
 data:extend(
-    controlCreateItemWithRecipe.createItemWithRecipe(
+    controlCreateBlocItemWithRecipe.createBlockItemWithRecipe(
         "throw-in-water", -- nome do item
         "production-machine",
         1,
@@ -102,6 +102,11 @@ data:extend(
         -- results
         {
             {type = "item", name = "throw-in-water", amount = 1}
-        }
+        },
+        nil,
+        true,
+        512,
+        utils.getAudio("__LDA-LIB__/audios/water-bubbles"),
+        utils.getAudio("__LDA-LIB__/audios/water-bubbles")
     )
 )

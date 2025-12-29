@@ -2,7 +2,7 @@ local Module = {}
 local controlGetModPath = require("utils.control-get-mod-path")
 
 
-function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results,alternative_unlock_methods)
+function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results,alternative_unlock_methods,enabled)
     local path_main = controlGetModPath.getModPath()
     for _, v in ipairs(ingredients) do
         if v.type ~= "item" and v.type ~= "fluid" then
@@ -21,7 +21,7 @@ function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, resu
         type = "recipe",
         name =  name,
         category = crafted_in,
-        enabled = false,
+        enabled = enabled or false,
         energy_required = time,
         icon = icon_path,
         icon_size = 128,

@@ -7,6 +7,8 @@ Date: 25/12/2025
     - Função que Cria a estrutura completa de animação para um protótipo, a partir de uma ou mais layers. (Esta função permaneceu inalterada, pois já tinha responsabilidade única)
     - throw-in-water adicionado
     - Funções utils adicionado (getSequentialAudioList,getAudio)
+    - adicionado isEnabled nas receitas para que ja venha desbloqueadas ou não
+    - adicionado icon_size,pick_sound,drop_sound (opicional) com getAudio embutido para que tenha mais opções de modificações granular
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.5
 Date: 24/12/2025

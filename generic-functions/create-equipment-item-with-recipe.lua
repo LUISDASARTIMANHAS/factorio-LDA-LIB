@@ -10,9 +10,9 @@ local Module = {}
 -- @param time tempo que demora para ser construido em segundos (ex: 10) 10s.
 -- @param ingredients tabela de ingredientes que são necessarios para construir o item.
 -- @param results tabela de saidas depois de construido o item .
-function Module.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results,alternative_unlock_methods)
+function Module.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
     local item = createEquipment.createEquipmentItem(name,subgroup, weight)
-    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods)
+    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
 
     return {item, recipe}
 end
