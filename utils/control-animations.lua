@@ -56,7 +56,7 @@ end
 
 --- Função Pública: Cria uma única camada (layer) de animação.
 -- Esta função é o orquestrador que utiliza as funções privadas para garantir o SRP.
--- @param filename {string} O caminho completo para o arquivo de imagem.
+-- @param filename {string} O caminho completo para o arquivo de imagem. auto adiciona .png
 -- @param width {number} A largura da sprite na versão base.
 -- @param height {number} A altura da sprite na versão base.
 -- @param hr_scale {number|nil} O fator de escala para a versão HR (padrão: 0.5).
@@ -64,10 +64,11 @@ end
 -- @return {table} Um objeto de layer de animação completo, incluindo a hr_version.
 function Module.createAnimationLayer(filename, width, height, hr_scale, custom_props)
     local props = prepareProps(custom_props)
+    local formalizedFilename = filename ..".png"
 
     -- Cria a base da camada (layer)
     local layer = {
-        filename = filename,
+        filename = formalizedFilename,
         width = width,
         height = height
     }
@@ -78,7 +79,7 @@ function Module.createAnimationLayer(filename, width, height, hr_scale, custom_p
     end
 
     -- Anexa a versão HR
-    layer.hr_version = createHRVersion(width, height, filename, props, hr_scale)
+    layer.hr_version = createHRVersion(width, height, formalizedFilename, props, hr_scale)
 
     return layer
     -- usage

@@ -6,26 +6,30 @@
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 d-----        15/11/2025     18:37                .vscode                                                              
-d-----        24/12/2025     14:02                base-functions                                                       
-d-----        24/12/2025     13:46                functions                                                            
+d-----        25/12/2025     17:52                audios                                                               
+d-----        25/12/2025     18:00                base-functions                                                       
+d-----        24/12/2025     17:26                functions                                                            
 d-----        28/11/2025     19:02                generic-functions                                                    
+d-----        24/12/2025     17:28                graficos                                                             
 d-----        15/11/2025     11:41                locale                                                               
+d-----        25/12/2025     18:00                utils                                                                
 -a----        15/11/2025     11:26             25 .env                                                                 
 -a----        21/07/2025     19:44             52 .gitignore                                                           
--a----        24/12/2025     13:47           2386 autoupdate.cmd                                                       
--a----        29/11/2025     12:16           1826 changelog.txt                                                        
+-a----        24/12/2025     17:37           2381 autoupdate.cmd                                                       
+-a----        25/12/2025     17:58           2668 changelog.txt                                                        
 -a----        29/11/2025     12:17            957 control.lua                                                          
+-a----        24/12/2025     17:30             35 data.lua                                                             
 -a----        21/07/2025     19:45             79 exclusions.txt                                                       
 -a----        15/11/2025     11:56            128 generate-structure.cmd                                               
--a----        24/12/2025     13:46            569 info.json                                                            
--a----        24/12/2025     13:42           4108 init.lua                                                             
--a----        29/11/2025     12:17        1855028 LDA-LIB_0.0.4.zip                                                    
--a----        24/12/2025     13:48        1856024 LDA-LIB_0.0.5.zip                                                    
+-a----        24/12/2025     17:30            569 info.json                                                            
+-a----        25/12/2025     18:07           4245 init.lua                                                             
+-a----        24/12/2025     14:21        1857158 LDA-LIB_0.0.5.zip                                                    
+-a----        25/12/2025     18:40        2811123 LDA-LIB_0.0.6.zip                                                    
 -a----        15/11/2025     11:06          35823 LICENSE                                                              
 -a----        15/11/2025     11:06            171 README.md                                                            
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        24/12/2025     14:08              0 structure.txt                                                        
+-a----        29/12/2025     11:52              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
 
 
@@ -38,22 +42,30 @@ Mode                 LastWriteTime         Length Name
 -a----        15/11/2025     11:39            734 settings.json                                                        
 
 
+    Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\audios
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+-a----        25/12/2025     17:23         704785 water-bubbles.ogg                                                    
+-a----        25/12/2025     17:24         241400 water.ogg                                                            
+
+
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\base-functions
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        29/11/2025     09:25           1028 control-get-mod-path.lua                                             
--a----        29/11/2025     09:11           1637 create-block-item.lua                                                
--a----        29/11/2025     09:12           3863 create-entity.lua                                                    
--a----        29/11/2025     11:58           1375 create-equipment-item.lua                                            
--a----        29/11/2025     09:12           1099 create-fluid.lua                                                     
--a----        29/11/2025     09:12           1200 create-gas.lua                                                       
--a----        24/12/2025     14:08           6417 create-item-group.lua                                                
--a----        29/11/2025     09:12           1587 create-item-search.lua                                               
--a----        29/11/2025     11:49           2535 create-item.lua                                                      
--a----        29/11/2025     09:13           3193 create-ore.lua                                                       
--a----        29/11/2025     09:13           2048 create-recipe.lua                                                    
+-a----        25/12/2025     18:00           1628 create-block-item.lua                                                
+-a----        25/12/2025     18:00           3854 create-entity.lua                                                    
+-a----        25/12/2025     18:00           1366 create-equipment-item.lua                                            
+-a----        25/12/2025     18:00           1090 create-fluid.lua                                                     
+-a----        25/12/2025     18:00           1191 create-gas.lua                                                       
+-a----        25/12/2025     18:00           6408 create-item-group.lua                                                
+-a----        25/12/2025     18:00           1578 create-item-search.lua                                               
+-a----        25/12/2025     18:00           2526 create-item.lua                                                      
+-a----        25/12/2025     18:00           3184 create-ore.lua                                                       
+-a----        25/12/2025     18:00           2039 create-recipe.lua                                                    
 -a----        24/12/2025     14:04           2265 formatResultsList.lua                                                
 -a----        17/11/2025     12:22           6494 tech-util.lua                                                        
 
@@ -65,8 +77,9 @@ Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----                                                                 
 -a----        24/12/2025     13:46           2245 create-assembler-item-with-recipe.lua                                
 -a----        29/11/2025     11:51           2212 create-smelting-item-with-recipe.lua                                 
--a----        29/11/2025     09:13           2401 create-technology-trigger.lua                                        
--a----        29/11/2025     09:13           2878 create-technology.lua                                                
+-a----        25/12/2025     18:00           2392 create-technology-trigger.lua                                        
+-a----        25/12/2025     18:00           2869 create-technology.lua                                                
+-a----        29/12/2025     11:51           4967 throw-in-water.lua                                                   
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\generic-functions
@@ -79,6 +92,22 @@ Mode                 LastWriteTime         Length Name
 -a----        28/11/2025     19:25           1288 create-fluid-with-recipe.lua                                         
 -a----        15/11/2025     14:47           2096 create-generic-recipe.lua                                            
 -a----        28/11/2025     19:25           2436 create-item-with-recipe.lua                                          
+
+
+    Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graficos
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        24/12/2025     17:28                blocos                                                               
+
+
+    Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graficos\blocos
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+-a----        24/12/2025     17:28           6380 throw-in-water.webp                                                  
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\locale
@@ -95,5 +124,15 @@ d-----        15/11/2025     11:41                pt-BR
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        15/11/2025     11:41            227 settings.cfg                                                         
+
+
+    Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\utils
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+-a----        29/12/2025     11:51           4995 control-animations.lua                                               
+-a----        29/11/2025     09:25           1028 control-get-mod-path.lua                                             
+-a----        25/12/2025     18:36           5582 control-utils.lua                                                    
 
 

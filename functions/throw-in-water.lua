@@ -2,9 +2,9 @@
 -- Este arquivo define a entidade Assembling Machine customizada para o processo de "Throw In Water".
 local utils = require("utils.control-utils")
 local utilsAnimations = require("utils.control-animations")
-
--- Define a constante para o caminho base do seu mod (se "__LDA-LIB__" for o nome do seu mod)
-local MOD_GRAPHICS_PATH = "__LDA-LIB__/graficos/blocos/"
+local controlCreateItemWithRecipe = require("generic-functions.create-item-with-recipe")
+local controlGetModPath = require("utils.control-get-mod-path")
+local PATH = controlGetModPath.setBasePath('LDA-LIB')
 
 data:extend(
     {
@@ -12,11 +12,11 @@ data:extend(
             type = "assembling-machine",
             name = "throw-in-water",
             -- Gráficos e Ícones
-            icon = MOD_GRAPHICS_PATH .. "throw-in-water.webp",
-            icon_size = 128,
+            icon = PATH .. "graficos/blocos/throw-in-water.png",
+            icon_size = 512,
             icon_mipmaps = 2,
             -- Propriedades Físicas e de Mineração
-            minable = {mining_time = 20, result = "throw-in-water-item"}, -- Adicione um item resultado se for minável
+            minable = {mining_time = 20, result = "throw-in-water"}, -- Adicione um item resultado se for minável
             max_health = 99999999, -- Saúde alta, conforme seu exemplo
             -- Configurações de Crafting
             crafting_speed = 1.0, -- Reduzido para 1.0 (mais realista para uma reação natural)
@@ -50,16 +50,16 @@ data:extend(
             module_specification = utils.createModuleSpec(0),
             -- Flags
             flags = {"placeable-neutral", "placeable-player", "player-creation"},
-            placeable_by = {item = "throw-in-water-item", count = 1}, -- Certifique-se de definir o item
+            placeable_by = {item = "throw-in-water", count = 1}, -- Certifique-se de definir o item
             -- Animação
             animation = utilsAnimations.createAnimation(
-                utilsAnimations.createAnimationLayer(MOD_GRAPHICS_PATH .. "throw-in-water.webp", 128, 128)
+                utilsAnimations.createAnimationLayer(PATH .. "throw-in-water", 512, 512)
             ),
             -- Sons
             close_sound = {utils.getAudio("__base__/sound/machine-close")},
             open_sound = {utils.getAudio("__base__/sound/machine-open")},
             working_sound = {
-                sound = {utils.getAudio("__LDA-LIB__/audios/water")}, 
+                sound = {utils.getAudio("__LDA-LIB__/audios/water")},
                 fade_in_ticks = 4,
                 audible_distance_modifier = 0.5,
                 fade_out_ticks = 20
@@ -89,16 +89,19 @@ data:extend(
 -- 2. Definição do Item de Colocação (Obrigatório, senão a entidade não pode ser colocada)
 -- Assumimos que o item tem o mesmo nome da entidade
 data:extend(
-    {
+    controlCreateItemWithRecipe.createItemWithRecipe(
+        "throw-in-water", -- nome do item
+        "production-machine",
+        1,
+        "crafting",
+        60,
+        -- ingredientes
         {
-            type = "item",
-            name = "throw-in-water-item",
-            icon = MOD_GRAPHICS_PATH .. "throw-in-water.webp",
-            icon_size = 64,
-            subgroup = "other",
-            order = "a[throw-in-water]",
-            stack_size = 50,
-            place_result = "throw-in-water" -- Deve corresponder ao nome da entidade
+            {type = "item", name = "water-barrel", amount = 10}
+        },
+        -- results
+        {
+            {type = "item", name = "throw-in-water", amount = 1}
         }
-    }
+    )
 )

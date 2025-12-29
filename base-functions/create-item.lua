@@ -60,7 +60,7 @@ function Module.createItem(name, subgroup, stack_size)
         icon = icon_path,
         icon_size = 128,
         color_hint = {text = "1"},
-        subgroup = subgroup or "intermediate-products",
+        subgroup = subgroup or "basic-crafting",
         order = "b["..subgroup.."]-a[" .. name .. "item" .. "]",
         inventory_move_sound = item_sounds.metal_small_inventory_move,
         pick_sound = item_sounds.metal_small_inventory_pickup,
