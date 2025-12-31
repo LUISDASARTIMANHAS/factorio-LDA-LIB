@@ -2,6 +2,59 @@
 local Module = {}
 -- Constante para o shift padrão do ícone (Factorio base costuma usar {0, 0})
 local DEFAULT_MODULE_SHIFT = {0, 0}
+-- NOVO FORMATO (MAPA)
+local DEFAULT_DAMAGE_TYPE = {
+    "physical",
+    "impact",
+    "fire",
+    "acid",
+    "poison",
+    "explosion",
+    "laser",
+    "electric"
+    -- Note: "physical and explosion" não é um tipo de dano, mas uma combinação
+    -- de *duas* resistências na lista. Para esta função, focamos nos tipos de dano únicos.
+}
+
+-- Função auxiliar para procurar um valor em um array
+function Module.array_contains(array, value)
+    for _, v in ipairs(array) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
+-- Função auxiliar genérica para mesclar uma tabela 'source' em uma tabela 'target'.
+-- Parâmetros:
+--   target (table): A tabela que receberá os dados.
+--   source (table): A tabela de onde os dados serão copiados.
+--   overwrite (boolean, opcional): Se for 'true', sobrescreve campos existentes em 'target'.
+--                                  Se for 'false' ou omitido, só adiciona novos campos (mesclagem condicional).
+function Module.tableMerge(target, source, overwrite)
+    -- O 'overwrite' padrão é FALSE (mesclagem condicional)
+    local should_overwrite = overwrite or false 
+    
+    -- target é o único que precisa ser uma tabela não-nil para podermos escrever
+    if not target or type(target) ~= "table" then
+        -- Retornamos a source se o target for inválido (ou você pode lançar um erro)
+        return source or {} 
+    end
+
+    -- source deve ser uma tabela para iterar
+    if source and type(source) == "table" then
+        for key, value in pairs(source) do
+            
+            -- Lógica da Mesclagem
+            if should_overwrite or target[key] == nil then
+                target[key] = value
+            end
+        end
+    end
+    
+    return target
+end
 
 --- Cria uma caixa de delimitação (bounding box) simétrica, usada para collision_box, selection_box ou drawing_box.
 -- O formato da caixa é sempre: {{ -x_max, -y_max }, { x_max, y_max }}.
@@ -29,13 +82,13 @@ function Module.createBoundingBox(x_max, y_max)
         {x, y}
     }
 
--- Colisão e Seleção (Tamanho 2.4 x 2.4, conforme seu exemplo)
+    -- Colisão e Seleção (Tamanho 2.4 x 2.4, conforme seu exemplo)
     -- x_max = 1.2, y_max = 1.2 (automático)
-    -- collision_box = utils.createBoundingBox(1.2), 
+    -- collision_box = utils.createBoundingBox(1.2),
     -- x_max = 1.5, y_max = 1.5 (automático)
-    -- selection_box = utils.createBoundingBox(1.5), 
+    -- selection_box = utils.createBoundingBox(1.5),
     -- x_max = 1.5, y_max = 1.5 (automático)
-    -- drawing_box = utils.createBoundingBox(1.5),   
+    -- drawing_box = utils.createBoundingBox(1.5),
 end
 
 --- Cria a estrutura completa para a especificação de módulos da entidade.
@@ -67,6 +120,89 @@ function Module.createModuleSpec(slots, icon_shift)
         module_slots = slots,
         module_info_icon_shift = final_icon_shift
     }
+end
+
+function Module.createResistance(resistenceType, percent)
+    -- Tipos de resistência padrão do Factorio (exemplos comuns)
+
+    if not Module.array_contains(DEFAULT_DAMAGE_TYPE, resistenceType) then
+        -- Se não for um tipo padrão, logue um aviso, mas continue
+        log(
+            string.format(
+                "LDA-LIB WARN: O tipo de resistência '%s' não é um tipo padrão do Factorio. Certifique-se de que este tipo de dano está definido.",
+                resistenceType
+            )
+        )
+    end
+
+    -- Validação de 'percent'
+    if type(percent) ~= "number" or percent < 0 then
+        percent = 0
+    end
+
+    -- usage
+    -- resistances ={
+    --     utils.createResistance("fire",100)
+    -- }
+    return {type = resistenceType, percent = percent}
+end
+
+function Module.getFullResistance(percent)
+    -- Definir o valor padrão de 100% se 'percent' for nulo ou inválido
+    local final_percent = 100
+    if type(percent) == "number" and percent >= 0 then
+        final_percent = percent
+    end
+
+    local resistances_table = {}
+
+    -- Iterar sobre os tipos no array e criar as entradas de resistência
+    for _, resistenceType in ipairs(DEFAULT_DAMAGE_TYPE) do
+        local resistance_entry = {
+            type = resistenceType,
+            percent = final_percent
+        }
+
+        table.insert(resistances_table, resistance_entry)
+    end
+
+    -- usage
+    -- resistances = utils.getFullResistance(),
+    -- {
+    --     {
+    --         type = "physical",
+    --         percent = 100
+    --     },
+    --     {
+    --         type = "impact",
+    --         percent = 100
+    --     },
+    --     {
+    --         type = "fire",
+    --         percent = 100
+    --     },
+    --     {
+    --         type = "acid",
+    --         percent = 100
+    --     },
+    --     {
+    --         type = "poison",
+    --         percent = 100
+    --     },
+    --     {
+    --         type = "explosion",
+    --         percent = 100
+    --     },
+    --     {
+    --         type = "laser",
+    --         percent = 100
+    --     },
+    --     {
+    --         type = "electric",
+    --         percent = 100
+    --     }
+    -- }
+    return resistances_table
 end
 
 --- Gera uma lista de definições de áudio sequenciais para Factorio.
@@ -129,5 +265,6 @@ function Module.getAudio(filename, volume)
 
     return {filename = filename .. ".ogg", volume = volume or 0.7}
 end
+
 
 return Module

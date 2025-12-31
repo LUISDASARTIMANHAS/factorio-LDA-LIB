@@ -41,9 +41,7 @@ data:extend(
             -- x_max = 1.5, y_max = 1.5 (automático)
             drawing_box = utils.createBoundingBox(1.5),
             -- Destruição e Resistências
-            resistances = {
-                {type = "fire", percent = 100} -- Imune a fogo
-            },
+            resistances = utils.getFullResistance(),
             corpse = "assembling-machine-2-remnants", -- Usando remanescentes do Factorio base
             dying_explosion = "assembling-machine-2-explosion",
             -- Módulos
@@ -53,7 +51,7 @@ data:extend(
             placeable_by = {item = "throw-in-water", count = 1}, -- Certifique-se de definir o item
             -- Animação
             animation = utilsAnimations.createAnimation(
-                utilsAnimations.createAnimationLayer(PATH .. "throw-in-water", 512, 512)
+                utilsAnimations.createAnimationLayer(PATH .. "graficos/blocos/throw-in-water", 512, 512)
             ),
             -- Sons
             close_sound = {utils.getAudio("__base__/sound/machine-close")},

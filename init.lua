@@ -9,6 +9,7 @@ local LDA = {}
 ---------------------------------------------------------------------
 local controlGetModPath = require("utils.control-get-mod-path")
 local utils = require("utils.control-utils")
+local utilsEnergySource = require("utils.control-energy-sources")
 local CANI = require("utils.control-animations")
 
 -- BASE FUNCTIONS
@@ -60,6 +61,7 @@ local TECHTRIGGER = require("functions.create-technology-trigger")
 LDA.functions = {
     utilsAnimations = CANI,
     utils = utils,
+    utilsEnergySource = utilsEnergySource,
     getBasePath = controlGetModPath.getModPath,
     setBasePath = controlGetModPath.setBasePath,
     createOre = CO.createOre,
