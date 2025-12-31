@@ -2,7 +2,13 @@
 local Module = {}
 local utils = require("utils.control-utils")
 
--- Função de alto nível para criar uma PipeConnectionDefinition (conexão de tubo)
+--- Cria uma PipeConnectionDefinition (conexão de tubo) para uso em FluidBox.
+-- @param flow_direction (string, optional) Ex: "input", "output", "input-output". Padrão: "input-output".
+-- @param direction (defines.direction, optional) Direção primária (obrigatório para normal/underground). Ex: defines.direction.north.
+-- @param position (MapPosition, optional) Posição relativa ao centro da entidade. Ex: {0, 1}.
+-- @param connection_type (string, optional) Tipo de conexão. Padrão: "normal". Opções: "normal", "underground", "linked".
+-- @param params (table, optional) Parâmetros adicionais (connection_category, max_underground_distance, etc.).
+-- @return (table) PipeConnectionDefinition
 function Module.createPipeConnection(
     flow_direction,
     direction,
@@ -71,7 +77,14 @@ function Module.createPipeConnection(
     return connection
 end
 
--- Função de alto nível para criar uma definição de FluidBox.
+--- Cria uma definição de FluidBox completa.
+-- @param volume (FluidAmount, optional) Volume interno do fluido. Padrão: 100.
+-- @param filter (FluidID, optional) Filtro de fluido (Ex: "water").
+-- @param production_type (ProductionType, optional) Tipo de produção. Padrão: "input-output".
+-- @param pipe_connections (array[PipeConnectionDefinition], optional) Array de conexões de tubo.
+-- @param pipecoverspictures (Sprite4Way, optional) Sprites para os covers dos tubos. Padrão: pipecoverspictures().
+-- @param params (table, optional) Parâmetros adicionais (min/max_temperature, render_layer, etc.).
+-- @return (table) FluidBox
 function Module.createFluidBox(
     volume,
     filter,
@@ -112,6 +125,11 @@ function Module.createFluidBox(
 end
 
 -- Função auxiliar interna para criar a BaseEnergySource
+--- Cria a estrutura base de uma EnergySource com as propriedades de poluição e ícones.
+-- @param emissions_per_minute (dictionary[AirbornePollutantID -> double], optional) Poluição por minuto.
+-- @param render_no_power_icon (boolean, optional) Padrão: true.
+-- @param render_no_network_icon (boolean, optional) Padrão: true.
+-- @return (table) BaseEnergySource
 local function createBaseSource(emissions_per_minute, render_no_power_icon, render_no_network_icon)
     local source = {
         emissions_per_minute = emissions_per_minute or nil,
@@ -121,7 +139,15 @@ local function createBaseSource(emissions_per_minute, render_no_power_icon, rend
     return source
 end
 
--- createBurnerEnergySource
+--- Cria uma fonte de energia do tipo "burner" (queimador de item).
+-- @param fuel_inventory_size (uint32, optional) Slots de inventário de combustível. Padrão: 1.
+-- @param effectivity (double, optional) Eficiência do consumo de combustível. Padrão: 1.0.
+-- @param fuel_categories (array[string], optional) Categorias de combustível aceitas. Padrão: {"chemical"}.
+-- @param emissions_per_minute (dictionary, optional) Poluição por minuto (BaseSource).
+-- @param render_no_power_icon (boolean, optional) (BaseSource).
+-- @param render_no_network_icon (boolean, optional) (BaseSource).
+-- @param params (table, optional) Parâmetros adicionais (smoke, light_flicker, burnt_inventory_size, etc.).
+-- @return (table) BurnerEnergySource
 function Module.createBurnerEnergySource(
     fuel_inventory_size,
     effectivity,
@@ -152,7 +178,16 @@ function Module.createBurnerEnergySource(
     return source
 end
 
--- Função de alto nível para criar uma fonte de energia tipo "electric"
+--- Cria uma fonte de energia do tipo "electric" (rede elétrica).
+-- @param usage_priority (ElectricUsagePriority, optional) Prioridade de uso (e.g., "secondary-input", "tertiary"). Padrão: "secondary-input".
+-- @param buffer_capacity (Energy, optional) Capacidade do buffer de energia (e.g., "5MJ").
+-- @param input_flow_limit (Energy, optional) Limite de fluxo de entrada (e.g., "300kW"). Padrão: "300kW".
+-- @param output_flow_limit (Energy, optional) Limite de fluxo de saída (e.g., "300kW"). Padrão: "300kW".
+-- @param emissions_per_minute (dictionary, optional) Poluição por minuto (BaseSource).
+-- @param render_no_power_icon (boolean, optional) (BaseSource).
+-- @param render_no_network_icon (boolean, optional) (BaseSource).
+-- @param params (table, optional) Parâmetros adicionais (drain, etc.).
+-- @return (table) ElectricEnergySource
 function Module.createElectricEnergySource(
     usage_priority,
     buffer_capacity,
@@ -196,7 +231,17 @@ function Module.createElectricEnergySource(
     return source
 end
 
--- Função de alto nível para criar uma fonte de energia tipo "fluid"
+--- Cria uma fonte de energia do tipo "fluid" (combustível líquido ou vapor).
+-- @param fluid_volume (FluidAmount, optional) Volume interno do fluido. Padrão: 100.
+-- @param fluid_connections (array[PipeConnectionDefinition], optional) Array de conexões de tubo (use Module.createPipeConnection).
+-- @param fluid_filter (FluidID, optional) Filtro de fluido.
+-- @param effectivity (double, optional) Eficiência. Padrão: 1.0.
+-- @param burns_fluid (boolean, optional) Define se o cálculo de energia é baseado no fuel_value do fluido. Padrão: true.
+-- @param emissions_per_minute (dictionary, optional) Poluição por minuto (BaseSource).
+-- @param render_no_power_icon (boolean, optional) (BaseSource).
+-- @param render_no_network_icon (boolean, optional) (BaseSource).
+-- @param params (table, optional) Parâmetros adicionais (smoke, light_flicker, maximum_temperature, production_type, etc.).
+-- @return (table) FluidEnergySource
 function Module.createFluidEnergySource(
     fluid_volume,
     fluid_connections, -- Array de PipeConnectionDefinition
@@ -246,7 +291,17 @@ function Module.createFluidEnergySource(
     return source
 end
 
--- Função de alto nível para criar uma fonte de energia tipo "heat"
+--- Cria uma fonte de energia do tipo "heat" (energia térmica nuclear).
+-- @param max_temperature (double) Temperatura máxima de trabalho. (Obrigatório)
+-- @param specific_heat (Energy) Quantidade de energia por grau (capacidade térmica). (Obrigatório)
+-- @param max_transfer (Energy) Taxa máxima de transferência de calor. (Obrigatório)
+-- @param default_temperature (double, optional) Temperatura ambiente/padrão. Padrão: 15.
+-- @param min_working_temperature (double, optional) Temperatura mínima de trabalho. Padrão: 15.
+-- @param emissions_per_minute (dictionary, optional) Poluição por minuto (BaseSource).
+-- @param render_no_power_icon (boolean, optional) (BaseSource).
+-- @param render_no_network_icon (boolean, optional) (BaseSource).
+-- @param params (table, optional) Parâmetros adicionais (connections, heat_picture, heat_glow, min_temperature_gradient, etc.).
+-- @return (table) HeatEnergySource
 function Module.createHeatEnergySource(
     max_temperature,
     specific_heat,
@@ -283,6 +338,25 @@ function Module.createHeatEnergySource(
     if not source.max_temperature or not source.specific_heat or not source.max_transfer then
         log("LDA-LIB ERROR: HeatEnergySource requer max_temperature, specific_heat e max_transfer.")
     end
+
+    return source
+end
+
+--- Cria uma fonte de energia do tipo "void" (sem consumo/produção de energia).
+-- @param emissions_per_minute (dictionary, optional) Poluição por minuto (BaseSource).
+-- @param render_no_power_icon (boolean, optional) (BaseSource).
+-- @param render_no_network_icon (boolean, optional) (BaseSource).
+-- @param params (table, optional) Parâmetros adicionais.
+-- @return (table) VoidEnergySource
+function Module.createVoidEnergySource(emissions_per_minute, render_no_power_icon, render_no_network_icon, params)
+    local base_source = createBaseSource(emissions_per_minute, render_no_power_icon, render_no_network_icon)
+
+    local source = {
+        type = "void"
+    }
+
+    source = utils.tableMerge(source, base_source, true)
+    source = utils.tableMerge(source, params)
 
     return source
 end
