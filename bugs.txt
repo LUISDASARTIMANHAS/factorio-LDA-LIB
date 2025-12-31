@@ -1,1 +1,1 @@
-throw in water não aparece a textura da maquina
+all bugs fixed

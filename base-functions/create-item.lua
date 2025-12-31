@@ -2,6 +2,7 @@ local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local controlGetModPath = require("utils.control-get-mod-path")
+local utils = require("utils.control-utils")
 -- stone-brick
 -- subgroup = terrain 
 
@@ -51,25 +52,51 @@ local controlGetModPath = require("utils.control-get-mod-path")
 -- subgroup = transport
 
 
-function Module.createItem(name, subgroup, stack_size)
+--- Cria um protótipo de Item (ItemPrototype).
+-- @param name (string) Nome único do item (e.g., "iron-gear-wheel").
+-- @param subgroup (string, optional) Subgrupo do menu de crafting. Padrão: "basic-crafting".
+-- @param stack_size (uint16, optional) Tamanho da pilha. Padrão: 100.
+-- @param pictures (array[SpritePath], optional) Lista de sprites/pictures (impede o uso de icon_size).
+-- @return (table) ItemPrototype
+function Module.createItem(name, subgroup, stack_size, pictures)
+    -- Assumindo que controlGetModPath.getModPath() está acessível.
     local path_main = controlGetModPath.getModPath()
     local icon_path = path_main .. "graficos/itens/" .. name .. ".png"
-    return {
+    
+    -- 1. Cria a tabela base com campos comuns
+    local item_data = {
         type = "item",
         name = name,
         icon = icon_path,
-        icon_size = 128,
-        color_hint = {text = "1"},
         subgroup = subgroup or "basic-crafting",
-        order = "b["..subgroup.."]-a[" .. name .. "item" .. "]",
+        order = "b[".. (subgroup or "basic-crafting") .. "]-a[" .. name .. "item" .. "]",
+        
+        -- Detalhes visuais e de som
+        color_hint = {text = "1"},
         inventory_move_sound = item_sounds.metal_small_inventory_move,
         pick_sound = item_sounds.metal_small_inventory_pickup,
         drop_sound = item_sounds.metal_small_inventory_move,
+        random_tint_color = item_tints.iron_rust,
+        
+        -- Detalhes de empilhamento/peso
         stack_size = stack_size or 100,
-        weight = stack_size/2,
+        weight = (stack_size or 100) / 2, -- O peso deve ser baseado no stack_size final
         ingredient_to_weight_coefficient = 0.28,
-        random_tint_color = item_tints.iron_rust
     }
+
+    -- 2. Adiciona 'pictures' e decide sobre 'icon_size'
+    if pictures and #pictures > 0 then
+        -- Se 'pictures' existe e tem elementos, adiciona 'pictures' e NÃO adiciona 'icon_size'
+        item_data.pictures = pictures
+        -- item_data.icon_size é omitido
+    else
+        -- Se 'pictures' é nulo, vazio ou não foi fornecido, adiciona 'icon_size'
+        item_data.icon_size = 128
+        -- item_data.pictures é omitido (ou será nil, mas Factorio prefere omitir)
+        item_data.pictures = nil -- Garante que a chave pictures não vá com nil se for o caso
+    end
+    
+    return item_data
 end
 
 -- example

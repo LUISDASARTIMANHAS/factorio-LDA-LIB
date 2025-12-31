@@ -1,10 +1,14 @@
 -- throw-in-water.lua
 -- Este arquivo define a entidade Assembling Machine customizada para o processo de "Throw In Water".
 local utils = require("utils.control-utils")
+local utilsEnergySource = require("utils.control-energy-sources")
 local utilsAnimations = require("utils.control-animations")
 local controlCreateBlocItemWithRecipe = require("generic-functions.create-block-item-with-recipe")
 local controlGetModPath = require("utils.control-get-mod-path")
+local controlCreateItemWithRecipe = require("generic-functions.create-item-with-recipe")
 local PATH = controlGetModPath.setBasePath("LDA-LIB")
+
+-- __base__/sound/world/water/waterlap
 
 data:extend(
     {
@@ -27,11 +31,7 @@ data:extend(
             -- ALTERAÇÃO CRUCIAL AQUI: energy_usage deve ser > 0
             -- O custo energético da eletrólise da água é alto, exigindo cerca de 50-55 kWh de eletricidade para produzir 1 kg de hidrogênio, com um valor teórico de ~39,4 kWh/kg (HHV), mas perdas reais aumentam isso, com foco em tecnologias como PEM e Alcalina para melhorar a eficiência e reduzir o custo por kg de H₂, visando metas como US$ 1/kg até 2030.
             energy_usage = "55kW",
-            energy_source = {
-                type = "electric", -- Mantemos o tipo electric para simplicidade, mas o consumo é mínimo
-                usage_priority = "secondary-input",
-                emissions_per_second = 0 -- Não há poluição gerada
-            },
+            energy_source = utilsEnergySource.createElectricEnergySource("secondary-input", nil, 0, 0, 0, false, false),
             -- Poluição e Efeitos
             allowed_effects = {"pollution"},
             -- x_max = 1.2, y_max = 1.2 (automático)
@@ -54,19 +54,19 @@ data:extend(
                 utilsAnimations.createAnimationLayer(PATH .. "graficos/blocos/throw-in-water", 512, 512)
             ),
             -- Sons
-            close_sound = {utils.getAudio("__base__/sound/machine-close")},
-            open_sound = {utils.getAudio("__base__/sound/machine-open")},
+            close_sound = {utils.getAudio("__base__/sound/world/waterlap")},
+            open_sound = {utils.getAudio("__base__/sound/world/waterlap")},
             working_sound = {
                 sound = {utils.getAudio("__LDA-LIB__/audios/water")},
                 fade_in_ticks = 4,
                 audible_distance_modifier = 0.5,
                 fade_out_ticks = 20
             },
-            -- Sons de Impacto de Veículo (do seu exemplo)
+            -- Sons de Impacto de Veículo
             vehicle_impact_sound = utils.getSequentialAudioList(
-                "__base__/sound/car-metal-impact-", -- Nome base do arquivo
-                2, -- Começa no 2 (car-metal-impact-2.ogg)
-                6, -- Termina no 6 (car-metal-impact-6.ogg)
+                "__base__/sound/world/water/waterlap-", -- Nome base do arquivo
+                1, -- Começa no 2 (car-metal-impact-2.ogg)
+                10, -- Termina no 6 (car-metal-impact-6.ogg)
                 0.5 -- Volume (opcional, mas bom manter)
             )
         }
@@ -106,5 +106,27 @@ data:extend(
         512,
         utils.getAudio("__LDA-LIB__/audios/water-bubbles"),
         utils.getAudio("__LDA-LIB__/audios/water-bubbles")
+    )
+)
+-- duplicação de sementes
+data:extend(
+    controlCreateItemWithRecipe.createItemWithRecipe(
+        "yumako-seed-x2",
+        "agriculture-processes",
+        5,
+        "throw-in-water",
+        5,
+        -- ingredients
+        {
+            {type = "item", name = "yumako-seed", amount = 1},
+            {type = "item", name = "nutrients", amount = 2}
+        },
+        -- results
+        {
+            {type = "item", name = "yumako-seed", amount = 2}
+        },
+        nil,
+        true,
+        utils.getSequentialPictureList(PATH.."graficos/icones/yumako-seed-x2-", 1, 4, 64, 0.5, 4)
     )
 )

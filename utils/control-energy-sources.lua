@@ -2,6 +2,26 @@
 local Module = {}
 local utils = require("utils.control-utils")
 
+-- Função auxiliar interna para garantir que o valor seja uma string de energia ou nil
+local function sanitize_energy_string(value, default_unit)
+    -- Se o valor for nil ou string, retorna como está (o Factorio validará a string)
+    if value == nil or type(value) == "string" then
+        return value
+    end
+
+    -- Se o valor for um número, converte para string de energia (com unidade padrão)
+    if type(value) == "number" then
+        -- Assume-se que a unidade padrão mais comum para fluxos é "kW"
+        default_unit = default_unit or "kW"
+        return tostring(value) .. default_unit
+    end
+
+    -- Caso contrário (e.g., boolean, tabela, função), loga um aviso e retorna nil/padrão.
+    log("LDA-LIB WARN: Valor inválido passado para campo Energy. Esperado string ou number, recebido: " .. type(value))
+    return nil
+end
+
+
 --- Cria uma PipeConnectionDefinition (conexão de tubo) para uso em FluidBox.
 -- @param flow_direction (string, optional) Ex: "input", "output", "input-output". Padrão: "input-output".
 -- @param direction (defines.direction, optional) Direção primária (obrigatório para normal/underground). Ex: defines.direction.north.
@@ -132,10 +152,17 @@ end
 -- @return (table) BaseEnergySource
 local function createBaseSource(emissions_per_minute, render_no_power_icon, render_no_network_icon)
     local source = {
-        emissions_per_minute = emissions_per_minute or nil,
+        emissions_per_minute = (type(emissions_per_minute) == "table" and emissions_per_minute) or nil,
+        
         render_no_power_icon = render_no_power_icon or true,
         render_no_network_icon = render_no_network_icon or true
     }
+    
+    -- Otimização: remove a chave se o valor for nil (melhor prática em Factorio LUA)
+    if source.emissions_per_minute == nil then
+        source.emissions_per_minute = nil
+    end
+    
     return source
 end
 
@@ -199,33 +226,29 @@ function Module.createElectricEnergySource(
     render_no_network_icon,
     -- Parâmetros adicionais e opcionais do electric (input_flow_limit, drain, etc.)
     params)
-    -- Cria a base. (Assume-se que 'createBaseSource' está disponível localmente ou via 'utils')
+    
+    -- Cria a base (assumindo que createBaseSource foi corrigida para emissions_per_minute)
     local base_source = createBaseSource(emissions_per_minute, render_no_power_icon, render_no_network_icon)
 
+    local sanitized_input_limit = sanitize_energy_string(input_flow_limit, "kW")
+    local sanitized_output_limit = sanitize_energy_string(output_flow_limit, "kW")
+    
     -- Cria a tabela final com os campos Electric.
     local source = {
         type = "electric",
-        -- usage_priority (Essencial)
-        -- Exemplos comuns: "secondary-input" (máquina), "tertiary" (acumulador), "secondary-output" (gerador)
         usage_priority = usage_priority or "secondary-input",
-        -- buffer_capacity (Opcional, mas útil para o construtor)
-        -- Deve ser uma string de energia (Ex: "5MJ")
-        -- Se não for fornecido, Factorio usa o padrão (geralmente 0J se não for um acumulador/bateria)
         buffer_capacity = buffer_capacity,
-        input_flow_limit = input_flow_limit or "300kW",
-        output_flow_limit = output_flow_limit or "300kW"
+        
+        -- Agora usamos os valores sanitizados. Se forem nil, voltamos para o padrão "300kW".
+        input_flow_limit = sanitized_input_limit or "300kW",
+        output_flow_limit = sanitized_output_limit or "300kW"
     }
 
-    -- Usa utils.tableMerge, conforme definido no arquivo de utilitários.
     source = utils.tableMerge(source, base_source, true)
-
-    -- Isso permite adicionar input_flow_limit, output_flow_limit, drain, etc.
     source = utils.tableMerge(source, params)
 
-    -- Remove 'buffer_capacity' se for nil, para não forçar {buffer_capacity = nil} no protótipo,
-    -- o que é preferível a {buffer_capacity = "0J"} se não for um acumulador.
     if source.buffer_capacity == nil then
-        source.buffer_capacity = nil -- Isso remove a chave ao ser serializado (Factorio LUA)
+        source.buffer_capacity = nil
     end
 
     return source

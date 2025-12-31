@@ -11,6 +11,7 @@ Date: 25/12/2025
     - adicionado icon_size,pick_sound,drop_sound (opicional) com getAudio embutido para que tenha mais opções de modificações granular
     - Funções utils adicionadas createModuleSpec, createBoundingBox
     - Funções utils adicionadas createResistance, getFullResistance
+    - Funções utils adicionado (getSequentialPictureList,getPicture)
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.5
 Date: 24/12/2025

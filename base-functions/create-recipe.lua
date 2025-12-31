@@ -2,6 +2,7 @@ local Module = {}
 local controlGetModPath = require("utils.control-get-mod-path")
 
 
+-- @param typeIcon {string} concatena pastas com base no tipo do item, ex "graficos/typeIcon/name.png"
 function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results,alternative_unlock_methods,enabled)
     local path_main = controlGetModPath.getModPath()
     for _, v in ipairs(ingredients) do
