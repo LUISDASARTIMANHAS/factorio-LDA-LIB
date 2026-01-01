@@ -31,6 +31,7 @@ local CEIR = require("generic-functions.create-equipment-item-with-recipe")
 local CGR = require("generic-functions.create-generic-recipe")
 
 -- ADVANCED FUNCTIONS
+local CTWIR = require("functions.create-throw-in-water-item-with-recipe")
 local CSIR = require("functions.create-smelting-item-with-recipe")
 local CAIR = require("functions.create-assembler-item-with-recipe")
 local TECH = require("functions.create-technology")
@@ -78,6 +79,7 @@ LDA.functions = {
     createEquipmentItemWithRecipe = CEIR.createEquipmentItemWithRecipe,
     createSmeltingItemWithRecipe = CSIR.createSmeltingItemWithRecipe,
     createAssemblerItemWithRecipe = CAIR.createAssemblerItemWithRecipe,
+    createThrowInWaterItemWithRecipe = CTWIR.createThrowInWaterItemWithRecipe,
     createTechnology = TECH.createTechnology,
     createTechnologyTrigger = TECHTRIGGER.createTechnologyTrigger,
     createItemSearch = CIS.createItemSearch,

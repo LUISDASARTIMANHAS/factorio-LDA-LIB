@@ -12,9 +12,9 @@ local Module = {}
 -- @param results tabela de saidas depois de construido o item.
 -- @param alternative_unlock_methods quais outras techs desbloqueiam esse item.
 -- @param isEnabled se o item ja deve vir com a receita desbloqueada.
-function Module.createBlockItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,icon_size,pick_sound,drop_sound)
+function Module.createBlockItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures,icon_size,pick_sound,drop_sound)
     local item = createBlock.createBlockItem(name,subgroup, stack_size,icon_size,pick_sound,drop_sound)
-    local recipe = createRecipe.createRecipe("blocos",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
+    local recipe = createRecipe.createRecipe("blocos",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
 
     return {item, recipe}
 end

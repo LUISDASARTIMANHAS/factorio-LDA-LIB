@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.7
+Date: 01/01/2026
+  changes:
+    - Função createThrowInWaterItemWithRecipe adicionada
+  fixes:
+    - Adiciona suporte para 'pictures' na função createRecipe ou icon_size padrão devolvido para 128x128 
+---------------------------------------------------------------------------------------------------
 Version: 0.0.6
 Date: 31/12/2025
   changes:

@@ -14,7 +14,7 @@ local Module = {}
 -- @param isEnabled se o item ja deve vir com a receita desbloqueada.
 function Module.createItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
     local item = createItem.createItem(name,subgroup, stack_size,pictures)
-    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled)
+    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
 
     return {item, recipe}
 end
