@@ -47,8 +47,8 @@ local function createHRVersion(base_width, base_height, filename, props, hr_scal
     }
 
     -- Aplica as propriedades compartilhadas (frame_count, shift, priority, etc.)
-    for k, v in pairs(props) do
-        hr_version[k] = v
+    for k, value in pairs(props) do
+        hr_version[k] = value
     end
 
     return hr_version
@@ -60,9 +60,10 @@ end
 -- @param width {number} A largura da sprite na versão base.
 -- @param height {number} A altura da sprite na versão base.
 -- @param hr_scale {number|nil} O fator de escala para a versão HR (padrão: 0.5).
+-- @param draw_as_shadow {boolean} se o layer deve ser uma sombra (padrão: false).
 -- @param custom_props {table|nil} Propriedades customizadas.
 -- @return {table} Um objeto de layer de animação completo, incluindo a hr_version.
-function Module.createAnimationLayer(filename, width, height, hr_scale, custom_props)
+function Module.createAnimationLayer(filename, width, height, hr_scale,shift,draw_as_shadow, custom_props)
     local props = prepareProps(custom_props)
     local formalizedFilename = filename ..".png"
 
@@ -70,12 +71,14 @@ function Module.createAnimationLayer(filename, width, height, hr_scale, custom_p
     local layer = {
         filename = formalizedFilename,
         width = width,
-        height = height
+        height = height,
+        shift = shift or nil,
+        draw_as_shadow = draw_as_shadow or false
     }
 
     -- Aplica as propriedades à camada base
-    for k, v in pairs(props) do
-        layer[k] = v
+    for k, value in pairs(props) do
+        layer[k] = value
     end
 
     -- Anexa a versão HR

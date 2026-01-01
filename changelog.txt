@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.6
-Date: 25/12/2025
+Date: 31/12/2025
   changes:
     - Função Privada: Cria o objeto hr_version, calculando as dimensões.
     - Função Pública: Cria uma única camada (layer) de animação.
@@ -12,6 +12,11 @@ Date: 25/12/2025
     - Funções utils adicionadas createModuleSpec, createBoundingBox
     - Funções utils adicionadas createResistance, getFullResistance
     - Funções utils adicionado (getSequentialPictureList,getPicture)
+    - removido icons_size das receitas (recipe), 
+      - motivo:
+      - Inferência (O Mecanismo Padrão), Quando você omite icon_size em um protótipo de recipe O jogo assume que o ícone da receita (recipe.icon) tem a mesma forma e tamanho que o ícone do principal resultado (recipe.results[1].name).
+      - Exemplo: Se a sua receita produz iron-plate, e o ícone de iron-plate é definido como 32x32 pixels, o jogo renderizará o ícone da receita na mesma dimensão padrão para receitas.
+    - Atualiza receitas, ajusta changelog; adiciona suporte a novos itens e traduções para inglês e português.
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.5
 Date: 24/12/2025

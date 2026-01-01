@@ -7,9 +7,9 @@ local controlCreateBlocItemWithRecipe = require("generic-functions.create-block-
 local controlGetModPath = require("utils.control-get-mod-path")
 local controlCreateItemWithRecipe = require("generic-functions.create-item-with-recipe")
 local PATH = controlGetModPath.setBasePath("LDA-LIB")
+local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
 
 -- __base__/sound/world/water/waterlap
-
 data:extend(
     {
         {
@@ -31,7 +31,15 @@ data:extend(
             -- ALTERAÇÃO CRUCIAL AQUI: energy_usage deve ser > 0
             -- O custo energético da eletrólise da água é alto, exigindo cerca de 50-55 kWh de eletricidade para produzir 1 kg de hidrogênio, com um valor teórico de ~39,4 kWh/kg (HHV), mas perdas reais aumentam isso, com foco em tecnologias como PEM e Alcalina para melhorar a eficiência e reduzir o custo por kg de H₂, visando metas como US$ 1/kg até 2030.
             energy_usage = "55kW",
-            energy_source = utilsEnergySource.createElectricEnergySource("secondary-input", nil, 0, 0, 0, false, false),
+            energy_source = utilsEnergySource.createElectricEnergySource(
+                "secondary-input",
+                nil,
+                "55kW",
+                "55kW",
+                0,
+                false,
+                false
+            ),
             -- Poluição e Efeitos
             allowed_effects = {"pollution"},
             -- x_max = 1.2, y_max = 1.2 (automático)
@@ -53,11 +61,30 @@ data:extend(
             animation = utilsAnimations.createAnimation(
                 utilsAnimations.createAnimationLayer(PATH .. "graficos/blocos/throw-in-water", 512, 512)
             ),
+            picture = {
+                layers = {
+                    utilsAnimations.createAnimationLayer(
+                        PATH .. "graficos/blocos/throw-in-water",
+                        512,
+                        512,
+                        nil,
+                        {0, -0.015625}
+                    ),
+                    utilsAnimations.createAnimationLayer(
+                        PATH .. "graficos/blocos/throw-in-water",
+                        512,
+                        512,
+                        nil,
+                        {0.3125, 0.203125},
+                        true
+                    ),
+                }
+            },
             -- Sons
-            close_sound = {utils.getAudio("__base__/sound/world/waterlap")},
-            open_sound = {utils.getAudio("__base__/sound/world/waterlap")},
+            close_sound = {utils.getAudio("__base__/sound/world/waterlap", 1)},
+            open_sound = {utils.getAudio("__base__/sound/world/waterlap", 1)},
             working_sound = {
-                sound = {utils.getAudio("__LDA-LIB__/audios/water")},
+                sound = {utils.getAudio("__LDA-LIB__/audios/water", 1)},
                 fade_in_ticks = 4,
                 audible_distance_modifier = 0.5,
                 fade_out_ticks = 20
@@ -84,7 +111,7 @@ data:extend(
     }
 )
 
--- 2. Definição do Item de Colocação (Obrigatório, senão a entidade não pode ser colocada)
+-- Definição do Item de Colocação (Obrigatório, senão a entidade não pode ser colocada)
 -- Assumimos que o item tem o mesmo nome da entidade
 data:extend(
     controlCreateBlocItemWithRecipe.createBlockItemWithRecipe(
@@ -127,6 +154,6 @@ data:extend(
         },
         nil,
         true,
-        utils.getSequentialPictureList(PATH.."graficos/icones/yumako-seed-x2-", 1, 4, 64, 0.5, 4)
+        utils.getSequentialPictureList(PATH .. "graficos/itens/yumako-seed-x2-", 1, 4, 64, 0.5, 4)
     )
 )

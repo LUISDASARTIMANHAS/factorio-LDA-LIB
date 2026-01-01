@@ -25,7 +25,13 @@ function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, resu
         enabled = enabled or false,
         energy_required = time,
         icon = icon_path,
-        icon_size = 128,
+        -- 1. Inferência (O Mecanismo Padrão)
+        -- Quando você omite icon_size em um protótipo de recipe:
+
+        -- Fonte: O jogo assume que o ícone da receita (recipe.icon) tem a mesma forma e tamanho que o ícone do principal resultado (recipe.results[1].name).
+
+        -- Exemplo: Se a sua receita produz iron-plate, e o ícone de iron-plate é definido como 32x32 pixels, o jogo renderizará o ícone da receita na mesma dimensão padrão para receitas.
+        -- icon_size = 128,
         ingredients = ingredients,
         results = results,
         maximum_productivity = 2,
