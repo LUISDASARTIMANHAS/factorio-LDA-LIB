@@ -77,8 +77,8 @@ end
 -- @param unlocks table Uma lista de nomes de receitas (strings) OU uma tabela de efeitos no formato Factorio.
 -- @param modtag string (mymod-) usado para verificar se a receita está na lista de exceções do jogo base
 -- @return table A tabela de efeitos no formato Factorio.
-function Module.processUnlocks(unlocks,modtag)
-    local modtag = "DSP-"
+function Module.processUnlocks(unlocks,tag)
+    local modtag = tag or "DSP-"
     local processed_unlocks = {}
     if unlocks then
         -- Verificar se 'unlocks' é uma lista simples de nomes de receitas (strings)

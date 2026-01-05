@@ -3,6 +3,8 @@ local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local controlGetModPath = require("utils.control-get-mod-path")
 local utils = require("utils.control-utils")
+-- graphics/icons - icones de itens
+
 -- stone-brick
 -- subgroup = terrain 
 
@@ -61,7 +63,7 @@ local utils = require("utils.control-utils")
 function Module.createItem(name, subgroup, stack_size, pictures)
     -- Assumindo que controlGetModPath.getModPath() está acessível.
     local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graficos/itens/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/icons/" .. name .. ".png"
     
     -- 1. Cria a tabela base com campos comuns
     local item_data = {

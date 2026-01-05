@@ -2,10 +2,11 @@ local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local controlGetModPath = require("utils.control-get-mod-path")
+-- graphics/icons - icones de itens
 
 function Module.createItemSearch(name, stack_size)
     local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graficos/itens/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/icons/" .. name .. ".png"
     return {
         type = "tool",
         durability = 1,

@@ -1,32 +1,26 @@
 local Module = {}
 local controlGetModPath = require("utils.control-get-mod-path")
+-- graphics/item-group - icones de grupos e categorias de itens
 
 --- Cria a definição para um Item Group (Categoria Principal) e seus Item Subgroups (Subgrupos) no Factorio.
 -- @param group_name {string} O nome único (ID) do Item Group (Categoria). Ex: "AE2-category".
 -- @param group_order {string} A ordem de exibição do grupo na lista de categorias. Ex: "e".
--- @param icon_filename {string|nil} O caminho do arquivo de ícone (dentro da pasta de gráficos do mod) ou o caminho completo se for um ícone de outro mod. Se for 'nil', usará o padrão.
 -- @param icon_size {number} O tamanho do ícone em pixels (Factorio usa 32, 64, 128, etc.).
 -- @param subgroups {table|nil} Uma tabela de strings ou uma tabela de objetos para definir os subgrupos.
 --   Se for uma tabela de strings: {"subgrupo1", "subgrupo2"}. O nome do subgrupo será a string e a ordem será [Group-Name]-[String].
 --  Se for uma tabela de objetos: {{name = "nome-sub", order = "ordem-sub"}}.
 -- @param icon_mipmaps {number|nil} O número de mipmaps para o ícone. Opcional.
 -- @return {table} Uma tabela contendo a definição do Item Group e todos os Item Subgroups.
-function Module.createItemGroup(group_name, group_order, icon_filename, icon_size, subgroups, icon_mipmaps)
-    -- Lógica para definir o caminho do ícone se for fornecido apenas o nome do arquivo
-    local icon_path = icon_filename
-    if icon_filename and not icon_filename:match("/") then
-        local path_main = controlGetModPath.getModPath()
-        -- Assumindo que o ícone para a categoria principal fica em "graficos/icons/"
-        icon_path = path_main .. "graficos/icons/" .. icon_filename
-    end
+function Module.createItemGroup(group_name, group_order, icon_size, subgroups, icon_mipmaps)
+    local path_main = controlGetModPath.getModPath()
 
     -- 1. Definição do Item Group (Categoria Principal)
     local group_definition = {
         type = "item-group",
         name = group_name,
         order = group_order,
-        icon = icon_path,
-        icon_size = icon_size or 126, -- Padrão 32 se não for especificado
+        icon = path_main .. "graphics/item-group/" .. group_name .. ".png",
+        icon_size = icon_size or 32, -- Padrão 32 se não for especificado
         -- Adiciona icon_mipmaps apenas se for um número válido
         icon_mipmaps = type(icon_mipmaps) == "number" and icon_mipmaps or nil
     }

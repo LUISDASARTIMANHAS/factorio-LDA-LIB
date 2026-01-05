@@ -3,10 +3,12 @@ local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local controlGetModPath = require("utils.control-get-mod-path")
 
+-- graphics/icons - icones de itens
+
 function Module.createBlockItem(name, subgroup, stack_size,icon_size,pick_sound,drop_sound)
     local path_main = controlGetModPath.getModPath()
 
-    local icon_path = path_main .. "graficos/blocos/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/icons/" .. name .. ".png"
     return {
         type = "item",
         name = name,

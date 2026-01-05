@@ -3,10 +3,11 @@ local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local hit_effects = require("__base__.prototypes.entity.hit-effects")
 local controlGetModPath = require("utils.control-get-mod-path")
+-- graphics/entities - icones de entidades
 
-function Module.createBlockItem(typeEntity, name, subgroup, stack_size)
+function Module.createEntity(typeEntity, name, subgroup, stack_size)
     local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graficos/blocos/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/entities/" .. name .. ".png"
     return {
         type = typeEntity,
         name =  name,
