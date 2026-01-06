@@ -16,7 +16,7 @@ data:extend(
             type = "assembling-machine",
             name = "throw-in-water",
             -- Gráficos e Ícones
-            icon = PATH .. "graficos/blocos/throw-in-water.png",
+            icon = PATH .. "graphics/entities/throw-in-water.png",
             icon_size = 512,
             icon_mipmaps = 2,
             -- Propriedades Físicas e de Mineração
@@ -59,19 +59,19 @@ data:extend(
             placeable_by = {item = "throw-in-water", count = 1}, -- Certifique-se de definir o item
             -- Animação
             animation = utilsAnimations.createAnimation(
-                utilsAnimations.createAnimationLayer(PATH .. "graficos/blocos/throw-in-water", 512, 512)
+                utilsAnimations.createAnimationLayer(PATH .. "graphics/entities/throw-in-water", 512, 512)
             ),
             picture = {
                 layers = {
                     utilsAnimations.createAnimationLayer(
-                        PATH .. "graficos/blocos/throw-in-water",
+                        PATH .. "graphics/entities/throw-in-water",
                         512,
                         512,
                         nil,
                         {0, -0.015625}
                     ),
                     utilsAnimations.createAnimationLayer(
-                        PATH .. "graficos/blocos/throw-in-water",
+                        PATH .. "graphics/entities/throw-in-water",
                         512,
                         512,
                         nil,
@@ -155,6 +155,6 @@ data:extend(
         },
         nil,
         true,
-        utils.getSequentialPictureList(PATH .. "graficos/itens/yumako-seed-x2-", 1, 4, 64, 0.5, 4)
+        utils.getSequentialPictureList(PATH .. "graphics/icons/yumako-seed-x2-", 1, 4, 64, 0.5, 4)
     )
 )

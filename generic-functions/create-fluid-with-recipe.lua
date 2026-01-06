@@ -5,7 +5,7 @@ local Module = {}
 
 function Module.createFluidWithRecipe(name, heatEnergy, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
     local item = createFluid.createFluid(name, heatEnergy)
-    local recipe = createRecipe.createRecipe("fluids",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
+    local recipe = createRecipe.createRecipe("fluid",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
 
     return {item, recipe}
 end

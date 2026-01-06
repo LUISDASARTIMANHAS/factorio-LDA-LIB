@@ -1,43 +1,41 @@
 local controlGetModPath = require("utils.control-get-mod-path")
-local techUtil = require("base-functions.tech-util")
+local techUtil = require("utils.tech-util")
 local Module = {}
+-- graphics/technology - icones de pesquisa
+
 
 -- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").
 -- @param ingredients tabela de pacotes cientificos necessarios para a pesquisa (ex: "energy-matrix").
 -- @param unlocks tabela de receitasa a desbloquear tecnologia (ex: "processor").
 -- @param prerequisites tabela de pre requisitos necessarios para pesquisar essa pesquisa (ex: "tech-dyston-sphere-program").
-function Module.createTechnology(name, ingredients, prerequisites, unlocks, pack_count)
+function Module.createTechnology(
+    name,
+    ingredients,
+    prerequisitesList,
+    unlocksList,
+    time,
+    pack_count,
+    isUpgrade,
+    icon_size)
     local path_main = controlGetModPath.getModPath()
-    -- Copiar os pré-requisitos existentes primeiro
-    local final_prerequisites = techUtil.copyPrerequisites(prerequisites)
 
-    -- Adicionar pré-requisitos automáticos usando a sub-função
-    techUtil.addAutomaticPrerequisites(name, final_prerequisites)
-
-    -- Garantir que não haja duplicatas nos pré-requisitos usando a sub-função
-    local unique_final_prerequisites = techUtil.removeDuplicates(final_prerequisites)
-
-    -- Processar os desbloqueios (unlocks) usando a sub-função
-    local final_unlocks = techUtil.processUnlocks(unlocks)
-
-    -- Processar os desbloqueios (unlocks) usando a sub-função
-    local final_ingredients = techUtil.processUnlockIngredients(ingredients)
-
-    return {
+    local technology = {
         type = "technology",
         name = name,
-        icon = path_main .. "graficos/technology/" .. name .. ".png",
-        icon_size = 128,
+        icon = path_main .. "graphics/technology/" .. name .. ".png",
+        icon_size = icon_size or 64,
         icon_mipmaps = 4,
-        prerequisites = unique_final_prerequisites, -- Usar os pré-requisitos ajustados e únicos
-        effects = final_unlocks,
+        prerequisites = prerequisitesList,
+        effects = techUtil.createEffectsUnlocksRecipes(unlocksList),
         unit = {
             count = pack_count or 100,
-            time = 30,
-            ingredients = final_ingredients
+            time = time or 30,
+            ingredients = ingredients
         },
-        order = "a-b-c".. name
+        order = "a-b-c" .. name,
+        upgrade = isUpgrade or false
     }
+    return technology
 end
 
 -- example return

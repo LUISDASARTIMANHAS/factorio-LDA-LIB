@@ -14,7 +14,7 @@ local Module = {}
 -- @param isEnabled se o item ja deve vir com a receita desbloqueada.
 function Module.createItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
     local item = createItem.createItem(name,subgroup, stack_size,pictures)
-    local recipe = createRecipe.createRecipe("itens",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
+    local recipe = createRecipe.createRecipe("icons",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
 
     return {item, recipe}
 end
@@ -24,7 +24,7 @@ end
 -- {
 --             type = "item",
 --             name = "quantum-teleporter-equipment",
---             icon = path_main .. "graficos/itens/quantum-teleporter-equipment-128.png",
+--             icon = path_main .. "graphics/itens/quantum-teleporter-equipment-128.png",
 --             icon_size = 128,
 --             subgroup = "itens",
 --             -- diz pro jogo que o equipamento deve ser colocado com o item especificado

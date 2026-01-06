@@ -34,7 +34,7 @@ local CGR = require("generic-functions.create-generic-recipe")
 local CTWIR = require("functions.create-throw-in-water-item-with-recipe")
 local CSIR = require("functions.create-smelting-item-with-recipe")
 local CAIR = require("functions.create-assembler-item-with-recipe")
-local TECH = require("functions.create-technology")
+local TECH = require("base-functions.create-technology")
 local TECHTRIGGER = require("functions.create-technology-trigger")
 
 ---------------------------------------------------------------------

@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.8
+Date: 05/01/2026
+  fixes:
+    - locale translations updated
+    - remake da techUtil, todas as funções fora atualizadas e refeitas do 0 para buscar uma melhor eficiencia 
+  pendingBugs:
+    - entidade não esta renderizando
+---------------------------------------------------------------------------------------------------
 Version: 0.0.7
 Date: 01/01/2026
   changes:

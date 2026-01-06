@@ -6,7 +6,7 @@ local utils = require("utils.control-utils")
 
 function Module.createOre(name, stack_size, fuel_category, fuel_value)
     local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graficos/itens/" .. name .. "-ore" .. ".png"
+    local icon_path = path_main .. "graphics/icons/" .. name .. "-ore" .. ".png"
     return {
         {
             type = "item",

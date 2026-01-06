@@ -72,7 +72,7 @@ function Module.createAnimationLayer(filename, width, height, hr_scale,shift,dra
         filename = formalizedFilename,
         width = width,
         height = height,
-        shift = shift or nil,
+        shift = shift or util.by_pixel(-3, 3.5),
         draw_as_shadow = draw_as_shadow or false
     }
 

@@ -69,7 +69,7 @@ end
     --         -- nome da categoria
     --         name = "AE2-category",
     --         order = "e",
-    --         icon = "Applied-Energistics-2/graficos/technology/AE2.png",
+    --         icon = "Applied-Energistics-2/graphics/technology/AE2.png",
     --         icon_size = 126,
     --         icon_mipmaps = 2
     --     },
@@ -133,7 +133,7 @@ return Module
 -- local ae2_category_definitions = LDAFunctions.createItemGroup(
 --     "AE2-category", -- group_name
 --     "e",            -- group_order
---     "Applied-Energistics-2/graficos/technology/AE2.png", -- icon_filename (Caminho completo de um ícone de outro mod, neste caso)
+--     "Applied-Energistics-2/graphics/technology/AE2.png", -- icon_filename (Caminho completo de um ícone de outro mod, neste caso)
 --     126,            -- icon_size
 --     ae2_subgroups,  -- subgroups
 --     2               -- icon_mipmaps

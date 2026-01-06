@@ -16,7 +16,7 @@ function Module.createGenericRecipe(name)
         {type = "item", name = "iron-plate", amount = 1}
     }
     local item = createItem.createItem(name,"other-consumables", 50)
-    local recipe = createRecipe.createRecipe("itens",name, "advanced-crafting", 10, ingredients, results)
+    local recipe = createRecipe.createRecipe("icons",name, "advanced-crafting", 10, ingredients, results)
 
     return {item, recipe}
 end
@@ -26,7 +26,7 @@ end
 -- {
 --             type = "item",
 --             name = "quantum-teleporter-equipment",
---             icon = path_main .. "graficos/itens/quantum-teleporter-equipment-128.png",
+--             icon = path_main .. "graphics/itens/quantum-teleporter-equipment-128.png",
 --             icon_size = 128,
 --             subgroup = "itens",
 --             -- diz pro jogo que o equipamento deve ser colocado com o item especificado

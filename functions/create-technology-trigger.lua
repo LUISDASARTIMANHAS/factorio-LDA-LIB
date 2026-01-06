@@ -1,37 +1,28 @@
 local controlGetModPath = require("utils.control-get-mod-path")
-local techUtil = require("base-functions.tech-util")
+local techUtil = require("utils.tech-util")
 
 local Module = {}
+-- graphics/technology - icones de pesquisa
 
 -- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").
 -- @param unlocks tabela de receitasa a desbloquear tecnologia (ex: "processor").
 -- @param prerequisites tabela de pre requisitos necessarios para pesquisar essa pesquisa (ex: "tech-dyston-sphere-program").
-function Module.createTechnologyTrigger(name, unlocks, prerequisites, research_trigger)
+function Module.createTechnologyTrigger(name, unlocksList, prerequisitesList, research_trigger,icon_size)
     local path_main = controlGetModPath.getModPath()
-    -- Copiar os pré-requisitos existentes primeiro
-    local final_prerequisites = techUtil.copyPrerequisites(prerequisites)
 
-    -- Adicionar pré-requisitos automáticos usando a sub-função
-    techUtil.addAutomaticPrerequisites(name, final_prerequisites)
-
-    -- Garantir que não haja duplicatas nos pré-requisitos usando a sub-função
-    local unique_final_prerequisites = techUtil.removeDuplicates(final_prerequisites)
-
-    -- Processar os desbloqueios (unlocks) usando a sub-função
-    local final_unlocks = techUtil.processUnlocks(unlocks)
-
-    return {
+    local technologyTrigger ={
         type = "technology",
         name = name,
-        icon = path_main .. "graficos/technology/" .. name .. ".png",
-        icon_size = 128,
+        icon = path_main .. "graphics/technology/" .. name .. ".png",
+        icon_size = icon_size or 64,
         icon_mipmaps = 4,
-        prerequisites = unique_final_prerequisites,
-        effects = final_unlocks,
+        prerequisites = prerequisitesList,
+        effects = techUtil.createEffectsUnlocksRecipes(unlocksList),
         -- so e permitido 1 trigger
         research_trigger = research_trigger,
         order = "a-b-" .. name
     }
+    return technologyTrigger
 end
 
 -- example
