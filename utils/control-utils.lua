@@ -16,7 +16,11 @@ local DEFAULT_DAMAGE_TYPE = {
     -- de *duas* resistências na lista. Para esta função, focamos nos tipos de dano únicos.
 }
 
--- Função auxiliar para procurar um valor em um array
+--- Verifica se um valor existe dentro de um array sequencial.
+---
+---@param array table   Lista (array) a ser percorrida
+---@param value any     Valor a ser procurado no array
+---@return boolean      Retorna true se o valor existir, caso contrário false
 function Module.array_contains(array, value)
     for _, v in ipairs(array) do
         if v == value then
@@ -26,12 +30,13 @@ function Module.array_contains(array, value)
     return false
 end
 
--- Função auxiliar genérica para mesclar uma tabela 'source' em uma tabela 'target'.
--- Parâmetros:
---   target (table): A tabela que receberá os dados.
---   source (table): A tabela de onde os dados serão copiados.
---   overwrite (boolean, opcional): Se for 'true', sobrescreve campos existentes em 'target'.
---                                  Se for 'false' ou omitido, só adiciona novos campos (mesclagem condicional).
+--- Mescla os campos de uma tabela `source` em uma tabela `target`.
+--- Permite mesclagem condicional ou sobrescrita total dos campos existentes.
+---
+---@param target table|nil      Tabela que receberá os dados
+---@param source table|nil      Tabela de origem dos dados
+---@param overwrite boolean|nil Se true, sobrescreve campos existentes em `target`
+---@return table               Tabela resultante da mesclagem
 function Module.tableMerge(target, source, overwrite)
     -- O 'overwrite' padrão é FALSE (mesclagem condicional)
     local should_overwrite = overwrite or false
@@ -55,11 +60,23 @@ function Module.tableMerge(target, source, overwrite)
     return target
 end
 
---- Cria uma caixa de delimitação (bounding box) simétrica, usada para collision_box, selection_box ou drawing_box.
--- O formato da caixa é sempre: {{ -x_max, -y_max }, { x_max, y_max }}.
--- @param x_max {number} O deslocamento máximo horizontal a partir do centro.
--- @param y_max {number|nil} O deslocamento máximo vertical. Se nulo, usa x_max (cria uma caixa quadrada/simétrica).
--- @return {table} Um objeto de caixa de delimitação pronto para uso.
+--- Cria uma caixa de delimitação (bounding box) simétrica.
+--- Usada em `collision_box`, `selection_box` ou `drawing_box`.
+--- O formato retornado é sempre: {{ -x_max, -y_max }, { x_max, y_max }}.
+---
+--- Usage:
+--- ```lua
+--- collision_box = LDA.createBoundingBox(1.2)
+--- selection_box = LDA.createBoundingBox(1.5)
+--- drawing_box   = LDA.createBoundingBox(1.5)
+---
+--- -- Caixa retangular
+--- collision_box = LDA.createBoundingBox(1.2, 0.8)
+--- ```
+---
+---@param x_max number        Deslocamento máximo horizontal a partir do centro
+---@param y_max number|nil    Deslocamento máximo vertical (se nil, usa x_max)
+---@return table              Bounding box pronta para uso no Factorio
 function Module.createBoundingBox(x_max, y_max)
     -- Validação básica:
     if type(x_max) ~= "number" or x_max <= 0 then
@@ -72,30 +89,31 @@ function Module.createBoundingBox(x_max, y_max)
         final_y_max = x_max
     end
 
-    local x = math.abs(x_max) -- Usa o valor absoluto para garantir que seja positivo
+    local x = math.abs(x_max)
     local y = math.abs(final_y_max)
 
-    -- Retorna o formato: {{ canto inferior esquerdo }, { canto superior direito }}
     return {
         {-x, -y},
         {x, y}
     }
-
-    -- Colisão e Seleção (Tamanho 2.4 x 2.4, conforme seu exemplo)
-    -- x_max = 1.2, y_max = 1.2 (automático)
-    -- collision_box = utils.createBoundingBox(1.2),
-    -- x_max = 1.5, y_max = 1.5 (automático)
-    -- selection_box = utils.createBoundingBox(1.5),
-    -- x_max = 1.5, y_max = 1.5 (automático)
-    -- drawing_box = utils.createBoundingBox(1.5),
 end
 
 --- Cria a estrutura completa para a especificação de módulos da entidade.
--- Abstrai a definição de 'module_specification'.
--- @param slots {number} O número de slots de módulo disponíveis (0 para nenhum).
--- @param icon_shift {table|nil} Ajuste da posição do ícone de informação do módulo.
---        Formato: {x_offset, y_offset}. Padrão: {0, 0}.
--- @return {table} Um objeto 'module_specification' pronto para uso.
+--- Abstrai a definição de `module_specification` usada pelo Factorio.
+---
+--- Usage:
+--- ```lua
+--- module_specification = LDA.createModuleSpec(0)
+---
+--- module_specification = LDA.createModuleSpec(
+---     2,
+---     {0, 0.5}
+--- )
+--- ```
+---
+---@param slots number              Número de slots de módulo disponíveis (0 para nenhum)
+---@param icon_shift table|nil       Ajuste da posição do ícone do módulo ({x, y})
+---@return table                    Estrutura `module_specification` pronta para uso
 function Module.createModuleSpec(slots, icon_shift)
     -- Validação básica
     if type(slots) ~= "number" or slots < 0 then
@@ -108,19 +126,26 @@ function Module.createModuleSpec(slots, icon_shift)
         final_icon_shift = icon_shift
     end
 
-    -- usage
-    -- module_specification =
-    --     utils.createModuleSpec(
-    --     0, -- slots
-    --     {0, 0.5} -- icon_shift (ajuste vertical para cima)
-    -- )
-
     return {
         module_slots = slots,
         module_info_icon_shift = final_icon_shift
     }
 end
 
+--- Cria uma definição de resistência individual para entidades do Factorio.
+--- Valida o tipo de dano contra a lista padrão e ajusta o percentual se necessário.
+---
+--- Usage:
+--- ```lua
+--- resistances = {
+---     LDA.createResistance("fire", 100),
+---     LDA.createResistance("physical", 50)
+--- }
+--- ```
+---
+---@param resistenceType string   Tipo de dano (ex: "fire", "physical", "acid")
+---@param percent number|nil     Percentual de resistência (0–100)
+---@return table                 Estrutura de resistência `{ type, percent }`
 function Module.createResistance(resistenceType, percent)
     -- Tipos de resistência padrão do Factorio (exemplos comuns)
 
@@ -139,13 +164,21 @@ function Module.createResistance(resistenceType, percent)
         percent = 0
     end
 
-    -- usage
-    -- resistances ={
-    --     utils.createResistance("fire",100)
-    -- }
     return {type = resistenceType, percent = percent}
 end
 
+--- Cria uma lista completa de resistências para todos os tipos de dano padrão do Factorio.
+--- Todos os tipos recebem o mesmo percentual de resistência.
+---
+--- Usage:
+--- ```lua
+--- resistances = LDA.getFullResistance()
+---
+--- resistances = LDA.getFullResistance(80)
+--- ```
+---
+---@param percent number|nil   Percentual de resistência aplicado a todos os tipos (padrão: 100)
+---@return table              Lista de resistências no formato aceito pelo Factorio
 function Module.getFullResistance(percent)
     -- Definir o valor padrão de 100% se 'percent' for nulo ou inválido
     local final_percent = 100
@@ -165,45 +198,22 @@ function Module.getFullResistance(percent)
         table.insert(resistances_table, resistance_entry)
     end
 
-    -- usage
-    -- resistances = utils.getFullResistance(),
-    -- {
-    --     {
-    --         type = "physical",
-    --         percent = 100
-    --     },
-    --     {
-    --         type = "impact",
-    --         percent = 100
-    --     },
-    --     {
-    --         type = "fire",
-    --         percent = 100
-    --     },
-    --     {
-    --         type = "acid",
-    --         percent = 100
-    --     },
-    --     {
-    --         type = "poison",
-    --         percent = 100
-    --     },
-    --     {
-    --         type = "explosion",
-    --         percent = 100
-    --     },
-    --     {
-    --         type = "laser",
-    --         percent = 100
-    --     },
-    --     {
-    --         type = "electric",
-    --         percent = 100
-    --     }
-    -- }
     return resistances_table
 end
 
+--- Cria uma definição de áudio simples para uso em protótipos do Factorio.
+--- Concatena automaticamente a extensão `.ogg` ao nome do arquivo.
+---
+--- Usage:
+--- ```lua
+--- working_sound = LDA.getAudio("__base__/sound/furnace", 0.8)
+---
+--- open_sound = LDA.getAudio("__base__/sound/gui-open")
+--- ```
+---
+---@param filename string        Caminho e nome base do arquivo de áudio (sem extensão)
+---@param volume number|nil      Volume do áudio (padrão: 0.7)
+---@return table                Tabela de definição de som compatível com o Factorio
 function Module.getAudio(filename, volume)
     local path = Module.basePath -- agora é global para biblioteca inteira
     -- caso o mod dependente não tenha definido o setBasePath
@@ -215,15 +225,23 @@ function Module.getAudio(filename, volume)
 end
 
 --- Gera uma lista de definições de áudio sequenciais para Factorio.
--- É útil para sons como 'vehicle_impact_sound' onde os nomes dos arquivos
--- seguem um padrão com numeração (ex: 'impact-1.ogg', 'impact-2.ogg').
--- @param base_filename {string} O caminho base e nome do arquivo antes do número.
---        Ex: "__base__/sound/car-metal-impact-"
--- @param start_index {number} O número inicial da sequência (ex: 2).
--- @param end_index {number} O número final da sequência (ex: 6).
--- @param volume {number|nil} O volume a ser aplicado a cada som. Padrão: 0.7.
--- @return {table} Uma tabela contendo as definições de som prontas para uso
---         em atributos como 'vehicle_impact_sound'.
+--- É útil para sons cujos arquivos seguem um padrão numérico incremental.
+---
+--- Usage:
+--- ```lua
+--- vehicle_impact_sound = Module.getSequentialAudioList(
+---     "__base__/sound/car-metal-impact-",
+---     2,
+---     6,
+---     0.5
+--- )
+--- ```
+---
+---@param base_filename string     Caminho base e nome do arquivo antes do número
+---@param start_index number       Índice inicial da sequência
+---@param end_index number         Índice final da sequência
+---@param volume number|nil        Volume aplicado a todos os sons (padrão: 0.7)
+---@return table                   Lista de definições de áudio compatíveis com o Factorio
 function Module.getSequentialAudioList(base_filename, start_index, end_index, volume)
     -- Validação: Garantir que os parâmetros essenciais não são nulos.
     if not base_filename or not start_index or not end_index then
@@ -247,37 +265,98 @@ function Module.getSequentialAudioList(base_filename, start_index, end_index, vo
         table.insert(audio_list, Module.getAudio(filename, default_volume))
     end
 
-    -- usage exemplo
-    -- Sons de Impacto de Veículo
-    -- vehicle_impact_sound = utils.getSequentialAudioList(
-    --     "__base__/sound/car-metal-impact-", -- Nome base do arquivo
-    --     2,                                 -- Começa no 2 (car-metal-impact-2.ogg)
-    --     6,                                 -- Termina no 6 (car-metal-impact-6.ogg)
-    --     0.5                                -- Volume (opcional, mas bom manter)
-    -- )
-
     return audio_list
 end
 
---- Cria uma definição de Sprite/Picture para uso em listas.
--- É o equivalente visual de Module.getAudio.
--- @param filename {string} O caminho completo e nome do arquivo (ex: "__base__/graphics/sprites/iron-ore").
--- @param size {number, optional} O tamanho do sprite em pixels (largura/altura). Padrão: 64.
--- @param scale {number, optional} Fator de escala. Padrão: 0.5 (para ícones pequenos).
--- @param mipmap_count {number, optional} Mipmap count para otimização. Padrão: 4.
--- @return {table} Um objeto Picture/Sprite Definition.
+--- Cria uma definição base de som ambiente para o Factorio.
+--- Esta função é genérica e serve como base para todos os tipos de trilha.
+---
+--- Tipos válidos de `track_type`:
+--- - `"menu-track"`   : reproduz apenas no menu principal
+--- - `"main-track"`   : toca intercalado com "interlude"
+--- - `"hero-track"`   : toca ao pisar em um novo planeta (1 por planeta)
+--- - `"interlude"`    : toca intercalado com "main-track"
+---
+---@param nameTrack string              Nome lógico da trilha (usado como ID)
+---@param track_type string             Tipo da trilha ambiente
+---@param volume number|nil             Volume do áudio (padrão: 1.2)
+---@param SpaceLocationID string|nil     ID do planeta/plataforma espacial
+---@return table                         Protótipo `ambient-sound` do Factorio
+function Module.CreateBaseAmbientSound(nameTrack, track_type, volume, SpaceLocationID)
+    if nameTrack == nil then
+        error("[LDA-LIB] [CreateBaseAmbientSound] error: nameTrack não pode ser nulo!")
+    end
+
+    if track_type == nil then
+        error("[LDA-LIB] [CreateBaseAmbientSound] error: track_type não pode ser nulo!")
+    end
+
+    return {
+        type = "ambient-sound",
+        name = nameTrack,
+        weight = 1,
+        track_type = track_type,
+        planetoptional = SpaceLocationID,
+        sound = Module.getAudio(nameTrack, volume or 1.2)
+    }
+end
+
+--- Cria uma trilha do tipo `interlude`.
+--- Essas faixas são tocadas alternadamente com `main-track`.
+---
+--- Uso:
+--- ```lua
+--- data:extend({
+---     LDA.CreateInterludeAmbientSound("Minha Musica")
+--- })
+--- ```
+---
+---@param nameTrack string              Nome lógico da trilha
+---@param volume number|nil             Volume do áudio (padrão: 1.2)
+---@param SpaceLocationID string|nil     ID do planeta/plataforma espacial
+---@return table                         Protótipo `ambient-sound`
+function Module.CreateInterludeAmbientSound(nameTrack, volume, SpaceLocationID)
+    return Module.CreateBaseAmbientSound(nameTrack, "interlude", volume or 1.2, SpaceLocationID)
+end
+
+--- Cria uma trilha exclusiva do menu principal (`menu-track`).
+---
+--- Uso:
+--- ```lua
+--- data:extend({
+---     LDA.CreateMenuAmbientSound("Minha Musica de Menu")
+--- })
+--- ```
+---
+---@param nameTrack string      Nome lógico da trilha
+---@param volume number|nil     Volume do áudio (padrão: 1.5)
+---@return table                Protótipo `ambient-sound`
+function Module.CreateMenuAmbientSound(nameTrack, volume)
+    return Module.CreateBaseAmbientSound(nameTrack, "menu-track", volume or 1.5, nil)
+end
+
+--- Cria uma definição de Picture/Sprite para uso em protótipos do Factorio.
+--- Utilizado em campos como `pictures`, `icons`, `animation`, entre outros.
+---
+--- Usage:
+--- ```lua
+--- local pictures = {
+---     LDA.getPicture("__space-age__/graphics/icons/yumako-seed-1", 64, 0.5, 4),
+---     LDA.getPicture("__space-age__/graphics/icons/yumako-seed-2", 64, 0.5, 4),
+---     LDA.getPicture("__space-age__/graphics/icons/yumako-seed-3", 64, 0.5, 4),
+---     LDA.getPicture("__space-age__/graphics/icons/yumako-seed-4", 64, 0.5, 4)
+--- }
+--- ```
+---
+---@param filename string            Caminho do arquivo sem extensão
+---@param size number|nil            Tamanho do sprite em pixels (padrão: 64)
+---@param scale number|nil           Fator de escala aplicado à imagem (padrão: 0.5)
+---@param mipmap_count number|nil    Quantidade de mipmaps (padrão: 4)
+---@return table                     Definição de Picture/Sprite compatível com o Factorio
 function Module.getPicture(filename, size, scale, mipmap_count)
     if filename == nil then
         error("[LDA-LIB] [getPicture] error: filename não pode ser nulo!")
     end
-
-    -- usage
-    -- local pictures = {
-    --     Module.getPicture("__space-age__/graphics/icons/yumako-seed-1", 64, 0.5, 4),
-    --     Module.getPicture("__space-age__/graphics/icons/yumako-seed-2", 64, 0.5, 4),
-    --     Module.getPicture("__space-age__/graphics/icons/yumako-seed-3", 64, 0.5, 4),
-    --     Module.getPicture("__space-age__/graphics/icons/yumako-seed-4", 64, 0.5, 4)
-    -- }
 
     return {
         size = size or 64,
@@ -286,17 +365,32 @@ function Module.getPicture(filename, size, scale, mipmap_count)
         mipmap_count = mipmap_count or 4
     }
 end
-
---- Gera uma lista de definições de Sprite/Picture sequenciais para Factorio.
--- Útil para listas de imagens que seguem um padrão com numeração (ex: 'seed-1.png', 'seed-2.png').
--- @param base_filename_without_ext {string} O caminho base e nome do arquivo antes do número. Ex: "__space-age__/graphics/icons/yumako-seed-"
--- @param extension {string, optional} Extensão do arquivo. Padrão: ".png".
--- @param start_index {number} O número inicial da sequência (ex: 1).
--- @param end_index {number} O número final da sequência (ex: 4).
--- @param size {number, optional} O tamanho do sprite em pixels. Padrão: 64.
--- @param scale {number, optional} Fator de escala. Padrão: 0.5.
--- @param mipmap_count {number, optional} Mipmap count. Padrão: 4.
--- @return {table} Uma tabela contendo as definições de Picture/Sprite prontas para uso.
+--- Gera uma lista sequencial de definições de Picture/Sprite para o Factorio.
+--- Ideal para conjuntos de imagens numeradas de forma incremental
+--- (ex: "seed-1.png", "seed-2.png", "seed-3.png").
+---
+--- A função utiliza internamente `LDA.getPicture`, herdando seus padrões
+--- (extensão `.png`, size 64, scale 0.5, mipmap_count 4).
+---
+--- Usage:
+--- ```lua
+--- local pictures = LDA.getSequentialPictureList(
+---     "__space-age__/graphics/icons/yumako-seed-",
+---     1,
+---     4,
+---     64,
+---     0.5,
+---     4
+--- )
+--- ```
+---
+---@param base_filename string       Caminho base do arquivo sem número e sem extensão
+---@param start_index number         Índice inicial da sequência (ex: 1)
+---@param end_index number           Índice final da sequência (ex: 4)
+---@param size number|nil            Tamanho do sprite em pixels (padrão: 64)
+---@param scale number|nil           Fator de escala aplicado à imagem (padrão: 0.5)
+---@param mipmap_count number|nil    Quantidade de mipmaps (padrão: 4)
+---@return table                     Lista de definições Picture/Sprite compatíveis com o Factorio
 function Module.getSequentialPictureList(base_filename, start_index, end_index, size, scale, mipmap_count)
     -- Validação: Garantir que os parâmetros essenciais não são nulos.
     if not base_filename or not start_index or not end_index then
@@ -318,9 +412,6 @@ function Module.getSequentialPictureList(base_filename, start_index, end_index, 
         -- Adiciona o objeto Picture/Sprite formatado à lista usando o utilitário getPicture
         table.insert(picture_list, Module.getPicture(filename, size, scale, mipmap_count))
     end
-
-    -- usage
-    -- local pictures = Module.getSequentialPictureList("__space-age__/graphics/icons/yumako-seed-", 1, 4, 64, 0.5, 4)
 
     return picture_list
 end

@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.9
+Date: 28/01/2026
+  changes:
+    - Funções adicionadas (CreateBaseAmbientSound,CreateInterludeAmbientSound,CreateMenuAmbientSound)
+  pendingBugs:
+    - entidade não esta renderizando
+---------------------------------------------------------------------------------------------------
 Version: 0.0.8
 Date: 05/01/2026
   fixes:
