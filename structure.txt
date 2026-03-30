@@ -11,27 +11,27 @@ d-----        05/01/2026     15:52                base-functions
 d-----        05/01/2026     15:11                functions                                                            
 d-----        28/11/2025     19:02                generic-functions                                                    
 d-----        05/01/2026     17:47                graphics                                                             
+d-----        16/03/2026     22:38                gui                                                                  
 d-----        31/12/2025     23:13                locale                                                               
-d-----        05/01/2026     15:52                utils                                                                
+d-----        28/01/2026     15:29                utils                                                                
 -a----        15/11/2025     11:26             25 .env                                                                 
 -a----        21/07/2025     19:44             52 .gitignore                                                           
 -a----        31/12/2025     11:31           2381 autoupdate.cmd                                                       
 -a----        05/01/2026     15:21             37 bugs.txt                                                             
--a----        05/01/2026     21:19           4397 changelog.txt                                                        
+-a----        28/01/2026     15:47           4704 changelog.txt                                                        
 -a----        29/11/2025     12:17            957 control.lua                                                          
 -a----        24/12/2025     17:30             35 data.lua                                                             
 -a----        21/07/2025     19:45             79 exclusions.txt                                                       
 -a----        15/11/2025     11:56            128 generate-structure.cmd                                               
--a----        05/01/2026     15:05            569 info.json                                                            
+-a----        16/03/2026     22:40            570 info.json                                                            
 -a----        05/01/2026     15:11           4516 init.lua                                                             
--a----        31/12/2025     23:21        2944584 LDA-LIB_0.0.6.zip                                                    
--a----        01/01/2026     20:33        2945844 LDA-LIB_0.0.7.zip                                                    
--a----        05/01/2026     21:15        2956492 LDA-LIB_0.0.8.zip                                                    
+-a----        28/01/2026     15:45        2956518 LDA-LIB_0.0.8.zip                                                    
+-a----        28/01/2026     15:52        2957216 LDA-LIB_0.0.9.zip                                                    
 -a----        15/11/2025     11:06          35823 LICENSE                                                              
 -a----        15/11/2025     11:06            171 README.md                                                            
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        05/01/2026     21:19              0 structure.txt                                                        
+-a----        30/03/2026     17:26              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
 
 
@@ -41,7 +41,7 @@ d-----        05/01/2026     15:52                utils
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        15/11/2025     18:37            835 launch.json                                                          
--a----        05/01/2026     17:33            837 settings.json                                                        
+-a----        30/03/2026     17:24            837 settings.json                                                        
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\audios
@@ -66,7 +66,7 @@ Mode                 LastWriteTime         Length Name
 -a----        05/01/2026     18:14           5957 create-item-group.lua                                                
 -a----        05/01/2026     14:55           1615 create-item-search.lua                                               
 -a----        05/01/2026     14:56           3967 create-item.lua                                                      
--a----        05/01/2026     18:13           2890 create-ore.lua                                                       
+-a----        30/03/2026     17:25           2866 create-ore.lua                                                       
 -a----        05/01/2026     18:14           2822 create-recipe.lua                                                    
 -a----        05/01/2026     17:41           2339 create-technology.lua                                                
 -a----        24/12/2025     14:04           2265 formatResultsList.lua                                                
@@ -161,7 +161,7 @@ Mode                 LastWriteTime         Length Name
 -a----        05/01/2026     16:35           5218 control-animations.lua                                               
 -a----        05/01/2026     16:17          18157 control-energy-sources.lua                                           
 -a----        29/11/2025     09:25           1028 control-get-mod-path.lua                                             
--a----        31/12/2025     22:17          12882 control-utils.lua                                                    
+-a----        28/01/2026     15:51          15846 control-utils.lua                                                    
 -a----        05/01/2026     16:04           1098 tech-util.lua                                                        
 
 

@@ -6,14 +6,14 @@ local utils = require("utils.control-utils")
 
 function Module.createOre(name, stack_size, fuel_category, fuel_value)
     local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graphics/icons/" .. name .. "-ore" .. ".png"
+    local icon_path = path_main .. "graphics/icons/" .. name .. "-ore" 
     return {
         {
             type = "item",
             name = name .. "-ore",
-            icon = icon_path,
+            icon = icon_path .. ".png",
             icon_size = 128,
-            pictures = utils.getSequentialPictureList("__base__/graphics/icons/iron-ore", 1, 3, 64, 0.5, 4),
+            pictures = utils.getSequentialPictureList(icon_path, 1, 3, 64, 0.5, 4),
             fuel_category = fuel_category or nil,
             -- "4MJ"
             fuel_value = fuel_value or nil,
