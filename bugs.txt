@@ -1,1 +1,13 @@
 mexer no tech util, technology create
+
+__base__/prototypes/tile/tile-sounds.lua:6: attempt to call global 'volume_multiplier' (a nil value)
+stack traceback:
+	__base__/prototypes/tile/tile-sounds.lua:6: in main chunk
+	[C]: in function 'require'
+	__LDA-LIB__/base-functions/resource.lua:4: in main chunk
+	[C]: in function 'require'
+	__LDA-LIB__/base-functions/create-ore.lua:6: in main chunk
+	[C]: in function 'require'
+	__LDA-LIB__/init.lua:17: in main chunk
+	[C]: in function 'require'
+	__LDA-LIB__/control.lua:2: in main chunk

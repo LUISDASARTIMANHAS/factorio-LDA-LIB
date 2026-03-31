@@ -155,6 +155,6 @@ data:extend(
         },
         nil,
         true,
-        utils.getSequentialPictureList(PATH .. "graphics/icons/yumako-seed-x2-", 1, 4, 64, 0.5, 4)
+        utils.getSequentialPictureList(PATH .. "graphics/icons/yumako-seed-x2", 1, 4, 64, 0.5, 4)
     )
 )

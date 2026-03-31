@@ -1,7 +1,7 @@
 local Module = {}
 local controlGetModPath = require("utils.control-get-mod-path")
 local resource_autoplace = require("resource-autoplace")
-local tile_sounds = require("prototypes.tile.tile-sounds")
+-- local tile_sounds = require("__base__.prototypes.tile.tile-sounds")
 local simulations = require("__base__.prototypes.factoriopedia-simulations")
 -- #by factorio
 
@@ -24,8 +24,8 @@ function Module.createResource(name, order, resource_parameters, autoplace_param
         },
         category = resource_parameters.category,
         subgroup = resource_parameters.subgroup,
-        walking_sound = resource_parameters.walking_sound or tile_sounds.walking.ore,
-        driving_sound = resource_parameters.driving_sound or tile_sounds.driving.stone,
+        walking_sound = resource_parameters.walking_sound,
+        driving_sound = resource_parameters.driving_sound,
         collision_mask = resource_parameters.collision_mask,
         collision_box = {{-0.1, -0.1}, {0.1, 0.1}},
         selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
