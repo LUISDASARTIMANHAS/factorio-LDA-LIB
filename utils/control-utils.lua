@@ -407,7 +407,7 @@ function Module.getSequentialPictureList(base_filename, start_index, end_index, 
     local picture_list = {}
 
     for i = start_index, end_index do
-        local filename = base_filename .. i
+        local filename = base_filename .. "-" .. i
 
         -- Adiciona o objeto Picture/Sprite formatado à lista usando o utilitário getPicture
         table.insert(picture_list, Module.getPicture(filename, size, scale, mipmap_count))
