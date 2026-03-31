@@ -5,13 +5,14 @@ local resource_autoplace = require("resource-autoplace")
 local simulations = require("__base__.prototypes.factoriopedia-simulations")
 -- #by factorio
 
-function Module.createResource(name, order, particleName,resource_parameters, autoplace_parameters)
+function Module.createResource(name, order, particleName, resource_parameters, autoplace_parameters)
     local path_main = controlGetModPath.getModPath()
     local icon_path = path_main .. "graphics/icons/" .. name .. "-ore"
-    resource_autoplace.initialize_patch_set(name.."-ore", true)
+    resource_autoplace.initialize_patch_set(name .. "-ore", true)
     return {
         type = "resource",
-        name = name.."-ore",
+        name = name .. "-ore",
+        icon_size = 128,
         icon = icon_path .. ".png",
         flags = {"placeable-neutral"},
         order = "a-b-" .. order,
@@ -20,7 +21,7 @@ function Module.createResource(name, order, particleName,resource_parameters, au
         minable = {
             mining_particle = particleName or "stone-particle",
             mining_time = resource_parameters.mining_time or 1,
-            result = name.."-ore"
+            result = name .. "-ore"
         },
         category = resource_parameters.category,
         subgroup = resource_parameters.subgroup,
@@ -30,7 +31,7 @@ function Module.createResource(name, order, particleName,resource_parameters, au
         collision_box = {{-0.1, -0.1}, {0.1, 0.1}},
         selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
         autoplace = resource_autoplace.resource_autoplace_settings {
-            name = name.."-ore",
+            name = name .. "-ore",
             order = "a-b-" .. order,
             base_density = autoplace_parameters.base_density or 10,
             base_spots_per_km = autoplace_parameters.base_spots_per_km2 or 1.8,
@@ -43,12 +44,12 @@ function Module.createResource(name, order, particleName,resource_parameters, au
         stage_counts = {15000, 9500, 5500, 2900, 1300, 400, 150, 80},
         stages = {
             sheet = {
-                filename = icon_path ..".png",
+                filename = "__base__/graphics/entity/iron-ore/iron-ore.png",
                 priority = "extra-high",
                 size = 128,
                 frame_count = 8,
                 variation_count = 8,
-                scale = 0.5
+                scale = 0.5,
             }
         },
         map_color = resource_parameters.map_color or {0.415, 0.525, 0.580},
