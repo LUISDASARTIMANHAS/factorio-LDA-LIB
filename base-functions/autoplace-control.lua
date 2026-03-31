@@ -6,7 +6,7 @@ local controlGetModPath = require("utils.control-get-mod-path")
 function Module.createAutoplaceControl(name, order, tint, icon_size, icon_mipmaps)
     local path_main = controlGetModPath.getModPath()
 
-    local icon_path = path_main .. "graphics/icons/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/icons/" .. name
     return {
         type = "autoplace-control",
         name = name .. "-ore",

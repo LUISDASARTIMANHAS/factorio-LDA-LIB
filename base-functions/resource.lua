@@ -5,20 +5,20 @@ local resource_autoplace = require("resource-autoplace")
 local simulations = require("__base__.prototypes.factoriopedia-simulations")
 -- #by factorio
 
-function Module.createResource(name, order, resource_parameters, autoplace_parameters)
+function Module.createResource(name, order, particleName,resource_parameters, autoplace_parameters)
     local path_main = controlGetModPath.getModPath()
     local icon_path = path_main .. "graphics/icons/" .. name .. "-ore"
     resource_autoplace.initialize_patch_set(name.."-ore", true)
     return {
         type = "resource",
         name = name.."-ore",
-        icon = icon_path,
+        icon = icon_path .. ".png",
         flags = {"placeable-neutral"},
         order = "a-b-" .. order,
         tree_removal_probability = 0.8,
         tree_removal_max_distance = 32 * 32,
         minable = {
-            mining_particle = name.."-ore" .. "-particle",
+            mining_particle = particleName or "stone-particle",
             mining_time = resource_parameters.mining_time or 1,
             result = name.."-ore"
         },
@@ -43,7 +43,7 @@ function Module.createResource(name, order, resource_parameters, autoplace_param
         stage_counts = {15000, 9500, 5500, 2900, 1300, 400, 150, 80},
         stages = {
             sheet = {
-                filename = "__base__/graphics/entity/" .. name .. "-ore.png",
+                filename = icon_path ..".png",
                 priority = "extra-high",
                 size = 128,
                 frame_count = 8,

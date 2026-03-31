@@ -36,6 +36,8 @@ function Module.createOre(name, stack_size, fuel_category, fuel_value,order)
         controlResource.createResource(
             name,
             order or name,
+            -- particleName
+            nil,
             -- resource_parameters
             {
                 order = order or name,
