@@ -7,7 +7,7 @@ local controlResource = require("resource")
 
 -- graphics/icons - icones de itens
 
-function Module.createOre(name, stack_size, fuel_category, fuel_value)
+function Module.createOre(name, stack_size, fuel_category, fuel_value,order)
     local path_main = controlGetModPath.getModPath()
     local icon_path = path_main .. "graphics/icons/" .. name .. "-ore"
     return {
@@ -35,9 +35,10 @@ function Module.createOre(name, stack_size, fuel_category, fuel_value)
         -- Resource Definition
         controlResource.createResource(
             name,
+            order or name,
             -- resource_parameters
             {
-                order = "b",
+                order = order or name,
                 map_color = {0.415, 0.525, 0.580},
                 mining_visualisation_tint = {r = 0.895, g = 0.965, b = 1.000, a = 1.000} -- #e4f6ffff
             },
