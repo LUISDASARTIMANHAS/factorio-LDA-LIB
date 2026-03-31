@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.10
+Date: 30/03/2026
+  changes:
+    - Map Generation:
+    - by factorio: função adicionada createResource(name, order, resource_parameters, autoplace_parameters)
+    - função adicionada createAutoplaceControl(name, order, tint, icon_size, icon_mipmaps)
+  fixes:
+    - corrigido bugs ao criar minerios
+  pendingBugs:
+    - entidade não esta renderizando
+---------------------------------------------------------------------------------------------------
 Version: 0.0.9
 Date: 28/01/2026
   changes:

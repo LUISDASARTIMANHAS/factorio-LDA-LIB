@@ -2,18 +2,22 @@ local Module = {}
 local item_sounds = require("__base__.prototypes.item_sounds")
 local controlGetModPath = require("utils.control-get-mod-path")
 local utils = require("utils.control-utils")
+local controlAutoplace = require("autoplace-control")
+local controlResource = require("resource")
+
 -- graphics/icons - icones de itens
 
 function Module.createOre(name, stack_size, fuel_category, fuel_value)
     local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graphics/icons/" .. name .. "-ore" 
+    local icon_path = path_main .. "graphics/icons/" .. name .. "-ore"
     return {
+        -- Ore Item
         {
             type = "item",
             name = name .. "-ore",
             icon = icon_path .. ".png",
             icon_size = 128,
-            pictures = utils.getSequentialPictureList(icon_path, 1, 3, 64, 0.5, 4),
+            pictures = utils.getSequentialPictureList(icon_path, 1, 4, 64, 0.5, 4),
             fuel_category = fuel_category or nil,
             -- "4MJ"
             fuel_value = fuel_value or nil,
@@ -26,16 +30,46 @@ function Module.createOre(name, stack_size, fuel_category, fuel_value)
             stack_size = stack_size or 100,
             weight = stack_size / 2
         },
-        {
-            type = "autoplace-control",
-            name = name .. "-ore",
-            localised_name = {"", "[entity=" .. name .. "-ore" .. "] ", {"entity-name." .. name .. "-ore"}},
-            richness = true,
-            order = "a-d",
-            category = "resource"
-        }
+        -- Autoplace Control for Map Generation Menu
+        controlAutoplace.createAutoplaceControl(name, "a-d", nil, 128),
+        -- Resource Definition
+        controlResource.createResource(
+            name,
+            -- resource_parameters
+            {
+                order = "b",
+                map_color = {0.415, 0.525, 0.580},
+                mining_visualisation_tint = {r = 0.895, g = 0.965, b = 1.000, a = 1.000} -- #e4f6ffff
+            },
+            -- autoplace_parameters
+            {
+                base_density = 10,
+                regular_rq_factor_multiplier = 1.10,
+                starting_rq_factor_multiplier = 1.5,
+                candidate_spot_count = 22 -- To match 0.17.50 placement
+            }
+        )
     }
 end
+-- by factorio 
+-- resource(
+--     {
+--       name = "iron-ore",
+--       order = "b",
+--       map_color = {0.415, 0.525, 0.580},
+--       mining_time = 1,
+--       walking_sound = tile_sounds.walking.ore,
+--       driving_sound = tile_sounds.driving.stone,
+--       mining_visualisation_tint = {r = 0.895, g = 0.965, b = 1.000, a = 1.000}, -- #e4f6ffff
+--       factoriopedia_simulation = simulations.factoriopedia_iron_ore,
+--     },
+--     {
+--       base_density = 10,
+--       regular_rq_factor_multiplier = 1.10,
+--       starting_rq_factor_multiplier = 1.5,
+--       candidate_spot_count = 22, -- To match 0.17.50 placement
+--     }
+--   )
 
 -- example
 -- {
@@ -60,15 +94,5 @@ end
 --     stack_size = 50,
 --     weight = 2 * kg,
 --     random_tint_color = item_tints.yellowing_coal
---   },
-
--- auto place
---  {
---     type = "autoplace-control",
---     name = "coal",
---     localised_name = {"", "[entity=coal] ", {"entity-name.coal"}},
---     richness = true,
---     order = "a-d",
---     category = "resource"
 --   },
 return Module

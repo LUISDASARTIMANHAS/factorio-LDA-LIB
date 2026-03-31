@@ -13,6 +13,7 @@ local utilsEnergySource = require("utils.control-energy-sources")
 local CANI = require("utils.control-animations")
 
 -- BASE FUNCTIONS
+local CAC = require("base-functions.autoplace-control")
 local CO = require("base-functions.create-ore")
 local CI = require("base-functions.create-item")
 local CBI = require("base-functions.create-block-item")
@@ -22,6 +23,7 @@ local CF = require("base-functions.create-fluid")
 local CG = require("base-functions.create-gas")
 local CR = require("base-functions.create-recipe")
 local CIS = require("base-functions.create-item-search")
+local controlResource = require("base-functions.resource")
 
 -- GENERIC FUNCTIONS
 local CIR = require("generic-functions/create-item-with-recipe")
@@ -65,6 +67,8 @@ LDA.functions = {
     utilsEnergySource = utilsEnergySource,
     getBasePath = controlGetModPath.getModPath,
     setBasePath = controlGetModPath.setBasePath,
+    createAutoplaceControl = CAC.createAutoplaceControl,
+    createResource = controlResource.createResource,
     createOre = CO.createOre,
     createItemGroup = CIG.createItemGroup,
     createItem = CI.createItem,
