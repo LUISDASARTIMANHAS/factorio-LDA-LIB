@@ -15,15 +15,14 @@ function Module.createTechnology(
     unlocksList,
     time,
     pack_count,
-    isUpgrade,
-    icon_size)
+    isUpgrade)
     local path_main = controlGetModPath.getModPath()
 
     local technology = {
         type = "technology",
         name = name,
-        icon = path_main .. "graphics/technology/" .. name .. ".png",
-        icon_size = icon_size or 64,
+        icon = path_main .. "graphics/technology/" .. name .. "-256x256.png",
+        icon_size = 256,
         icon_mipmaps = 4,
         prerequisites = prerequisitesList,
         effects = techUtil.createEffectsUnlocksRecipes(unlocksList),

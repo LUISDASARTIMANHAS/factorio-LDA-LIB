@@ -140,7 +140,7 @@ Lista todas as funções públicas expostas pela biblioteca LDA no console do jo
 - `LDA.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size, alt_unlocks, isEnabled)`
 
 ### Tecnologia
-- `LDA.createTechnology(name, ingredients, prerequisites, unlocks, time, count, isUpgrade, icon_size)`
+- `LDA.createTechnology(name, ingredients, prerequisites, unlocks, time, count, isUpgrade)`
 - `LDA.createTechnologyTrigger(name, unlocks, prerequisites, research_trigger)`
 - `LDA.createTechnologyCraftEntityTrigger(name, unlocks, prerequisites, item, count)`
 - `LDA.createTechnologyMineEntityTrigger(name, unlocks, prerequisites, mine_entity)`
