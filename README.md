@@ -50,87 +50,100 @@ Lista todas as funções públicas expostas pela biblioteca LDA no console do jo
 ### Base Functions
 | Função | Descrição Rápida |
 | :--- | :--- |
-| `createAutoplaceControl` | Cria controles de autoplace para geração de recursos no mapa. |
-| `createResource` | Cria a entidade de recurso (o minério físico no chão). |
-| `createOre` | Cria o item do minério (adiciona automaticamente o prefixo `-ore`). |
-| `createItem` | Cria um item simples com sons e ícone. |
-| `createBlockItem` | Cria itens do tipo bloco estrutural. |
-| `createEquipmentItem` | Cria itens do tipo equipamento (colocáveis em grids). |
-| `createFluid` | Cria fluidos com temperatura e ícone. |
-| `createGas` | Variante visual de fluido como gás. |
-| `createRecipe` | Cria uma receita simples. |
-| `createItemGroup` | Cria grupos de itens e categorias no inventário. |
-| `createItemSearch` | Cria itens de busca/pesquisa (ex: science packs). |
-| `createEntity` | Cria entidades personalizadas (base). |
+| `LDA.createAutoplaceControl` | Cria controles de autoplace para geração de recursos no mapa. |
+| `LDA.createResource` | Cria a entidade de recurso (o minério físico no chão). |
+| `LDA.createOre` | Cria o item do minério (adiciona automaticamente o prefixo `-ore`). |
+| `LDA.createItem` | Cria um item simples com sons e ícone. |
+| `LDA.createBlockItem` | Cria itens do tipo bloco estrutural. |
+| `LDA.createEquipmentItem` | Cria itens do tipo equipamento (colocáveis em grids). |
+| `LDA.createFluid` | Cria fluidos com temperatura e ícone. |
+| `LDA.createGas` | Variante visual de fluido como gás. |
+| `LDA.createRecipe` | Cria uma receita simples. |
+| `LDA.createItemGroup` | Cria grupos de itens e categorias no inventário. |
+| `LDA.createItemSearch` | Cria itens de busca/pesquisa (ex: science packs). |
 
 ### Generic Functions (Combos Item + Receita)
 | Função | Descrição Rápida |
 | :--- | :--- |
-| `createItemWithRecipe` | Cria item + receita associada em um único comando. |
-| `createFluidWithRecipe` | Cria fluido + receita associada. |
-| `createBlockItemWithRecipe` | Cria bloco + receita completa. |
-| `createEquipmentItemWithRecipe` | Cria Equipamento + Receita associada. |
-| `createGenericRecipe` | Gera receitas modulares definidas por matriz. |
-| `createThrowInWaterItemWithRecipe` | Cria item + receita que exige "jogar na água" (ex: sementes). |
+| `LDA.createItemWithRecipe` | Cria item + receita associada em um único comando. |
+| `LDA.createFluidWithRecipe` | Cria fluido + receita associada. |
+| `LDA.createBlockItemWithRecipe` | Cria bloco + receita completa. |
+| `LDA.createEquipmentItemWithRecipe` | Cria Equipamento + Receita associada. |
+| `LDA.createGenericRecipe` | Gera receitas modulares definidas por matriz. |
+| `LDA.createThrowInWaterItemWithRecipe` | Cria item + receita que exige "jogar na água" (ex: sementes). |
 
 ### Advanced Functions (Especializadas)
 | Função | Descrição Rápida |
 | :--- | :--- |
-| `createAssemblerItemWithRecipe` | Cria itens produzidos especificamente em montadoras. |
-| `createSmeltingItemWithRecipe` | Cria itens produzidos em fornalhas. |
-| `createTechnology` | Cria tecnologias completas com efeitos e custos. |
-| `createTechnologyTrigger` | Cria tecnologia com gatilho genérico. |
-| `createTechnologyCraftEntityTrigger`| Tecnologia desbloqueada ao fabricar um item específico. |
-| `createTechnologyMineEntityTrigger` | Tecnologia desbloqueada ao minerar uma entidade específica. |
+| `LDA.createAssemblerItemWithRecipe` | Cria itens produzidos especificamente em montadoras. |
+| `LDA.createSmeltingItemWithRecipe` | Cria itens produzidos em fornalhas. |
+| `LDA.createTechnology` | Cria tecnologias completas com efeitos e custos. |
+| `LDA.createTechnologyTrigger` | Cria tecnologia com gatilho genérico. |
+| `LDA.createTechnologyCraftEntityTrigger`| Tecnologia desbloqueada ao fabricar um item específico. |
+| `LDA.createTechnologyMineEntityTrigger` | Tecnologia desbloqueada ao minerar uma entidade específica. |
 
 ---
 
 ## 🛠️ Utilitários (Utils)
 
-### `utilsAnimations` (CANI)
-- `createAnimation(layers)`: Estrutura completa de animação.
-- `createAnimationLayer(filename, width, height, ...)`: Cria uma camada individual (layer) com suporte a HR.
+### `LDA.utilsAnimations`
+- `LDA.utilsAnimations.createAnimation(layers)`
+- `LDA.utilsAnimations.createAnimationLayer(filename, width, height, hr_scale, shift, draw_as_shadow, custom_props)`
 
-### `utilsEnergySource`
-- `createPipeConnection(...)`: Define conexões de tubos.
-- `createFluidBox(...)`: Define caixas de fluidos para entidades.
-- `createBurnerEnergySource(...)`: Fonte de energia por queima.
-- `createElectricEnergySource(...)`: Fonte de energia elétrica.
-- `createFluidEnergySource(...)`: Fonte de energia por fluido.
-- `createHeatEnergySource(...)`: Fonte de energia térmica.
-- `createVoidEnergySource(...)`: Sem consumo de energia.
+### `LDA.utilsEnergySource`
+- `LDA.utilsEnergySource.createPipeConnection(flow_direction, direction, position, connection_type, params)`
+- `LDA.utilsEnergySource.createFluidBox(volume, filter, production_type, pipe_connections, pipecoverspictures, params)`
+- `LDA.utilsEnergySource.createBurnerEnergySource(fuel_inventory_size, effectivity, fuel_categories, emissions_per_minute, render_no_power_icon, render_no_network_icon, params)`
+- `LDA.utilsEnergySource.createElectricEnergySource(usage_priority, buffer_capacity, input_flow_limit, output_flow_limit, emissions_per_minute, render_no_power_icon, render_no_network_icon, params)`
+- `LDA.utilsEnergySource.createFluidEnergySource(fluid_volume, fluid_connections, fluid_filter, effectivity, burns_fluid, emissions_per_minute, render_no_power_icon, render_no_network_icon, params)`
+- `LDA.utilsEnergySource.createHeatEnergySource(max_temperature, specific_heat, max_transfer, default_temperature, min_working_temperature, emissions_per_minute, render_no_power_icon, render_no_network_icon, params)`
+- `LDA.utilsEnergySource.createVoidEnergySource(emissions_per_minute, render_no_power_icon, render_no_network_icon, params)`
 
-### `utils` (Geral)
-- `array_contains(array, value)`: Verifica existência em lista.
-- `tableMerge(target, source, overwrite)`: Mescla tabelas.
-- `createBoundingBox(x, y)`: Gera caixas de colisão/seleção.
-- `getAudio(filename, volume)`: Atalho para carregar sons.
-- `getPicture(filename, size, ...)`: Atalho para carregar sprites.
-- `getFullResistance(percent)`: Gera 100% de resistência a todos os danos.
+### `LDA.utils` (Geral)
+- `LDA.utils.array_contains(array, value)`
+- `LDA.utils.tableMerge(target, source, overwrite)`
+- `LDA.utils.createBoundingBox(x, y)`
+- `LDA.utils.createModuleSpec(slots, icon_shift)`
+- `LDA.utils.createResistance(resistenceType, percent)`
+- `LDA.utils.getFullResistance(percent)`
+- `LDA.utils.getAudio(filename, volume)`
+- `LDA.utils.getSequentialAudioList(base_filename, start_index, end_index, volume)`
+- `LDA.utils.CreateBaseAmbientSound(nameTrack, track_type, volume, SpaceLocationID)`
+- `LDA.utils.CreateInterludeAmbientSound(nameTrack, volume, SpaceLocationID)`
+- `LDA.utils.CreateMenuAmbientSound(nameTrack, volume)`
+- `LDA.utils.getPicture(filename, size, scale, mipmap_count)`
+- `LDA.utils.getSequentialPictureList(base_filename, start_index, end_index, size, scale, mipmap_count)`
 
 ---
 
 ## 📝 Formato Bruto (Parâmetros)
 
 ### Recursos e Itens
-- `createAutoplaceControl(name, order, tint, icon_size, icon_mipmaps)`
-- `createResource(name, order, particleName, resource_parameters, autoplace_parameters)`
-- `createOre(name, stack_size, fuel_category, fuel_value)`
-- `createItem(name, subgroup, stack_size, pictures)`
-- `createBlockItem(name, subgroup, stack_size)`
-- `createEquipmentItem(name, subgroup, weight)`
-- `createFluid(name, energy)`
-- `createGas(name, energy)`
+- `LDA.createAutoplaceControl(name, order, tint, icon_size, icon_mipmaps)`
+- `LDA.createResource(name, order, particleName, resource_parameters, autoplace_parameters)`
+- `LDA.createOre(name, stack_size, fuel_category, fuel_value)`
+- `LDA.createItem(name, subgroup, stack_size, pictures)`
+- `LDA.createBlockItem(name, subgroup, stack_size)`
+- `LDA.createEquipmentItem(name, subgroup, weight)`
+- `LDA.createFluid(name, energy)`
+- `LDA.createGas(name, energy)`
+- `LDA.createItemGroup(group_name, group_order, icon_size, subgroups, icon_mipmaps)`
 
 ### Receitas
-- `createRecipe(typeIcon, name, crafted_in, time, ingredients, results, alt_unlocks, enabled)`
-- `createItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results, alt_unlocks, isEnabled, pictures)`
-- `createThrowInWaterItemWithRecipe(name, time, qtde, ingredients, stack_size, requiredWaterValue, alt_unlocks, isEnabled)`
+- `LDA.createRecipe(typeIcon, name, crafted_in, time, ingredients, results, alt_unlocks, enabled)`
+- `LDA.createItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results, alt_unlocks, isEnabled, pictures)`
+- `LDA.createThrowInWaterItemWithRecipe(name, time, qtde, ingredients, stack_size, requiredWaterValue, alt_unlocks, isEnabled)`
+- `LDA.createFluidWithRecipe(name, heatEnergy, crafted_in, time, ingredients, results, alt_unlocks)`
+- `LDA.createBlockItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results, alt_unlocks, isEnabled, icon_size, pick_sound, drop_sound)`
+- `LDA.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results, alt_unlocks, isEnabled)`
+- `LDA.createSmeltingItemWithRecipe(name, time, qtde, ingredients, crafted_in, alt_unlocks, isEnabled)`
+- `LDA.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size, alt_unlocks, isEnabled)`
 
 ### Tecnologia
-- `createTechnology(name, ingredients, prerequisites, unlocks, time, count, isUpgrade, icon_size)`
-- `createTechnologyCraftEntityTrigger(name, unlocks, prerequisites, item, count)`
-- `createTechnologyMineEntityTrigger(name, unlocks, prerequisites, mine_entity)`
+- `LDA.createTechnology(name, ingredients, prerequisites, unlocks, time, count, isUpgrade, icon_size)`
+- `LDA.createTechnologyTrigger(name, unlocks, prerequisites, research_trigger)`
+- `LDA.createTechnologyCraftEntityTrigger(name, unlocks, prerequisites, item, count)`
+- `LDA.createTechnologyMineEntityTrigger(name, unlocks, prerequisites, mine_entity)`
 
 ---
 
