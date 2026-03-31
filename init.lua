@@ -12,7 +12,7 @@ local utils = require("utils.control-utils")
 local utilsEnergySource = require("utils.control-energy-sources")
 local CANI = require("utils.control-animations")
 
--- BASE FUNCTIONS
+-- BASE FUNCTIONS - FUNÇÕES BASE DO JOGO ABSTRAIDAS
 local CAC = require("base-functions.autoplace-control")
 local CO = require("base-functions.create-ore")
 local CI = require("base-functions.create-item")
@@ -23,21 +23,25 @@ local CF = require("base-functions.create-fluid")
 local CG = require("base-functions.create-gas")
 local CR = require("base-functions.create-recipe")
 local CIS = require("base-functions.create-item-search")
+local TECH = require("base-functions.create-technology")
+local TECHTRIGGER = require("base-functions.create-technology-trigger")
 local controlResource = require("base-functions.resource")
 
--- GENERIC FUNCTIONS
+-- GENERIC FUNCTIONS - FUNÇÕES PRE PRONTAS QUE JA CRIAM TODO O CONJUNTO DO RECURSO, ITEM OU ENTIDADE. 
+-- EM VEZ DE CRIAR UM POR UM COM AS BASE FUNCTIONS
 local CIR = require("generic-functions/create-item-with-recipe")
 local CFR = require("generic-functions/create-fluid-with-recipe")
 local CBIR = require("generic-functions.create-block-item-with-recipe")
 local CEIR = require("generic-functions.create-equipment-item-with-recipe")
 local CGR = require("generic-functions.create-generic-recipe")
 
--- ADVANCED FUNCTIONS
+-- ADVANCED FUNCTIONS - VARIAÇOES DE FUNÇÕES BASE OU GENERIC FUNCTIONS, 
+-- COMO TIPOS DE RECEITAS FEITAS E, MAQUINAS OU FORNALHAS OU TIPOS DE PESQUISAS VARIADAS
 local CTWIR = require("functions.create-throw-in-water-item-with-recipe")
 local CSIR = require("functions.create-smelting-item-with-recipe")
+local CTTCE = require("functions.create-technology-trigger-craft-entity")
+local CTTME = require("functions.create-technology-trigger-mine-entity")
 local CAIR = require("functions.create-assembler-item-with-recipe")
-local TECH = require("base-functions.create-technology")
-local TECHTRIGGER = require("functions.create-technology-trigger")
 
 ---------------------------------------------------------------------
 -- API PÚBLICA
@@ -88,6 +92,8 @@ LDA.functions = {
     createTechnologyTrigger = TECHTRIGGER.createTechnologyTrigger,
     createItemSearch = CIS.createItemSearch,
     createGenericRecipe = CGR.createGenericRecipe,
+    createTechnologyCraftEntityTrigger = CTTCE.createTechnologyCraftEntityTrigger,
+    createTechnologyMineEntityTrigger = CTTME.createTechnologyMineEntityTrigger,
 }
 
 ---------------------------------------------------------------------

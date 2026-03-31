@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.11
+Date: 31/03/2026
+  changes:
+    - função adicionada createTechnologyMineEntityTrigger(name, unlocksList, prerequisitesList, mine_entity)
+    - função adicionada createTechnologyCraftEntityTrigger(name, unlocksList, prerequisitesList, item, count)
+  pendingBugs:
+    - entidade não esta renderizando
+---------------------------------------------------------------------------------------------------
 Version: 0.0.10
 Date: 30/03/2026
   changes:

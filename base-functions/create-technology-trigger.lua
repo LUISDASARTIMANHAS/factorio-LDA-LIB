@@ -5,16 +5,16 @@ local Module = {}
 -- graphics/technology - icones de pesquisa
 
 -- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").
--- @param unlocks tabela de receitasa a desbloquear tecnologia (ex: "processor").
+-- @param unlocksList lista de receitas a desbloquear tecnologia (ex: ["processor"]).
 -- @param prerequisites tabela de pre requisitos necessarios para pesquisar essa pesquisa (ex: "tech-dyston-sphere-program").
-function Module.createTechnologyTrigger(name, unlocksList, prerequisitesList, research_trigger,icon_size)
+function Module.createTechnologyTrigger(name, unlocksList, prerequisitesList, research_trigger)
     local path_main = controlGetModPath.getModPath()
 
     local technologyTrigger ={
         type = "technology",
         name = name,
-        icon = path_main .. "graphics/technology/" .. name .. ".png",
-        icon_size = icon_size or 64,
+        icon = path_main .. "graphics/technology/" .. name .. "-256x256.png",
+        icon_size = 256,
         icon_mipmaps = 4,
         prerequisites = prerequisitesList,
         effects = techUtil.createEffectsUnlocksRecipes(unlocksList),
