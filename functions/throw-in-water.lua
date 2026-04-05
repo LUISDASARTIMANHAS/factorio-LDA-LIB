@@ -8,6 +8,9 @@ local controlGetModPath = require("utils.control-get-mod-path")
 local controlCreateItemWithRecipe = require("generic-functions.create-item-with-recipe")
 local PATH = controlGetModPath.setBasePath("LDA-LIB")
 local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
+local defaultFilename = PATH .. "graphics/entities/throw-in-water"
+local defaultIconSize = 512
+-- createAnimationLayer(filename, width, height, hr_scale,shift,draw_as_shadow, custom_props)
 
 -- __base__/sound/world/water/waterlap
 data:extend(
@@ -17,7 +20,7 @@ data:extend(
             name = "throw-in-water",
             -- Gráficos e Ícones
             icon = PATH .. "graphics/entities/throw-in-water.png",
-            icon_size = 512,
+            icon_size = defaultIconSize,
             icon_mipmaps = 2,
             -- Propriedades Físicas e de Mineração
             minable = {mining_time = 20, result = "throw-in-water"}, -- Adicione um item resultado se for minável
@@ -63,17 +66,18 @@ data:extend(
             ),
             picture = {
                 layers = {
+                    -- createAnimationLayer(filename, width, height, hr_scale,shift,draw_as_shadow, custom_props)
                     utilsAnimations.createAnimationLayer(
-                        PATH .. "graphics/entities/throw-in-water",
-                        512,
-                        512,
+                        defaultFilename,
+                        defaultIconSize,
+                        defaultIconSize,
                         nil,
                         {0, -0.015625}
                     ),
                     utilsAnimations.createAnimationLayer(
-                        PATH .. "graphics/entities/throw-in-water",
-                        512,
-                        512,
+                        defaultFilename,
+                        defaultIconSize,
+                        defaultIconSize,
                         nil,
                         {0.3125, 0.203125},
                         true
