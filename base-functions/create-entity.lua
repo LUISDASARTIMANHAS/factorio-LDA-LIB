@@ -1,7 +1,7 @@
 local Module = {}
-local item_sounds = require("__base__.prototypes.item_sounds")
-local item_tints = require("__base__.prototypes.item-tints")
-local hit_effects = require("__base__.prototypes.entity.hit-effects")
+local item_sounds = require("__base__/prototypes/item_sounds")
+local item_tints = require("__base__/prototypes/item-tints")
+-- local hit_effects = require("__base__/prototypes/entity/hit-effects")
 local controlGetModPath = require("utils.control-get-mod-path")
 -- graphics/entities - icones de entidades
 
@@ -25,7 +25,7 @@ function Module.createEntity(typeEntity, name, subgroup, stack_size)
         selection_box = {{-1.2, -1.2}, {1.2, 1.2}},
         -- Caixa de colisão
         collision_box = {{-1.0, -1.0}, {1.0, 1.0}},
-        damaged_trigger_effect = hit_effects.entity(),
+        -- damaged_trigger_effect = hit_effects.entity(),
         energy_source = {
             type = "electric",
             usage_priority = "solar"
