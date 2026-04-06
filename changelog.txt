@@ -4,7 +4,13 @@ Date: 06/04/2026
   changes:
     - função adicionada createTechnologyMineEntityTrigger(name, unlocksList, prerequisitesList, mine_entity)
     - função adicionada createTechnologyCraftEntityTrigger(name, unlocksList, prerequisitesList, item, count)
-    - função adicionada getRandomPositionAround(centerX, centerY,SPAWN_RADIUS_MIN,SPAWN_RADIUS_MAX)
+    - função utils adicionada getRandomPositionAround(centerX, centerY,SPAWN_RADIUS_MIN,SPAWN_RADIUS_MAX)
+    - função utilsAmbientEffects adicionada createExplosion(surface, position)
+    - função utilsAmbientEffects adicionada createCrashFire(surface, center, count)
+    - função utilsAmbientEffects adicionada createSecondaryExplosions(surface, center, count)
+    - função utilsAmbientEffects adicionada createScorchmark(surface, position)
+    - adicionado utils -> ambent-effects.lua
+    - local utilsAmbientEffects = LDA.utilsAmbientEffects
   pendingBugs:
     - entidade não esta renderizando
 ---------------------------------------------------------------------------------------------------

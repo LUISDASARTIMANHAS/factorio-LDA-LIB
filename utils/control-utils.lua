@@ -417,8 +417,8 @@ function Module.getSequentialPictureList(base_filename, start_index, end_index, 
 end
 
 --- Gera uma posição aleatória próxima de um centro.
---- @param centerX MapPosition
---- @param centerY MapPosition
+--- @param centerX number
+--- @param centerY number
 --- @param SPAWN_RADIUS_MIN number|nil  default 96
 --- @param SPAWN_RADIUS_MAX number|nil  default 256
 --- @return MapPosition
@@ -431,6 +431,5 @@ function Module.getRandomPositionAround(centerX, centerY,SPAWN_RADIUS_MIN,SPAWN_
         y = centerY + math.sin(angle) * distance
     }
 end
-
 
 return Module

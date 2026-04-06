@@ -9,6 +9,7 @@ local LDA = {}
 ---------------------------------------------------------------------
 local controlGetModPath = require("utils.control-get-mod-path")
 local utils = require("utils.control-utils")
+local utilsAmbientEffects = require("utils.control-ambent-effects")
 local utilsEnergySource = require("utils.control-energy-sources")
 local CANI = require("utils.control-animations")
 
@@ -23,9 +24,12 @@ local CF = require("base-functions.create-fluid")
 local CG = require("base-functions.create-gas")
 local CR = require("base-functions.create-recipe")
 local CIS = require("base-functions.create-item-search")
+local CE = require("base-functions.create-entity")
+local FRL = require("base-functions.formatResultsList")
 local TECH = require("base-functions.create-technology")
 local TECHTRIGGER = require("base-functions.create-technology-trigger")
 local controlResource = require("base-functions.resource")
+local techUtil = require("utils.tech-util")
 
 -- GENERIC FUNCTIONS - FUNÇÕES PRE PRONTAS QUE JA CRIAM TODO O CONJUNTO DO RECURSO, ITEM OU ENTIDADE. 
 -- EM VEZ DE CRIAR UM POR UM COM AS BASE FUNCTIONS
@@ -68,7 +72,9 @@ local CAIR = require("functions.create-assembler-item-with-recipe")
 LDA.functions = {
     utilsAnimations = CANI,
     utils = utils,
+    utilsAmbientEffects = utilsAmbientEffects,
     utilsEnergySource = utilsEnergySource,
+    techUtils = techUtil,
     getBasePath = controlGetModPath.getModPath,
     setBasePath = controlGetModPath.setBasePath,
     createAutoplaceControl = CAC.createAutoplaceControl,
@@ -78,6 +84,7 @@ LDA.functions = {
     createItem = CI.createItem,
     createEquipmentItem = CEI.createEquipmentItem,
     createBlockItem = CBI.createBlockItem,
+    createEntity = CE.createEntity,
     createFluid = CF.createFluid,
     createGas = CG.createGas,
     createRecipe = CR.createRecipe,
@@ -94,6 +101,7 @@ LDA.functions = {
     createGenericRecipe = CGR.createGenericRecipe,
     createTechnologyCraftEntityTrigger = CTTCE.createTechnologyCraftEntityTrigger,
     createTechnologyMineEntityTrigger = CTTME.createTechnologyMineEntityTrigger,
+    formatResultsList = FRL.formatResultsList,
 }
 
 ---------------------------------------------------------------------
