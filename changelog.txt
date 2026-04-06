@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.11
-Date: 31/03/2026
+Date: 06/04/2026
   changes:
     - função adicionada createTechnologyMineEntityTrigger(name, unlocksList, prerequisitesList, mine_entity)
     - função adicionada createTechnologyCraftEntityTrigger(name, unlocksList, prerequisitesList, item, count)
+    - função adicionada getRandomPositionAround(centerX, centerY,SPAWN_RADIUS_MIN,SPAWN_RADIUS_MAX)
   pendingBugs:
     - entidade não esta renderizando
 ---------------------------------------------------------------------------------------------------
