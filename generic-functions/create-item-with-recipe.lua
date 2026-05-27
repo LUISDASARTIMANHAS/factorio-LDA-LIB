@@ -12,6 +12,7 @@ local Module = {}
 -- @param results tabela de saidas depois de construido o item.
 -- @param alternative_unlock_methods quais outras techs desbloqueiam esse item.
 -- @param isEnabled se o item ja deve vir com a receita desbloqueada.
+--  Construtor main
 function Module.createItemWithRecipe(name, subgroup, stack_size, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
     local item = createItem.createItem(name,subgroup, stack_size,pictures)
     local recipe = createRecipe.createRecipe("icons",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)

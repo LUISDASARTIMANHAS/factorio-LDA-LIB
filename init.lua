@@ -42,10 +42,9 @@ local CGR = require("generic-functions.create-generic-recipe")
 -- ADVANCED FUNCTIONS - VARIAÇOES DE FUNÇÕES BASE OU GENERIC FUNCTIONS, 
 -- COMO TIPOS DE RECEITAS FEITAS E, MAQUINAS OU FORNALHAS OU TIPOS DE PESQUISAS VARIADAS
 local CTWIR = require("functions.create-throw-in-water-item-with-recipe")
-local CSIR = require("functions.create-smelting-item-with-recipe")
+local CCMIR = require("functions.create-category-machines-item-with-recipe")
 local CTTCE = require("functions.create-technology-trigger-craft-entity")
 local CTTME = require("functions.create-technology-trigger-mine-entity")
-local CAIR = require("functions.create-assembler-item-with-recipe")
 
 ---------------------------------------------------------------------
 -- API PÚBLICA
@@ -92,8 +91,10 @@ LDA.functions = {
     createFluidWithRecipe = CFR.createFluidWithRecipe,
     createBlockItemWithRecipe = CBIR.createBlockItemWithRecipe,
     createEquipmentItemWithRecipe = CEIR.createEquipmentItemWithRecipe,
-    createSmeltingItemWithRecipe = CSIR.createSmeltingItemWithRecipe,
-    createAssemblerItemWithRecipe = CAIR.createAssemblerItemWithRecipe,
+    createSmeltingItemWithRecipe = CCMIR.createSmeltingItemWithRecipe,
+    createChemicalPlantItemWithRecipe = CCMIR.createChemicalPlantItemWithRecipe,
+    createAssemblerItemWithRecipe = CCMIR.createAssemblerItemWithRecipe,
+    createBiochamberItemWithRecipe = CCMIR.createBiochamberItemWithRecipe,
     createThrowInWaterItemWithRecipe = CTWIR.createThrowInWaterItemWithRecipe,
     createTechnology = TECH.createTechnology,
     createTechnologyTrigger = TECHTRIGGER.createTechnologyTrigger,
