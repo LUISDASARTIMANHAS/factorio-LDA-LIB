@@ -1,4 +1,7 @@
 -- control-animations.lua
+-- getSequentialPictureList(base_filename, start_index, end_index, size, scale, mipmap_count)
+local controlUtils = require("utils.control-utils")
+
 local Module = {}
 
 -- Constantes para a animação padrão
@@ -63,9 +66,9 @@ end
 -- @param draw_as_shadow {boolean} se o layer deve ser uma sombra (padrão: false).
 -- @param custom_props {table|nil} Propriedades customizadas.
 -- @return {table} Um objeto de layer de animação completo, incluindo a hr_version.
-function Module.createAnimationLayer(filename, width, height, hr_scale,shift,draw_as_shadow, custom_props)
+function Module.createAnimationLayer(filename, width, height, hr_scale, shift, draw_as_shadow, custom_props)
     local props = prepareProps(custom_props)
-    local formalizedFilename = filename ..".png"
+    local formalizedFilename = filename .. ".png"
 
     -- Cria a base da camada (layer)
     local layer = {
@@ -132,6 +135,83 @@ function Module.createAnimation(layers_or_single_layer)
     --         -- ...
     --     }
     -- })
+end
+
+--- Cria a definição de reflexão na água (WaterReflectionDefinition).
+-- @param pictures {table} SpriteVariations utilizadas na reflexão.
+-- @param rotate {boolean|nil} Rotaciona a reflexão junto com a entidade (padrão: true).
+-- @param orientation_to_variation {boolean|nil} Usa a orientação para selecionar a variação (padrão: false).
+-- @return {table} Estrutura WaterReflectionDefinition.
+function Module.createWaterReflection(
+    base_filename,
+    rotate,
+    orientation_to_variation,
+    end_index,
+    size,
+    scale,
+    mipmap_count)
+    if not base_filename then
+        error("[LDA-LIB] [createWaterReflection] error: base_filename é obrigatório.")
+    end
+
+    return {
+        pictures = controlUtils.getSequentialPictureList(base_filename, 1, end_index or 3, size, scale, mipmap_count),
+        rotate = rotate ~= false,
+        orientation_to_variation = orientation_to_variation or false
+    }
+
+    -- usage
+    --
+    -- example return
+    -- {
+    -- pictures = {
+    --   {size = 64, filename = "__base__/graphics/icons/coal.png", scale = 0.5, mipmap_count = 4},
+    --   {size = 64, filename = "__base__/graphics/icons/coal-1.png", scale = 0.5, mipmap_count = 4},
+    --   {size = 64, filename = "__base__/graphics/icons/coal-2.png", scale = 0.5, mipmap_count = 4},
+    --   {size = 64, filename = "__base__/graphics/icons/coal-3.png", scale = 0.5, mipmap_count = 4}
+    -- },
+    --     rotate = false,
+    --     orientation_to_variation = false
+    -- }
+end
+
+--- Cria a estrutura completa de graphics_set para um protótipo.
+-- Compatível com Factorio 2.0+, substituindo a antiga propriedade animation.
+--
+-- @param animation_progress number|nil               Progresso inicial da animação (default: 0.25)
+-- @param frozen_patch table|nil                      Sprite usada quando a entidade está congelada
+-- @param always_draw_idle_animation boolean|nil      Força renderização da idle animation (default: true)
+-- @param reset_animation_when_frozen boolean|nil     Reinicia animação ao congelar (default: true)
+-- @param base_filename string|nil                    Base usada para water_reflection (default: coal)
+--
+-- @return table                                      Estrutura pronta de graphics_set
+function Module.createGraphicsSet(
+    animation_progress,
+    frozen_patch,
+    always_draw_idle_animation,
+    reset_animation_when_frozen,
+    base_filename)
+    return {
+        animation_progress = animation_progress or 0.25,
+        always_draw_idle_animation = always_draw_idle_animation ~= false,
+        frozen_patch = frozen_patch or
+            util.sprite_load(
+                base_filename or "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-frozen",
+                {scale = 0.5}
+            ),
+        water_reflection = Module.createWaterReflection(base_filename or "__base__/graphics/icons/coal"),
+        reset_animation_when_frozen = reset_animation_when_frozen ~= false
+    }
+
+    -- usage
+    -- graphics_set = animation_utils.createGraphicsSet()
+    -- example return
+    -- return {
+    --     animation_progress = 0.25,
+    --     always_draw_idle_animation = true,
+    --     frozen_patch = util.sprite_load("__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-frozen", {scale = 0.5}),
+    --     reset_animation_when_frozen = true
+    --   },
 end
 
 return Module

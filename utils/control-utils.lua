@@ -365,6 +365,7 @@ function Module.getPicture(filename, size, scale, mipmap_count)
         mipmap_count = mipmap_count or 4
     }
 end
+
 --- Gera uma lista sequencial de definições de Picture/Sprite para o Factorio.
 --- Ideal para conjuntos de imagens numeradas de forma incremental
 --- (ex: "seed-1.png", "seed-2.png", "seed-3.png").

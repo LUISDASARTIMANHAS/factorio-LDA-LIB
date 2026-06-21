@@ -8,8 +8,8 @@ Mode                 LastWriteTime         Length Name
 d-----        15/11/2025     18:37                .vscode                                                              
 d-----        25/12/2025     17:52                audios                                                               
 d-----        31/03/2026     11:22                base-functions                                                       
-d-----        26/05/2026     23:56                functions                                                            
-d-----        26/05/2026     22:50                game-addons                                                          
+d-----        21/06/2026     10:07                functions                                                            
+d-----        21/06/2026     10:07                game-addons                                                          
 d-----        21/04/2026     14:31                generic-functions                                                    
 d-----        05/01/2026     17:47                graphics                                                             
 d-----        16/03/2026     22:38                gui                                                                  
@@ -18,23 +18,24 @@ d-----        06/04/2026     11:29                utils
 -a----        15/11/2025     11:26             25 .env                                                                 
 -a----        21/07/2025     19:44             52 .gitignore                                                           
 -a----        31/12/2025     11:31           2381 autoupdate.cmd                                                       
--a----        21/04/2026     17:40           1151 bugs.txt                                                             
+-a----        21/06/2026     10:28           1153 bugs.txt                                                             
 -a----        06/04/2026     11:45           6176 changelog.txt                                                        
 -a----        29/11/2025     12:17            957 control.lua                                                          
--a----        24/12/2025     17:30             35 data.lua                                                             
+-a----        21/06/2026     10:07             67 data.lua                                                             
 -a----        21/07/2025     19:45             79 exclusions.txt                                                       
 -a----        15/11/2025     11:56            128 generate-structure.cmd                                               
 -a----        26/05/2026     23:28            570 info.json                                                            
 -a----        27/05/2026     00:03           5865 init.lua                                                             
--a----        31/03/2026     00:57        2962924 LDA-LIB_0.0.10.zip                                                   
+-a----        21/06/2026     09:43        2962924 LDA-LIB_0.0.10.zip                                                   
 -a----        06/04/2026     12:22        2968911 LDA-LIB_0.0.11.zip                                                   
--a----        28/01/2026     15:52        2957216 LDA-LIB_0.0.9.zip                                                    
+-a----        10/06/2026     18:06        3138954 LDA-LIB_0.0.12.zip                                                   
 -a----        15/11/2025     11:06          35823 LICENSE                                                              
--a----        06/04/2026     12:00           9358 README.md                                                            
+-a----        21/06/2026     10:47          10420 README.md                                                            
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        27/05/2026     00:06             82 structure.txt                                                        
+-a----        21/06/2026     10:48           1292 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
+-a----        27/05/2026     11:43           3426 USAGE.md                                                             
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\.vscode
@@ -43,7 +44,7 @@ d-----        06/04/2026     11:29                utils
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        15/11/2025     18:37            835 launch.json                                                          
--a----        26/05/2026     22:50            837 settings.json                                                        
+-a----        27/05/2026     13:31            837 settings.json                                                        
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\audios
@@ -84,10 +85,9 @@ Mode                 LastWriteTime         Length Name
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        26/05/2026     23:57           4074 create-category-machines-item-with-recipe.lua                        
--a----        31/03/2026     12:12           1309 create-technology-trigger-craft-entity.lua                           
+-a----        21/06/2026     10:07           1309 create-technology-trigger-craft-entity.lua                           
 -a----        31/03/2026     11:26           1398 create-technology-trigger-mine-entity.lua                            
 -a----        05/01/2026     18:14           2598 create-throw-in-water-item-with-recipe.lua                           
--a----        05/04/2026     16:17           7060 throw-in-water.lua                                                   
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\game-addons
@@ -95,7 +95,8 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        27/05/2026     00:05           1341 items.lua                                                            
+-a----        27/05/2026     00:57           1720 items.lua                                                            
+-a----        21/06/2026     10:09           7055 throw-in-water.lua                                                   
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\generic-functions
@@ -116,7 +117,7 @@ Mode                 LastWriteTime         Length Name
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 d-----        05/01/2026     17:47                entities                                                             
-d-----        31/12/2025     15:49                icons                                                                
+d-----        27/05/2026     01:14                icons                                                                
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\entities
@@ -132,6 +133,9 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
+-a----        27/05/2026     01:14          43761 biomass.png                                                          
+-a----        27/05/2026     01:14          35432 liquid-biofuel.png                                                   
+-a----        27/05/2026     01:14          36458 solid-biofuel.png                                                    
 -a----        29/12/2025     12:25          33580 throw-in-water.png                                                   
 -a----        01/12/2024     16:00           5376 yumako-seed-x2-1.png                                                 
 -a----        01/12/2024     16:00           5241 yumako-seed-x2-2.png                                                 
@@ -154,7 +158,7 @@ d-----        31/12/2025     23:14                pt-BR
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        05/01/2026     21:14            590 base.cfg                                                             
+-a----        21/06/2026     10:23           1896 base.cfg                                                             
 -a----        31/12/2025     23:13            227 settings.cfg                                                         
 
 
@@ -163,7 +167,7 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        05/01/2026     21:15            606 base.cfg                                                             
+-a----        21/06/2026     10:25           2352 base.cfg                                                             
 -a----        31/12/2025     23:14            225 settings.cfg                                                         
 
 
@@ -173,7 +177,7 @@ Mode                 LastWriteTime         Length Name
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        06/04/2026     11:45           2030 control-ambent-effects.lua                                           
--a----        05/04/2026     16:35           5218 control-animations.lua                                               
+-a----        21/06/2026     10:45           6611 control-animations.lua                                               
 -a----        05/01/2026     16:17          18157 control-energy-sources.lua                                           
 -a----        29/11/2025     09:25           1028 control-get-mod-path.lua                                             
 -a----        06/04/2026     11:33          16451 control-utils.lua                                                    

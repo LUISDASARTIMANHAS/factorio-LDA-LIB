@@ -62,8 +62,9 @@ data:extend(
             placeable_by = {item = "throw-in-water", count = 1}, -- Certifique-se de definir o item
             -- Animação
             animation = utilsAnimations.createAnimation(
-                utilsAnimations.createAnimationLayer(PATH .. "graphics/entities/throw-in-water", 512, 512)
+                utilsAnimations.createAnimationLayer(defaultFilename, 512, 512)
             ),
+            graphics_set = utilsAnimations.createGraphicsSet(nil,nil,nil,nil,defaultFilename),
             picture = {
                 layers = {
                     -- createAnimationLayer(filename, width, height, hr_scale,shift,draw_as_shadow, custom_props)

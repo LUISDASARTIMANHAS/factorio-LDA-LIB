@@ -109,6 +109,7 @@ LDA.setBasePath('Seu-Mod-Nome')
 ### `LDA.utilsAnimations`
 - `LDA.utilsAnimations.createAnimation(layers)`
 - `LDA.utilsAnimations.createAnimationLayer(filename, width, height, hr_scale, shift, draw_as_shadow, custom_props)`
+- `LDA.utilsAnimations.createGraphicsSet(animation_progress,frozen_patch,always_draw_idle_animation,reset_animation_when_frozen)`
 
 ### `LDA.utilsEnergySource`
 - `LDA.utilsEnergySource.createPipeConnection(flow_direction, direction, position, connection_type, params)`
