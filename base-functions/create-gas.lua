@@ -4,7 +4,7 @@ local controlGetModPath = require("utils.control-get-mod-path")
 
 function Module.createGas(name, energy)
     local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graphics/icons/fluid/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/icons/gas/" .. name .. ".png"
     return {
         type = "fluid",
         name = name,

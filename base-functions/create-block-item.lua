@@ -8,7 +8,7 @@ local controlGetModPath = require("utils.control-get-mod-path")
 function Module.createBlockItem(name, subgroup, stack_size,icon_size,pick_sound,drop_sound)
     local path_main = controlGetModPath.getModPath()
 
-    local icon_path = path_main .. "graphics/icons/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/icons/entities/" .. name .. ".png"
     return {
         type = "item",
         name = name,

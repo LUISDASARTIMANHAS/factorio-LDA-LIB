@@ -16,6 +16,7 @@ function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, resu
         end
     end
 
+    -- cada tipo de receita tem sua pasta de icones ex: graphics/entities, graphics/itens, graphics/fluids, etc
     local icon_path = path_main .. "graphics/" .. typeIcon .. "/" .. name .. ".png"
 
     local item_data = {

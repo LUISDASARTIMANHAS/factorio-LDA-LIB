@@ -7,7 +7,7 @@ local controlGetModPath = require("utils.control-get-mod-path")
 function Module.createEquipmentItem(name, subgroup, weight)
     local path_main = controlGetModPath.getModPath()
 
-    local icon_path = path_main .. "graphics/equipment/" .. name .. ".png"
+    local icon_path = path_main .. "graphics/icons/" .. name .. ".png"
     return {
         type = "item",
         name = name,

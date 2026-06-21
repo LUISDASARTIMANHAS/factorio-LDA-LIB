@@ -25,10 +25,21 @@ O objetivo é **reduzir trabalho repetitivo** e manter um **padrão uniforme** e
 
 A biblioteca busca assets automaticamente baseada nesta estrutura:
 
-- `graphics/icons` - ícones de itens e fluidos
-- `graphics/entities` - sprites de entidades
-- `graphics/technology` - ícones de pesquisa
+-graphics (recipe)
+- `graphics/icons` - ícones de itens gerais
+- `graphics/entities` - ícones de entidades
+- `graphics/equipment` - ícones de equipamentos
+- `graphics/fluid` - ícones de fluidos
+- `graphics/gas` - ícones de gas
+
+- graphics (item,fluid)
+- `graphics/icons/` - ícones de itens gerais
+- `graphics/icons/fluid` - ícones de fluidos
+- `graphics/icons/gas` - ícones de gas
 - `audios` - arquivos de som (.ogg)
+
+- graphics (item-group)
+- `graphics/item-group` - ícones de item-group e subgroup (categoria)
 
 ---
 
