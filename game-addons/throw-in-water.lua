@@ -24,7 +24,7 @@ data:extend(
             icon_mipmaps = 2,
             -- Propriedades Físicas e de Mineração
             minable = {mining_time = 20, result = "throw-in-water"}, -- Adicione um item resultado se for minável
-            max_health = 99999999, -- Saúde alta, conforme seu exemplo
+            max_health = 300, -- Saúde alta, conforme seu exemplo
             -- Configurações de Crafting
             crafting_speed = 1.0, -- Reduzido para 1.0 (mais realista para uma reação natural)
             ingredient_count = 2,
