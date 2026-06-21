@@ -12,15 +12,11 @@ mexer no tech util, technology create
 --     reset_animation_when_frozen = true
 --   },
 
-Properties
-frozen_patch optional	:: Sprite4Way	
-circuit_connector_layeroptional	:: RenderLayer or CircuitConnectorLayer	
-Render layer(s) for all directions of the circuit connectors.
-
-circuit_connector_secondary_draw_orderoptional	:: int8 or CircuitConnectorSecondaryDrawOrder	
-Secondary draw order(s) for all directions of the circuit connectors.
-
-animation_progress optional	:: float	
-reset_animation_when_frozenoptional	:: boolean	
-water_reflectionoptional	:: WaterReflectionDefinition	
-Only loaded if this graphics set is used in a property called graphics_set, refer to EntityPrototype::water_reflection.
+Falha ao carregar mods: __core__/lualib/util.lua:676: module __LDA-LIB__/graphics/entities/throw-in-water not found;  no such file __LDA-LIB__/graphics/entities/throw-in-water.lua
+stack traceback:
+	[C]: in function 'require'
+	__core__/lualib/util.lua:676: in function 'sprite_load'
+	__LDA-LIB__/utils/control-animations.lua:198: in function 'createGraphicsSet'
+	__LDA-LIB__/game-addons/throw-in-water.lua:67: in main chunk
+	[C]: in function 'require'
+	__LDA-LIB__/data.lua:1: in main chunk
