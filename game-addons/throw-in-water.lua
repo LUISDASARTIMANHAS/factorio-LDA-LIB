@@ -37,8 +37,8 @@ data:extend(
             energy_source = utilsEnergySource.createElectricEnergySource(
                 "secondary-input",
                 nil,
-                "55kW",
-                "55kW",
+                "75kW",
+                "75kW",
                 0,
                 false,
                 false
@@ -46,11 +46,11 @@ data:extend(
             -- Poluição e Efeitos
             allowed_effects = {"pollution"},
             -- x_max = 1.2, y_max = 1.2 (automático)
-            collision_box = utils.createBoundingBox(5.2),
+            collision_box = utils.createBoundingBox(8.2),
             -- x_max = 1.5, y_max = 1.5 (automático)
-            selection_box = utils.createBoundingBox(5.5),
+            selection_box = utils.createBoundingBox(8.5),
             -- x_max = 1.5, y_max = 1.5 (automático)
-            drawing_box = utils.createBoundingBox(5.5),
+            drawing_box = utils.createBoundingBox(8.5),
             -- Destruição e Resistências
             resistances = utils.getFullResistance(),
             corpse = "assembling-machine-2-remnants", -- Usando remanescentes do Factorio base

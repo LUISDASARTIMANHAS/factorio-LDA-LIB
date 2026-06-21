@@ -4,57 +4,72 @@ local controlUtils = require("utils.control-utils")
 
 local Module = {}
 
--- Constantes para a animação padrão
-local DEFAULT_ANIM_PROPS = {
-    line_length = 1,
-    frame_count = 1,
-    priority = "high",
-    shift = {0, 0.125}
-}
-
---- 1. Função Privada: Une as propriedades padrão com as customizadas.
--- @param custom_props {table|nil} Propriedades customizadas a serem aplicadas.
--- @return {table} Tabela de propriedades combinadas.
-local function prepareProps(custom_props)
-    local props = {}
-    -- Copia as propriedades padrão
-    for k, v in pairs(DEFAULT_ANIM_PROPS) do
-        props[k] = v
-    end
-    -- Sobrescreve com as customizadas
-    if custom_props then
-        for k, v in pairs(custom_props) do
-            props[k] = v
-        end
-    end
-    return props
-end
-
---- 2. Função Privada: Cria o objeto hr_version, calculando as dimensões.
--- @param base_width {number} Largura da sprite base.
--- @param base_height {number} Altura da sprite base.
--- @param filename {string} Nome do arquivo (para ser repetido no HR).
--- @param props {table} Propriedades já unidas (shift, priority, frame_count, etc.).
--- @param hr_scale {number|nil} O fator de escala (padrão: 0.5).
--- @return {table} O objeto hr_version completo.
-local function createHRVersion(base_width, base_height, filename, props, hr_scale)
-    local scale = hr_scale or 0.5
-    local hr_width = base_width / scale
-    local hr_height = base_height / scale
-
-    local hr_version = {
+--- Cria uma layer base compatível com sprites do Factorio (entity/animation).
+-- @param filename string               Caminho do sprite
+-- @param width number                  Largura da imagem
+-- @param height number                 Altura da imagem
+-- @param frame_count number|nil        Número de frames (default: 1)
+-- @param line_length number|nil        Frames por linha (default: frame_count)
+-- @param shift table|nil               Offset da sprite (default: util.by_pixel(0, 0))
+-- @param scale number|nil              Escala da sprite (default: 1)
+-- @param priority string|nil           Prioridade de render (default: "high")
+-- @param extra_props table|nil         Propriedades adicionais opcionais
+-- @return table                        Layer compatível com Factorio
+function Module.createLayer(
+    filename,
+    width,
+    height,
+    frame_count,
+    line_length,
+    shift,
+    scale,
+    draw_as_shadow,
+    priority,
+    extra_props
+)
+    local layer = {
         filename = filename,
-        width = hr_width,
-        height = hr_height,
-        scale = scale
+        priority = priority or "high",
+        width = width,
+        height = height,
+        frame_count = frame_count or 1,
+        line_length = line_length or (frame_count or 1),
+        shift = shift or util.by_pixel(0, 0.125),
+        scale = scale or 1,
+        draw_as_shadow = draw_as_shadow or false
     }
 
-    -- Aplica as propriedades compartilhadas (frame_count, shift, priority, etc.)
-    for k, value in pairs(props) do
-        hr_version[k] = value
+    if extra_props then
+        for k, v in pairs(extra_props) do
+            layer[k] = v
+        end
     end
 
-    return hr_version
+    return layer
+end
+
+
+--- 2. Função Privada: Cria o objeto hr_version, calculando as dimensões.
+-- A partir de uma layer base, gera a versão em alta resolução (HR).
+--
+-- @param layer {table} Layer base já construída (contendo filename, width, height, frame_count, line_length, shift, priority)
+-- @param hr_scale {number|nil} Fator de escala da versão HR (default: 0.5)
+--
+-- @return {table} Objeto hr_version compatível com Factorio
+local function createHRVersion(layer, hr_scale)
+    local scale = hr_scale or 0.5
+
+    return {
+        filename = layer.filename,
+        width = layer.width / scale,
+        height = layer.height / scale,
+        scale = scale,
+        frame_count = layer.frame_count,
+        line_length = layer.line_length,
+        shift = layer.shift and table.deepcopy(layer.shift),
+        priority = layer.priority,
+        draw_as_shadow = layer.draw_as_shadow
+    }
 end
 
 --- Função Pública: Cria uma única camada (layer) de animação.
@@ -67,25 +82,24 @@ end
 -- @param custom_props {table|nil} Propriedades customizadas.
 -- @return {table} Um objeto de layer de animação completo, incluindo a hr_version.
 function Module.createAnimationLayer(filename, width, height, hr_scale, shift, draw_as_shadow, custom_props)
-    local props = prepareProps(custom_props)
     local formalizedFilename = filename .. ".png"
 
-    -- Cria a base da camada (layer)
-    local layer = {
-        filename = formalizedFilename,
-        width = width,
-        height = height,
-        shift = shift or util.by_pixel(-3, 3.5),
-        draw_as_shadow = draw_as_shadow or false
-    }
+    local props = custom_props or {}
 
-    -- Aplica as propriedades à camada base
-    for k, value in pairs(props) do
-        layer[k] = value
-    end
+    local layer = Module.createLayer(
+        formalizedFilename,
+        width,
+        height,
+        props.frame_count,
+        props.line_length,
+        shift or util.by_pixel(-3, 3.5),
+        props.scale,
+        draw_as_shadow,
+        "high",
+        props
+    )
 
-    -- Anexa a versão HR
-    layer.hr_version = createHRVersion(width, height, formalizedFilename, props, hr_scale)
+    layer.hr_version = createHRVersion(layer, hr_scale)
 
     return layer
     -- usage

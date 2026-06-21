@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.12
+Date: 06/04/2026
+  changes:
+    - adiciona novas funções para criação de itens e receitas, remove função obsoleta e atualiza versão
+    - função adicionada createGraphicsSet(animation_progress,frozen_patch,always_draw_idle_animation,reset_animation_when_frozen)
+    - função adicionada createLayer(filename,width,height,frame_count,line_length,shift,scale,draw_as_shadow,priority,extra_props)
+    - corrigido erro do animations
+---------------------------------------------------------------------------------------------------
 Version: 0.0.11
 Date: 06/04/2026
   changes:
