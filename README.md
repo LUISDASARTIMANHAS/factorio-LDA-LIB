@@ -1,4 +1,4 @@
-# LDA-LIB – Biblioteca Utilitária para Mods Factorio 2.0  
+﻿# LDA-LIB – Biblioteca Utilitária para Mods Factorio 2.0  
 
 ```lua
 local LDA = require('__LDA-LIB__/init') 
@@ -28,7 +28,7 @@ A biblioteca busca assets automaticamente baseada nesta estrutura:
 - `graphics/icons` - ícones de itens e fluidos
 - `graphics/entities` - sprites de entidades
 - `graphics/technology` - ícones de pesquisa
-- `audio` - arquivos de som (.ogg)
+- `audios` - arquivos de som (.ogg)
 
 ---
 
@@ -42,6 +42,23 @@ A biblioteca busca assets automaticamente baseada nesta estrutura:
 ## 🔎 Comando /lda-list
 
 Lista todas as funções públicas expostas pela biblioteca LDA no console do jogo.
+
+---
+
+## ✨ Como usar
+
+1. Ative o mod `LDA-LIB` no gerenciador de mods do Factorio.
+2. No seu mod, importe a biblioteca com:
+
+```lua
+local LDA = require('__LDA-LIB__/init')
+LDA.setBasePath('Seu-Mod-Nome')
+```
+
+3. Use as funções do `LDA` para criar protótipos e receitas.
+4. Se quiser ver todas as funções carregadas, abra o console do jogo e use `/lda-list`.
+
+> Recomenda-se definir o `setBasePath` logo no início do seu `data.lua` ou arquivo principal de geração de protótipos.
 
 ---
 
@@ -78,9 +95,11 @@ Lista todas as funções públicas expostas pela biblioteca LDA no console do jo
 | :--- | :--- |
 | `LDA.createAssemblerItemWithRecipe` | Cria itens produzidos especificamente em montadoras. |
 | `LDA.createSmeltingItemWithRecipe` | Cria itens produzidos em fornalhas. |
+| `LDA.createChemicalPlantItemWithRecipe` | Cria itens produzidos em Chemical Plants. |
+| `LDA.createBiochamberItemWithRecipe` | Cria itens produzidos na Biochamber. |
 | `LDA.createTechnology` | Cria tecnologias completas com efeitos e custos. |
 | `LDA.createTechnologyTrigger` | Cria tecnologia com gatilho genérico. |
-| `LDA.createTechnologyCraftEntityTrigger`| Tecnologia desbloqueada ao fabricar um item específico. |
+| `LDA.createTechnologyCraftEntityTrigger` | Tecnologia desbloqueada ao fabricar um item específico. |
 | `LDA.createTechnologyMineEntityTrigger` | Tecnologia desbloqueada ao minerar uma entidade específica. |
 
 ---
@@ -150,6 +169,8 @@ Lista todas as funções públicas expostas pela biblioteca LDA no console do jo
 - `LDA.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results, alt_unlocks, isEnabled)`
 - `LDA.createSmeltingItemWithRecipe(name, time, qtde, ingredients, crafted_in, alt_unlocks, isEnabled)`
 - `LDA.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size, alt_unlocks, isEnabled)`
+- `LDA.createChemicalPlantItemWithRecipe(name, time, qtde, ingredients, stack_size, alt_unlocks, isEnabled)`
+- `LDA.createBiochamberItemWithRecipe(name, time, qtde, ingredients, stack_size, alt_unlocks, isEnabled)`
 - `LDA.createGenericRecipe(name)`
 
 ### Tecnologia
@@ -179,4 +200,12 @@ Lista todas as funções públicas expostas pela biblioteca LDA no console do jo
 | `advanced-crafting` | Máquinas de montagem Tier 2 e 3. |
 | `smelting` | Fornalhas. |
 | `centrifuging` | Centrífuga. |
+| `chemistry` | Chemical plant e outros processos químicos. |
+| `organic` | Biochamber / processos orgânicos. |
 | `throw-in-water` | Gatilho de água (customizado pela LIB). |
+
+---
+
+## 📘 Documentação de uso
+
+Para exemplos detalhados de uso e padrões de chamada, consulte o arquivo `USAGE.md`.
