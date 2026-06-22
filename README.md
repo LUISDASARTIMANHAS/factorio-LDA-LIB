@@ -25,7 +25,7 @@ O objetivo é **reduzir trabalho repetitivo** e manter um **padrão uniforme** e
 
 A biblioteca busca assets automaticamente baseada nesta estrutura:
 
--graphics (recipe)
+- graphics (recipe)
 - `graphics/icons` - ícones de itens gerais
 - `graphics/entities` - ícones de entidades
 - `graphics/equipment` - ícones de equipamentos

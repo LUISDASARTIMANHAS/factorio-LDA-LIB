@@ -1,6 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.13
+Date: 21/06/2026
+  changes:
+    - melhora o carregamento de caminhos de arquivos.
+    - alterado caminhos base
+---------------------------------------------------------------------------------------------------
 Version: 0.0.12
-Date: 06/04/2026
+Date: 21/06/2026
   changes:
     - adiciona novas funções para criação de itens e receitas, remove função obsoleta e atualiza versão
     - função adicionada createGraphicsSet(animation_progress,frozen_patch,always_draw_idle_animation,reset_animation_when_frozen)
