@@ -1,6 +1,6 @@
 {
-    "name": "LDA-LIB",
-    "version": "0.0.13",
+    "name": "LDA-LIB-experimental",
+    "version": "0.0.14",
     "title": "LUIS DAS ARTIMANHAS - Biblioteca Utilitária",
     "author": "LUISDASARTIMANHAS",
     "contact": "luisaugustodesouza785@gmail.com",
@@ -8,7 +8,7 @@
     "description": "Biblioteca utilitária para criação rápida de itens, receitas e outros protótipos Factorio..",
     "factorio_version": "2.0",
     "dependencies": [
-        "base >= 2.0.0",
+        "base >= 2.1.20",
         "flib"
     ],
     "license": "GNU General Public License v3.0",
