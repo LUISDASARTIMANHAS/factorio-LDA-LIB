@@ -14,7 +14,7 @@ end
 -- {
 --     type = "recipe",
 --     name = "advanced-oil-processing",
---     category = "oil-processing",
+--     categories = {"oil-processing"},
 --     enabled = false,
 --     energy_required = 5,
 --     ingredients =

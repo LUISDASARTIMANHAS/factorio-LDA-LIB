@@ -22,7 +22,7 @@ function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, resu
     local item_data = {
         type = "recipe",
         name =  name,
-        category = crafted_in,
+        categories = {crafted_in},
         enabled = enabled or false,
         energy_required = time,
         icon = icon_path,
@@ -54,7 +54,7 @@ end
 --      {
 --             type = "recipe",
 --             name = "iron-ore",
---             category = "advanced-crafting",
+--             categories = {"advanced-crafting"},
 --             enabled = false,
 --             energy_required = 120,
 --             ingredients = {

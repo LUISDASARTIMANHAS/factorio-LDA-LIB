@@ -63,7 +63,7 @@ end
 --         {
 --             type = "recipe",
 --             name = "iron-ore",
---             category = "smelting",
+--             categories = {"smelting"},
 --             enabled = false,
 --             energy_required = 120,
 --             ingredients = {

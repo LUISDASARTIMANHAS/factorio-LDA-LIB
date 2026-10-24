@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.14
+Date: 24/10/2026
+  fixes:
+    - Falha ao carregar mods: Erro ao carregar o protótipo da receita "jogar na água" (receita): Em RecipePrototype, `category` e `additional_categories` foram mescladas na tabela `categories`. Por favor, use esta tabela em vez da anterior.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.13
 Date: 21/06/2026
   changes:

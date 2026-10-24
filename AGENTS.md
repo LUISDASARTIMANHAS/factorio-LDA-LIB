@@ -2,7 +2,7 @@
 
 ## Contexto do projeto
 
-- LDA-LIB é uma biblioteca Lua para Factorio 2.0. O manifesto e as dependências estão em [info.json](info.json); a API pública é montada em [init.lua](init.lua).
+- LDA-LIB é uma biblioteca Lua para Factorio. A documentação menciona Factorio 2.0, mas `info.json` contém marcadores de conflito de merge: não o trate como JSON válido nem infira a versão ou dependências até o conflito ser resolvido. A API pública é montada em [init.lua](init.lua).
 - Consulte [README.md](README.md) para o catálogo de funções e [USAGE.md](USAGE.md) para exemplos de integração em outros mods. Prefira links para essa documentação em vez de duplicá-la aqui.
 
 ## Arquitetura
@@ -13,6 +13,7 @@
 - `game-addons/` contém conteúdo concreto carregado automaticamente por [data.lua](data.lua).
 - `utils/` contém utilitários de assets, animação, energia, efeitos ambientais, caminhos e tecnologias.
 - [control.lua](control.lua) é exclusivamente runtime; [data.lua](data.lua) e os módulos de criação atuam no estágio data.
+- [init.lua](init.lua) retorna diretamente a tabela `LDA.functions`; o resultado de `require("__LDA-LIB__/init")` é a própria tabela de funções, não um objeto com uma propriedade `functions`.
 
 ## Regras de implementação
 
@@ -27,12 +28,12 @@
 ## Assets e compatibilidade
 
 - Use os caminhos convencionais `graphics/icons`, `graphics/entities` e `audios`; consulte [USAGE.md](USAGE.md) para a estrutura esperada pelos mods consumidores.
-- Ao tocar em `game-addons/throw-in-water.lua`, confirme a disponibilidade das APIs e assets de Space Age: `info.json` declara apenas `base` e `flib`.
+- Ao tocar em `game-addons/throw-in-water.lua`, confirme as APIs, assets e dependências de Space Age usados pelo módulo. Como `info.json` está em conflito, não use seu conteúdo atual para concluir quais dependências estão declaradas.
 - Não trate `structure.txt` como fonte de verdade: ele é um inventário gerado por [generate-structure.cmd](generate-structure.cmd) e pode ficar desatualizado.
 
 ## Validação
 
 - Não há testes unitários, lint ou typecheck configurados no repositório.
-- Para mudanças de protótipos, valide carregando o mod no Factorio 2.0 com as dependências e verifique erros no console, protótipos gerados e o comando `/lda-list`.
+- Não há suíte automatizada, lint, typecheck ou build configurados. Para mudanças de protótipos, valide carregando o mod numa versão compatível do Factorio, após resolver/verificar o manifesto e as dependências; confira erros no console e os protótipos gerados.
 - [generate-structure.cmd](generate-structure.cmd) apenas regenera o inventário de arquivos; use-o quando precisar atualizar `structure.txt`.
-- [autoupdate.cmd](autoupdate.cmd) depende de Windows, `.env` com `API_KEY`, `tar`, um caminho fixo de Steam e inicia o Factorio. Não execute automaticamente durante validações comuns.
+- [autoupdate.cmd](autoupdate.cmd) depende de Windows, `tar` e um caminho fixo de Steam; se `API_KEY` estiver ausente, grava um valor placeholder em `.env`. Também pode apagar um ZIP anterior de mesmo nome, copiar o novo ZIP para a instalação Steam e iniciar o Factorio. Não execute durante validações comuns; use apenas quando a tarefa pedir essa instalação/publicação e após conferir os efeitos.
