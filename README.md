@@ -1,4 +1,4 @@
-﻿# LDA-LIB – Biblioteca Utilitária para Mods Factorio 2.0  
+# LDA-LIB – Biblioteca Utilitária para Mods Factorio 2.0  
 
 ```lua
 local LDA = require('__LDA-LIB__/init') 
@@ -24,10 +24,14 @@ O objetivo é **reduzir trabalho repetitivo** e manter um **padrão uniforme** e
 ## Arquitetura do repositório
 
 - `data.lua` carrega `data-stage/init.lua`; os add-ons próprios ficam em `data-stage/addons/`.
-- `base-functions/`, `generic-functions/` e `functions/` separam construtores simples, combinações reutilizáveis e atalhos especializados.
-- `api/registry.lua` centraliza os nomes públicos e os módulos que os implementam; `init.lua` mantém o ponto de entrada usado pelos mods consumidores.
-- `control.lua` carrega somente os módulos de `runtime/`, separados dos construtores de protótipos.
-- `utils/` reúne utilitários reutilizados pelos construtores.
+- `data-stage/builders/` organiza os construtores de protótipos modulares e encapsulados:
+  - `base/`: construtores individuais de protótipos (itens, fluidos, gases, entidades, receitas).
+  - `composites/`: combinações reutilizáveis (item + receita, fluido + receita, bloco + receita).
+  - `specialized/`: construtores especializados (máquinas categorizadas, triggers de tecnologia).
+- `shared/` reúne utilitários compartilhados (animações, fontes de energia, mod paths, efeitos).
+- `runtime/` concentra lógica de runtime (`control.lua`, comandos `/lda-list` e registros de estado).
+- `api/registry.lua` e `api/modules.lua` centralizam a API pública consumida através de `init.lua`.
+- Módulos legados (`base-functions/`, `generic-functions/`, `functions/`, `utils/`) atuam como proxies delegadores garantindo 100% de compatibilidade retroativa.
 
 Essa separação mantém os pontos de entrada do Factorio na raiz e evita carregar módulos de protótipos no estágio runtime.
 
