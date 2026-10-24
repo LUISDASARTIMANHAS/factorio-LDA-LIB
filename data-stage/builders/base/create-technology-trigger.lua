@@ -1,0 +1,65 @@
+local controlGetModPath = require("shared.control-get-mod-path")
+local techUtil = require("shared.tech-util")
+
+local Module = {}
+-- graphics/technology - icones de pesquisa
+
+-- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").
+-- @param unlocksList lista de receitas a desbloquear tecnologia (ex: ["processor"]).
+-- @param prerequisites tabela de pre requisitos necessarios para pesquisar essa pesquisa (ex: "tech-dyston-sphere-program").
+function Module.createTechnologyTrigger(name, unlocksList, prerequisitesList, research_trigger)
+    local path_main = controlGetModPath.getModPath()
+
+    local technologyTrigger ={
+        type = "technology",
+        name = name,
+        icon = path_main .. "graphics/technology/" .. name .. "-256x256.png",
+        icon_size = 256,
+        icon_mipmaps = 4,
+        prerequisites = prerequisitesList,
+        effects = techUtil.createEffectsUnlocksRecipes(unlocksList),
+        -- so e permitido 1 trigger
+        research_trigger = research_trigger,
+        order = "a-b-" .. name
+    }
+    return technologyTrigger
+end
+
+-- example
+-- {
+--     type = "technology",
+--     name = "steam-power",
+--     icon = "__base__/graphics/technology/steam-power.png",
+--     icon_size = 256,
+--     effects =
+--     {
+--       {
+--         type = "unlock-recipe",
+--         recipe = "pipe"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "pipe-to-ground"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "offshore-pump"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "boiler"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "steam-engine"
+--       }
+--     },
+--     research_trigger =
+--     {
+--       type = "craft-item",
+--       item = "iron-plate",
+--       count = 50
+--     }
+--   },
+
+return Module

@@ -8,7 +8,7 @@
 -- category = "chemistry" feito na Chemical plant
 
 -- function createAssemblerItemWithRecipe(name: any, time: any, qtde: any, ingredients: any, stack_size: any, alternative_unlock_methods: any, isEnabled: any)
-local controlCreateCategoryMachinesItemWithRecipe = require("functions.create-category-machines-item-with-recipe")
+local controlCreateCategoryMachinesItemWithRecipe = require("data-stage.builders.specialized.create-category-machines-item-with-recipe")
 
 -- Biomassa
 data:extend(

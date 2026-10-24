@@ -1,11 +1,11 @@
 -- throw-in-water.lua
 -- Este arquivo define a entidade Assembling Machine customizada para o processo de "Throw In Water".
-local utils = require("utils.control-utils")
-local utilsEnergySource = require("utils.control-energy-sources")
-local utilsAnimations = require("utils.control-animations")
-local controlCreateBlocItemWithRecipe = require("generic-functions.create-block-item-with-recipe")
-local controlGetModPath = require("utils.control-get-mod-path")
-local controlCreateItemWithRecipe = require("generic-functions.create-item-with-recipe")
+local utils = require("shared.control-utils")
+local utilsEnergySource = require("shared.control-energy-sources")
+local utilsAnimations = require("shared.control-animations")
+local controlCreateBlocItemWithRecipe = require("data-stage.builders.composites.create-block-item-with-recipe")
+local controlGetModPath = require("shared.control-get-mod-path")
+local controlCreateItemWithRecipe = require("data-stage.builders.composites.create-item-with-recipe")
 local PATH = controlGetModPath.setBasePath("LDA-LIB")
 local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
 local defaultFilename = PATH .. "graphics/entities/throw-in-water"
