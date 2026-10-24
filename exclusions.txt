@@ -6,4 +6,6 @@
 ./.vscode/
 *.bat
 *.exe
+*.html
 exclusions.txt
+docs/factorio-docs/**
