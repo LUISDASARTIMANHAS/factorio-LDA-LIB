@@ -1,4 +1,65 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.15
+Date: 24/10/2026
+  changes:
+    - 1. player-utils (runtime/modules/player.lua) 
+      Obtenção e validação:
+      get(player_or_id): aceita índice numérico, nome ou objeto LuaPlayer.
+      isValid(player): checagem segura de validade.
+      getCharacter(player): retorna a entidade LuaEntity (character) do jogador.
+      getPosition(player) e getSurface(player).
+      getGps(player): gera a tag formatada de chat [gps=x,y,surface].
+    - Inventário e itens:
+      getItemCount(player, item_name, quality): contagem com suporte a qualidade do Factorio 2.0.
+      hasItem(player, item_name, count, quality): verificação booleana.
+      give(player, item_name, count, options): inserção segura no inventário principal/rápido com opção de derrubar no chão (spill_if_full = true).
+      remove(player, item_name, count, quality): remoção segura de itens.
+    - Interação & Feedback:
+      teleport(player, position, surface): teletransporte seguro entre coordenadas e superfícies.
+      flyingText(player, text, options): texto voador local visível apenas para o jogador.
+      notify(player, message, sound_path): envia mensagem no console e opcionalmente toca som.
+    - 2. entity-utils (runtime/modules/entity.lua)
+      Validação & Estado:
+      isValid(entity): checagem entity and entity.valid.
+      getHealth(entity), setHealth(entity, health), heal(entity, amount).
+      damage(entity, amount, force, damage_type): aplica dano respeitando forças e tipos.
+      getEnergy(entity), setEnergy(entity, energy): nível de Joules em máquinas e acumuladores.
+    - Posicionamento & Formato:
+      getPosition(entity), getSurface(entity), getForce(entity).
+      getBoundingBox(entity): retorna a área de colisão/seleção.
+    - Manipulação:
+      insert(entity, item_name, count, quality) e remove(entity, item_name, count, quality).
+      destroy(entity, options): destrói com segurança (com opção die = true ou disparar eventos raise_destroy).
+      isGhost(entity) e reviveGhost(ghost): suporte a fantasmas de construção.
+    - 3. world-utils (runtime/modules/world.lua)
+    - Superfícies & GPS:
+      getSurface(surface_or_id): resolve nomes, IDs ou padrão game.surfaces[1].
+      formatGps(position, surface): gera strings como [gps=10.5,-20.0,nauvis].
+      getDistance(pos1, pos2): cálculo de distância euclidiana.
+    - Busca e Spawning:
+      findEntitiesInRadius(surface, position, radius, filters): busca circular filtrada por nome, tipo ou força.
+      findEntitiesInBox(surface, area, filters): busca em caixa retangular.
+      findFreePosition(surface, entity_name, position, radius, precision): localiza posição desobstruída.
+      spawnEntity(surface, name, position, options): instancia entidades no mundo (direction, force, raise_built, quality).
+    - Edição de Terreno & Efeitos:
+      getTile(surface, position): consulta o piso/terreno.
+      setTile(surface, position, tile_name) e setTiles(surface, tiles_array): troca de tiles individual ou em lote.
+      createExplosion(surface, position, name): gera explosões ou efeitos na coordenada.
+      teleportEntity(entity, position, surface): teletransporte genérico para qualquer entidade móvel.
+    - 4. item-utils (runtime/modules/item.lua)
+    - Stacks & Inventário:
+      isValid(stack): valida se o stack é válido e tem conteúdo legível.
+      toTable(stack): converte stack em tabela simples (name, count, quality, health, ammo).
+      canFit(target, item_name, count, quality): verifica se inventário/entidade aguenta receber itens.
+      getEmptySlotCount(inventory): conta slots vazios disponíveis.
+      transfer(source_inv, target_inv, item_name, count, quality): transferência segura entre inventários.
+      spill(surface, position, item_name, count, options): derrama itens no chão.
+      Itens no Chão & Coleta:
+      findOnGround(surface, position, radius, item_name): localiza itens caídos no chão.
+      collectFromGround(surface, position, radius, target): recolhe itens caídos direto para o jogador ou baú.
+    - Protótipos (Factorio 2.0+):
+      getStackSize(item_name) e getSubgroup(item_name): consulta dados do protótipo em runtime.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.14
 Date: 24/10/2026
   fixes:

@@ -158,6 +158,50 @@ Mantenha sua estrutura de assets organizada:
 - `audios`
 - `locale`
 
+## Utilidades de Runtime (`control.lua`)
+
+Para lógica de scripts, eventos e manipulação de jogo durante a partida, importe o módulo de runtime:
+
+```lua
+local LDARuntime = require("__LDA-LIB__/runtime.init")
+
+-- Exemplo: Manipular jogador em evento
+script.on_event(defines.events.on_player_created, function(event)
+    local player = LDARuntime.player.get(event.player_index)
+    if player then
+        -- Entregar itens com segurança (com opção de cair no chão se cheio)
+        LDARuntime.player.give(player, "iron-plate", 100, {spill_if_full = true})
+        
+        -- Notificação e som
+        LDARuntime.player.notify(player, "Itens iniciais recebidos!", "utility/achievement_unlocked")
+        
+        -- Texto flutuante
+        LDARuntime.player.flyingText(player, "Bem-vindo!", {color = {r=0, g=1, b=0}})
+    end
+end)
+
+-- Exemplo: Interagir com entidades e mundo
+script.on_event(defines.events.on_built_entity, function(event)
+    local entity = event.entity
+    if LDARuntime.entity.isValid(entity) then
+        -- Obter posição e formatar tag GPS para chat
+        local pos = LDARuntime.entity.getPosition(entity)
+        local gps = LDARuntime.world.formatGps(pos, entity.surface)
+        
+        -- Buscar entidades ao redor
+        local vizinhos = LDARuntime.world.findEntitiesInRadius(entity.surface, pos, 15, {
+            type = "inserter"
+        })
+    end
+end)
+```
+
+### Módulos disponíveis no Runtime:
+- `LDARuntime.player`: `get`, `give`, `remove`, `hasItem`, `getItemCount`, `teleport`, `flyingText`, `notify`, `getGps`, `getPosition`, `getSurface`.
+- `LDARuntime.entity`: `isValid`, `getHealth`, `setHealth`, `heal`, `damage`, `getEnergy`, `setEnergy`, `insert`, `remove`, `destroy`, `reviveGhost`, `isGhost`.
+- `LDARuntime.world`: `getSurface`, `findEntitiesInRadius`, `findEntitiesInBox`, `findFreePosition`, `spawnEntity`, `setTile`, `setTiles`, `getTile`, `createExplosion`, `teleportEntity`, `formatGps`, `getDistance`.
+- `LDARuntime.item`: `isValid`, `toTable`, `canFit`, `getEmptySlotCount`, `transfer`, `spill`, `findOnGround`, `collectFromGround`, `getStackSize`, `getSubgroup`.
+
 ## Observações
 
 - A biblioteca é pensada para ser utilizada como dependência em outros mods, não como um mod de jogo direto.
