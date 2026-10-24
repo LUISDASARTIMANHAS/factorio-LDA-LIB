@@ -32,5 +32,11 @@ return {
     createGenericRecipe = {module = "data-stage.builders.composites.create-generic-recipe", member = "createGenericRecipe"},
     createTechnologyCraftEntityTrigger = {module = "data-stage.builders.specialized.create-technology-trigger-craft-entity", member = "createTechnologyCraftEntityTrigger"},
     createTechnologyMineEntityTrigger = {module = "data-stage.builders.specialized.create-technology-trigger-mine-entity", member = "createTechnologyMineEntityTrigger"},
-    formatResultsList = {module = "data-stage.builders.base.formatResultsList", member = "formatResultsList"}
+    formatResultsList = {module = "data-stage.builders.base.formatResultsList", member = "formatResultsList"},
+    createSurfaceProperties = {module = "shared.planet-surface-properties", member = "createSurfaceProperties"},
+    surfacePropertiesPresets = {module = "shared.planet-surface-properties", member = "presets"},
+    createMapGenSettings = {module = "shared.planet-mapgen-util", member = "createMapGenSettings"},
+    createCliffSettings = {module = "shared.planet-mapgen-util", member = "createCliffSettings"},
+    createSpaceConnection = {module = "data-stage.builders.base.create-space-connection", member = "createSpaceConnection"},
+    generateAsteroidSpawns = {module = "data-stage.builders.base.create-space-connection", member = "generateAsteroidSpawns"}
 }

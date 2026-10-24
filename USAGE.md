@@ -158,6 +158,58 @@ Mantenha sua estrutura de assets organizada:
 - `audios`
 - `locale`
 
+## Utilitários de Planeta & Espaço (Factorio 2.0+ / Space Age)
+
+A biblioteca oferece utilitários para configurar propriedades de planetas e rotas espaciais:
+
+### 1. Propriedades de Superfície (`surface_properties`)
+Configure gravidade, pressão, campo magnético, temperatura e energia solar, ou use predefinições prontas:
+
+```lua
+-- Presets inspirados no Space Age:
+local props_vulcanus = LDA.surfacePropertiesPresets.volcanic()
+local props_fulgora  = LDA.surfacePropertiesPresets.lightning()
+local props_gleba    = LDA.surfacePropertiesPresets.swamp()
+local props_aquilo   = LDA.surfacePropertiesPresets.frozen()
+local props_nauvis   = LDA.surfacePropertiesPresets.temperate()
+
+-- Ou customizado com overrides:
+local custom_props = LDA.createSurfaceProperties({
+    gravity = 14,
+    pressure = 2000,
+    temperature = 320,
+    solar_power = 250
+})
+```
+
+### 2. Configurações de Terreno (`map_gen_settings`)
+Gere penhascos e controles de autoplace sem boilerplate:
+
+```lua
+local map_gen = LDA.createMapGenSettings({
+    cliff_interval = 30,
+    terrain_segmentation = 1.5,
+    autoplace_controls = {
+        ["iron-ore"] = { frequency = 1.5, size = 1, richness = 2 }
+    }
+})
+```
+
+### 3. Conexão Espacial (`space-connection`)
+Crie rotas espaciais entre planetas com configuração automática de perigo de asteroides:
+
+```lua
+local rota = LDA.createSpaceConnection(
+    "nauvis",
+    "meu-planeta",
+    18000,
+    {
+        asteroid_density = "medium" -- "none", "low", "medium", "high", "extreme"
+    }
+)
+data:extend({rota})
+```
+
 ## Utilidades de Runtime (`control.lua`)
 
 Para lógica de scripts, eventos e manipulação de jogo durante a partida, importe o módulo de runtime:

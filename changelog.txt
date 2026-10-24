@@ -5,6 +5,10 @@ Date: 24/10/2026
     - Removidas as pastas e módulos legados (base-functions/, generic-functions/, functions/, utils/).
     - Obrigatório o uso do padrão canônico via init.lua (require('__LDA-LIB__/init')) ou caminhos encapsulados (data-stage/builders/, shared/, runtime/).
     - Estrutura do projeto totalmente limpa e modularizada.
+  features:
+    - Adicionado helper createSurfaceProperties e surfacePropertiesPresets (shared/planet-surface-properties.lua) com predefinições para o Space Age.
+    - Adicionado helper createMapGenSettings e createCliffSettings (shared/planet-mapgen-util.lua) para geração de mapa de planetas.
+    - Adicionado builder createSpaceConnection e gerador generateAsteroidSpawns (data-stage/builders/base/create-space-connection.lua).
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.15
 Date: 24/10/2026
