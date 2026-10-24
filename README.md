@@ -23,11 +23,11 @@ O objetivo é **reduzir trabalho repetitivo** e manter um **padrão uniforme** e
 
 ## Arquitetura do repositório
 
-- `data.lua` carrega `data-stage/init.lua`, que organiza os add-ons e protótipos do estágio data.
+- `data.lua` carrega `data-stage/init.lua`; os add-ons próprios ficam em `data-stage/addons/`.
 - `base-functions/`, `generic-functions/` e `functions/` separam construtores simples, combinações reutilizáveis e atalhos especializados.
 - `api/registry.lua` centraliza os nomes públicos e os módulos que os implementam; `init.lua` mantém o ponto de entrada usado pelos mods consumidores.
 - `control.lua` carrega somente os módulos de `runtime/`, separados dos construtores de protótipos.
-- `game-addons/` contém conteúdo próprio desta biblioteca, e `utils/` reúne utilitários reutilizados pelos construtores.
+- `utils/` reúne utilitários reutilizados pelos construtores.
 
 Essa separação mantém os pontos de entrada do Factorio na raiz e evita carregar módulos de protótipos no estágio runtime.
 

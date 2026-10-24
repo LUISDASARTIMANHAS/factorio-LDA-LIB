@@ -1,2 +1,2 @@
-require("game-addons.throw-in-water")
-require("game-addons.items")
+require("data-stage.addons.throw-in-water")
+require("data-stage.addons.items")

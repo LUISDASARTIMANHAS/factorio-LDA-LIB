@@ -7,13 +7,12 @@
 
 ## Arquitetura
 
-- `data.lua` delega a carga de conteúdo para `data-stage/init.lua`; os módulos de `game-addons/` continuam sendo carregados no estágio data.
+- `data.lua` delega a carga de conteúdo para `data-stage/init.lua`; os add-ons concretos ficam em `data-stage/addons/`.
 - `base-functions/` contém construtores individuais de protótipos.
 - `generic-functions/` combina construtores, principalmente item + receita.
 - `functions/` contém atalhos especializados, gatilhos de tecnologia e receitas de jogar na água.
 - `api/registry.lua` é a fonte única dos nomes e destinos da API pública; [init.lua](init.lua) resolve esses módulos para consumidores no estágio data.
 - `runtime/` contém o registro de funções e comandos; `control.lua` delega a inicialização para `runtime/init.lua`.
-- `game-addons/` contém conteúdo concreto carregado automaticamente por `data-stage/init.lua`.
 - `utils/` contém utilitários de assets, animação, energia, efeitos ambientais, caminhos e tecnologias.
 - Separe sempre APIs de protótipo do estágio data e APIs runtime como `storage`, `script`, `commands` e `game`.
 - [init.lua](init.lua) retorna diretamente a tabela `LDA.functions`; o resultado de `require("__LDA-LIB__/init")` é a própria tabela de funções, não um objeto com uma propriedade `functions`.
@@ -31,7 +30,7 @@
 ## Assets e compatibilidade
 
 - Use os caminhos convencionais `graphics/icons`, `graphics/entities` e `audios`; consulte [USAGE.md](USAGE.md) para a estrutura esperada pelos mods consumidores.
-- Ao tocar em `game-addons/throw-in-water.lua`, confirme as APIs, assets e dependências de Space Age usados pelo módulo. Como `info.json` está em conflito, não use seu conteúdo atual para concluir quais dependências estão declaradas.
+- Ao tocar em `data-stage/addons/throw-in-water.lua`, confirme as APIs, assets e dependências de Space Age usados pelo módulo. Como `info.json` está em conflito, não use seu conteúdo atual para concluir quais dependências estão declaradas.
 - Não trate `structure.txt` como fonte de verdade: ele é um inventário gerado por [generate-structure.cmd](generate-structure.cmd) e pode ficar desatualizado.
 
 ## Validação
