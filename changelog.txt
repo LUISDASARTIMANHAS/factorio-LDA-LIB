@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.16
+Date: 24/10/2026
+  major_changes:
+    - Removidas as pastas e módulos legados (base-functions/, generic-functions/, functions/, utils/).
+    - Obrigatório o uso do padrão canônico via init.lua (require('__LDA-LIB__/init')) ou caminhos encapsulados (data-stage/builders/, shared/, runtime/).
+    - Estrutura do projeto totalmente limpa e modularizada.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.15
 Date: 24/10/2026
   changes:

@@ -127,7 +127,7 @@ function Module.createFluidBox(
     }
 
     -- Isso permite adicionar render_layer, minimum_temperature, max_pipeline_extent, etc.
-    -- Usa utils.tableMerge (assume-se que está no escopo, via require("utils.control-utils")).
+    -- Usa utils.tableMerge (via require("shared.control-utils")).
     fluid_box = utils.tableMerge(fluid_box, params)
 
     -- 4. Limpeza e Validação (garante que volume não seja nil)

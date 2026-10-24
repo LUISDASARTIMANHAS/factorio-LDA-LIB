@@ -31,7 +31,7 @@ O objetivo é **reduzir trabalho repetitivo** e manter um **padrão uniforme** e
 - `shared/` reúne utilitários compartilhados (animações, fontes de energia, mod paths, efeitos).
 - `runtime/` concentra lógica de runtime (`control.lua`, comandos `/lda-list` e registros de estado).
 - `api/registry.lua` e `api/modules.lua` centralizam a API pública consumida através de `init.lua`.
-- Módulos legados (`base-functions/`, `generic-functions/`, `functions/`, `utils/`) atuam como proxies delegadores garantindo 100% de compatibilidade retroativa.
+- A partir da v0.0.16, diretórios legados foram descontinuados e removidos; o consumo deve ocorrer via `init.lua` ou caminhos modulares canônicos.
 
 Essa separação mantém os pontos de entrada do Factorio na raiz e evita carregar módulos de protótipos no estágio runtime.
 

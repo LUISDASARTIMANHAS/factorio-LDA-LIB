@@ -15,7 +15,7 @@
 - `shared/`: utilitários compartilhados de assets, animação, energia, efeitos ambientais, caminhos e tecnologias.
 - `runtime/`: registro de funções e comandos no estágio de controle; `control.lua` delega para `runtime/init.lua`.
 - `api/registry.lua` e `api/modules.lua`: registro canônico e catálogo central de funções públicas montadas por [init.lua](init.lua).
-- Pastas legadas (`base-functions/`, `generic-functions/`, `functions/`, `utils/`): mantidas como módulos-ponte (proxies) para assegurar compatibilidade retroativa com qualquer mod ou script que ainda requisite os caminhos antigos.
+- A partir da v0.0.16, pastas legadas foram totalmente removidas. Todo código deve usar os caminhos canônicos (`data-stage.builders.*`, `shared.*`, `runtime.*`) ou a API pública em [init.lua](init.lua).
 - Separe sempre APIs de protótipo do estágio data e APIs runtime como `storage`, `script`, `commands` e `game`.
 - [init.lua](init.lua) retorna diretamente a tabela pública de funções da LDA.
 
