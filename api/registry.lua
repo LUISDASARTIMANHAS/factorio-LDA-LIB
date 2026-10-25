@@ -38,5 +38,6 @@ return {
     createMapGenSettings = {module = "shared.planet-mapgen-util", member = "createMapGenSettings"},
     createCliffSettings = {module = "shared.planet-mapgen-util", member = "createCliffSettings"},
     createSpaceConnection = {module = "data-stage.builders.base.create-space-connection", member = "createSpaceConnection"},
-    generateAsteroidSpawns = {module = "data-stage.builders.base.create-space-connection", member = "generateAsteroidSpawns"}
+    generateAsteroidSpawns = {module = "data-stage.builders.base.create-space-connection", member = "generateAsteroidSpawns"},
+    createPlanet = {module = "data-stage.builders.base.create-planet", member = "createPlanet"}
 }

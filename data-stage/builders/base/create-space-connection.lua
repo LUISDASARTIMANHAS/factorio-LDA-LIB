@@ -1,68 +1,120 @@
 local Module = {}
 
---- Gera definições básicas de asteroides para conexões espaciais conforme o nível de perigo.
---- @param density string|nil "none"|"low"|"medium"|"high"|"extreme"
---- @return table[]|nil Array de SpaceConnectionAsteroidSpawnDefinition
-function Module.generateAsteroidSpawns(density)
-    if density == "none" then return nil end
+local DEFAULT_LENGTH = 15000
+local MINIMUM_LENGTH = 600
+local DEFAULT_DENSITY = "medium"
+local DEFAULT_ASTEROID_SPEED = 1
 
-    local factor = 1
-    if density == "low" then factor = 0.5
-    elseif density == "high" then factor = 2.0
-    elseif density == "extreme" then factor = 4.0
+local DENSITY_FACTORS = {
+    none = 0,
+    low = 0.5,
+    medium = 1,
+    high = 2,
+    extreme = 4
+}
+
+local DEFAULT_ASTEROIDS = {
+    {
+        type = "asteroid-chunk",
+        asteroid = "metallic-asteroid-chunk"
+    },
+    {
+        type = "asteroid-chunk",
+        asteroid = "carbonic-asteroid-chunk"
+    },
+    {
+        type = "asteroid-chunk",
+        asteroid = "oxide-asteroid-chunk"
+    }
+}
+
+local DEFAULT_SPAWN_POINTS = {
+    {distance = 0.1, probability = 0.01},
+    {distance = 0.5, probability = 0.03},
+    {distance = 0.9, probability = 0.01}
+}
+
+--- Gera os pontos de surgimento de um asteroide.
+--- @param factor number Fator de densidade.
+--- @param speed number Velocidade dos asteroides, maior que zero.
+--- @return table[] Pontos de surgimento configurados.
+local function generateSpawnPoints(factor, speed)
+    local spawn_points = {}
+
+    for _, point in ipairs(DEFAULT_SPAWN_POINTS) do
+        spawn_points[#spawn_points + 1] = {
+            distance = point.distance,
+            probability = point.probability * factor,
+            speed = speed
+        }
     end
 
-    return {
-        {
-            asteroid = "metallic-asteroid-chunk",
-            spawn_points = {
-                {distance = 0.1, probability = 0.01 * factor},
-                {distance = 0.5, probability = 0.03 * factor},
-                {distance = 0.9, probability = 0.01 * factor}
-            }
-        },
-        {
-            asteroid = "carbonaceous-asteroid-chunk",
-            spawn_points = {
-                {distance = 0.1, probability = 0.01 * factor},
-                {distance = 0.5, probability = 0.03 * factor},
-                {distance = 0.9, probability = 0.01 * factor}
-            }
-        },
-        {
-            asteroid = "oxide-asteroid-chunk",
-            spawn_points = {
-                {distance = 0.1, probability = 0.01 * factor},
-                {distance = 0.5, probability = 0.03 * factor},
-                {distance = 0.9, probability = 0.01 * factor}
-            }
-        }
-    }
+    return spawn_points
 end
 
---- Cria um protótipo de conexão espacial (SpaceConnectionPrototype) entre dois corpos celestes.
---- @param from string Nome do planeta/localização de origem (ex: "nauvis")
---- @param to string Nome do planeta/localização de destino
---- @param length number|nil Distância em km (padrão 15000, não pode ser 0)
---- @param options table|nil {name = string, shape = "arc"|"line", asteroid_density = string, asteroid_spawn_definitions = table, order = string, subgroup = string, icon = string, icon_size = number}
---- @return table Prototype de 'space-connection'
-function Module.createSpaceConnection(from, to, length, options)
-    options = options or {}
+--- Gera definições de surgimento de asteroides.
+--- @param density string|nil none, low, medium, high ou extreme.
+--- @param speed number|nil Velocidade positiva dos asteroides.
+--- @return table[]|nil Definições de surgimento.
+function Module.generateAsteroidSpawns(density, speed)
+    density = density or DEFAULT_DENSITY
 
-    local connection_name = options.name or (from .. "-" .. to)
-    local connection_length = length or 15000
-    if connection_length <= 0 then
-        connection_length = 600
+    local factor = DENSITY_FACTORS[density]
+
+    assert(factor ~= nil, "Densidade de asteroides inválida: " .. tostring(density))
+
+    if factor == 0 then
+        return nil
     end
 
+    speed = speed or DEFAULT_ASTEROID_SPEED
+
+    assert(type(speed) == "number" and speed > 0, "A velocidade dos asteroides deve ser maior que zero.")
+
+    local definitions = {}
+
+    for _, asteroid in ipairs(DEFAULT_ASTEROIDS) do
+        definitions[#definitions + 1] = {
+            type = asteroid.type,
+            asteroid = asteroid.asteroid,
+            spawn_points = generateSpawnPoints(factor, speed)
+        }
+    end
+
+    return definitions
+end
+
+--- Cria um protótipo de conexão espacial entre dois locais.
+--- @param from string Nome do local de origem.
+--- @param to string Nome do local de destino.
+--- @param length number|nil Comprimento positivo da conexão.
+--- @param options table|nil Opções adicionais do protótipo.
+--- @return table Protótipo space-connection.
+function Module.createSpaceConnection(from, to, length, options)
+    assert(type(from) == "string" and from ~= "", "O local de origem deve ser uma string não vazia.")
+
+    assert(type(to) == "string" and to ~= "", "O local de destino deve ser uma string não vazia.")
+
+    options = options or {}
+
+    local connection_length = length or DEFAULT_LENGTH
+
+    assert(type(connection_length) == "number", "O comprimento da conexão deve ser numérico.")
+
+    if connection_length <= 0 then
+        connection_length = MINIMUM_LENGTH
+    end
+
+    local density = options.asteroid_density or DEFAULT_DENSITY
     local spawns = options.asteroid_spawn_definitions
-    if not spawns and options.asteroid_density ~= "none" then
-        spawns = Module.generateAsteroidSpawns(options.asteroid_density or "medium")
+
+    if spawns == nil and density ~= "none" then
+        spawns = Module.generateAsteroidSpawns(density, options.asteroid_speed)
     end
 
     local prototype = {
         type = "space-connection",
-        name = connection_name,
+        name = options.name or (from .. "-" .. to),
         from = from,
         to = to,
         length = connection_length,
@@ -81,4 +133,3 @@ function Module.createSpaceConnection(from, to, length, options)
 end
 
 return Module
-

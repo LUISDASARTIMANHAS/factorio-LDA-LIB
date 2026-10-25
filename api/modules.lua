@@ -31,5 +31,6 @@ return {
     ["data-stage.builders.specialized.create-technology-trigger-mine-entity"] = require("data-stage.builders.specialized.create-technology-trigger-mine-entity"),
     ["shared.planet-surface-properties"] = require("shared.planet-surface-properties"),
     ["shared.planet-mapgen-util"] = require("shared.planet-mapgen-util"),
-    ["data-stage.builders.base.create-space-connection"] = require("data-stage.builders.base.create-space-connection")
+    ["data-stage.builders.base.create-space-connection"] = require("data-stage.builders.base.create-space-connection"),
+    ["data-stage.builders.base.create-planet"] = require("data-stage.builders.base.create-planet")
 }

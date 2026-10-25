@@ -20,7 +20,7 @@ d-----        24/10/2026     17:26                shared
 -a----        24/10/2026     16:58           3615 AGENTS.md                                                            
 -a----        31/12/2025     11:31           2381 autoupdate.cmd                                                       
 -a----        21/06/2026     11:33           1029 bugs.txt                                                             
--a----        24/10/2026     17:28          12640 changelog.txt                                                        
+-a----        24/10/2026     17:29          12640 changelog.txt                                                        
 -a----        24/10/2026     15:35             23 control.lua                                                          
 -a----        24/10/2026     15:35             26 data.lua                                                             
 -a----        24/10/2026     17:12            110 exclusions.txt                                                       
@@ -36,9 +36,9 @@ d-----        24/10/2026     17:26                shared
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        24/10/2026     16:32             32 runtime.lua                                                          
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        24/10/2026     17:28              0 structure.txt                                                        
+-a----        24/10/2026     19:22              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
--a----        24/10/2026     17:27           7097 USAGE.md                                                             
+-a----        24/10/2026     17:29           7097 USAGE.md                                                             
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\.vscode
@@ -55,8 +55,8 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        24/10/2026     17:27           3640 modules.lua                                                          
--a----        24/10/2026     17:27           4570 registry.lua                                                         
+-a----        24/10/2026     19:22           3740 modules.lua                                                          
+-a----        24/10/2026     19:22           4667 registry.lua                                                         
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\audios
@@ -73,9 +73,9 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        24/10/2026     15:40                addons                                                               
+d-----        24/10/2026     19:21                addons                                                               
 d-----        24/10/2026     15:55                builders                                                             
--a----        24/10/2026     15:40             79 init.lua                                                             
+-a----        24/10/2026     19:22            122 init.lua                                                             
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\addons
@@ -83,6 +83,7 @@ d-----        24/10/2026     15:55                builders
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
+-a----        24/10/2026     19:21           2878 desert-planet.lua                                                    
 -a----        24/10/2026     15:58           1744 items.lua                                                            
 -a----        24/10/2026     15:58           9177 throw-in-water.lua                                                   
 
@@ -92,7 +93,7 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        24/10/2026     17:26                base                                                                 
+d-----        24/10/2026     19:21                base                                                                 
 d-----        24/10/2026     15:55                composites                                                           
 d-----        24/10/2026     15:55                specialized                                                          
 
@@ -112,8 +113,9 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     15:56           1616 create-item-search.lua                                               
 -a----        24/10/2026     15:56           3969 create-item.lua                                                      
 -a----        24/10/2026     15:57           4022 create-ore.lua                                                       
+-a----        24/10/2026     19:21           6643 create-planet.lua                                                    
 -a----        24/10/2026     15:56           2944 create-recipe.lua                                                    
--a----        24/10/2026     17:26           3062 create-space-connection.lua                                          
+-a----        24/10/2026     17:28           3063 create-space-connection.lua                                          
 -a----        24/10/2026     15:56           1957 create-technology-trigger.lua                                        
 -a----        24/10/2026     15:56           2321 create-technology.lua                                                
 -a----        24/10/2026     15:56           2267 formatResultsList.lua                                                
@@ -3721,7 +3723,7 @@ Mode                 LastWriteTime         Length Name
 -a----        29/11/2025     09:25           1028 control-get-mod-path.lua                                             
 -a----        21/06/2026     11:06          16453 control-utils.lua                                                    
 -a----        24/10/2026     17:28           2986 planet-mapgen-util.lua                                               
--a----        24/10/2026     17:28           4117 planet-surface-properties.lua                                        
+-a----        24/10/2026     19:21           4592 planet-surface-properties.lua                                        
 -a----        05/01/2026     16:04           1098 tech-util.lua                                                        
 
 
