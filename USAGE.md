@@ -268,11 +268,36 @@ script.on_event(defines.events.on_built_entity, function(event)
 end)
 ```
 
+-- Exemplo: Rede de Entidades (ex: portais, reatores ou nós interligados)
+script.on_event(defines.events.on_built_entity, function(event)
+    local entity = event.entity
+    if LDARuntime.entity.isValid(entity) and entity.name == "meu-portal" then
+        -- Registra na rede persistida em storage com auto-limpeza
+        LDARuntime.network.register("portais", entity, {
+            name = "Portal Base",
+            canal = 1
+        })
+    end
+end)
+
+script.on_event(defines.events.on_entity_died, function(event)
+    -- Remove da rede ao ser destruído
+    LDARuntime.network.unregister("portais", event.entity)
+end)
+
+-- Buscar nós para montar rotas ou GUIs:
+local todos_portais = LDARuntime.network.getAll("portais", "player") -- ou {force = "player", surface = "nauvis"}
+
+-- Posição segura para teleporte/spawn de saída:
+local pos_saida = LDARuntime.network.findFreeSpawnPosition(portal_destino, "character", 4)
+```
+
 ### Módulos disponíveis no Runtime:
 - `LDARuntime.player`: `get`, `give`, `remove`, `hasItem`, `getItemCount`, `teleport`, `flyingText`, `notify`, `getGps`, `getPosition`, `getSurface`.
 - `LDARuntime.entity`: `isValid`, `getHealth`, `setHealth`, `heal`, `damage`, `getEnergy`, `setEnergy`, `insert`, `remove`, `destroy`, `reviveGhost`, `isGhost`.
 - `LDARuntime.world`: `getSurface`, `findEntitiesInRadius`, `findEntitiesInBox`, `findFreePosition`, `spawnEntity`, `setTile`, `setTiles`, `getTile`, `createExplosion`, `teleportEntity`, `formatGps`, `getDistance`.
 - `LDARuntime.item`: `isValid`, `toTable`, `canFit`, `getEmptySlotCount`, `transfer`, `spill`, `findOnGround`, `collectFromGround`, `getStackSize`, `getSubgroup`.
+- `LDARuntime.network`: `register`, `unregister`, `get`, `getAll`, `setName`, `setMetadata`, `findFreeSpawnPosition`, `cleanup`, `count`, `clear`, `getNetworks` (gerenciamento genérico de redes de entidades persistidas em `storage` com auto-limpeza de entidades inválidas).
 
 ## Observações
 

@@ -6,12 +6,14 @@ local player = require("runtime.modules.player")
 local entity = require("runtime.modules.entity")
 local world = require("runtime.modules.world")
 local item = require("runtime.modules.item")
+local network = require("runtime.modules.network")
 
 local Runtime = {
     player = player,
     entity = entity,
     world = world,
-    item = item
+    item = item,
+    network = network
 }
 
 if storage then
@@ -44,7 +46,16 @@ if remote and not remote.interfaces["LDA-LIB"] then
         world_set_tile = world.setTile,
         item_transfer = item.transfer,
         item_spill = item.spill,
-        item_collect = item.collectFromGround
+        item_collect = item.collectFromGround,
+        network_register = network.register,
+        network_unregister = network.unregister,
+        network_get = network.get,
+        network_get_all = network.getAll,
+        network_set_name = network.setName,
+        network_set_metadata = network.setMetadata,
+        network_find_free_spawn_position = network.findFreeSpawnPosition,
+        network_cleanup = network.cleanup,
+        network_count = network.count
     })
 end
 
