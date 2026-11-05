@@ -290,6 +290,30 @@ local todos_portais = LDARuntime.network.getAll("portais", "player") -- ou {forc
 
 -- Posição segura para teleporte/spawn de saída:
 local pos_saida = LDARuntime.network.findFreeSpawnPosition(portal_destino, "character", 4)
+
+-- Exemplo: Interface Gráfica Padronizada (GUI)
+local function abrir_janela(player)
+    -- Cria modal centralizado vinculado a player.opened com botão fechar no titlebar
+    local win = LDARuntime.gui.createWindow(player, "portal_window", "Portal Quântico", {
+        width = 420
+    })
+
+    -- Barra de status de energia formatada com porcentagem
+    local energy_bar = LDARuntime.gui.createEnergyBar(win.content, {
+        initial_value = 25000000, -- 25 MJ
+        max_value = 50000000      -- 50 MJ
+    })
+
+    -- Busca recursiva segura em hierarquias aninhadas
+    local found_bar = LDARuntime.gui.findElementByName(win.frame, "energy_progressbar")
+end
+
+-- Fechamento nativo por evento de clique ou tecla ESC:
+script.on_event(defines.events.on_gui_closed, function(event)
+    if event.element and event.element.name == "portal_window" then
+        LDARuntime.gui.closeWindow(game.get_player(event.player_index), event.element)
+    end
+end)
 ```
 
 ### Módulos disponíveis no Runtime:
@@ -298,6 +322,7 @@ local pos_saida = LDARuntime.network.findFreeSpawnPosition(portal_destino, "char
 - `LDARuntime.world`: `getSurface`, `findEntitiesInRadius`, `findEntitiesInBox`, `findFreePosition`, `spawnEntity`, `setTile`, `setTiles`, `getTile`, `createExplosion`, `teleportEntity`, `formatGps`, `getDistance`.
 - `LDARuntime.item`: `isValid`, `toTable`, `canFit`, `getEmptySlotCount`, `transfer`, `spill`, `findOnGround`, `collectFromGround`, `getStackSize`, `getSubgroup`.
 - `LDARuntime.network`: `register`, `unregister`, `get`, `getAll`, `setName`, `setMetadata`, `findFreeSpawnPosition`, `cleanup`, `count`, `clear`, `getNetworks` (gerenciamento genérico de redes de entidades persistidas em `storage` com auto-limpeza de entidades inválidas).
+- `LDARuntime.gui`: `findElementByName` (busca recursiva em profundidade/largura), `findElementsByType`, `createWindow` (janela modal padrão vinculada a `player.opened` com titlebar arrastável e botão fechar), `closeWindow`, `getWindow`, `toggleWindow`, `createEnergyBar`, `updateEnergyBar`, `formatEnergy`, `formatPower`, `clearChildren`.
 
 ## Observações
 

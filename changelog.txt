@@ -11,6 +11,7 @@ Date: 24/10/2026
     - Adicionado builder createSpaceConnection e gerador generateAsteroidSpawns (data-stage/builders/base/create-space-connection.lua).
     - Adicionado builder createAccumulator (data-stage/builders/base/create-accumulator.lua) para criação de protótipos de acumuladores elétricos modulares, com suporte a limites de fluxo (inclusive "0kW"), buffer_capacity, chargable_graphics, sons de operação e resistências.
     - Adicionado módulo de runtime LDARuntime.network (runtime/modules/network.lua) para registro e gerenciamento genérico de redes de entidades persistidas em storage (Factorio 2.0+), com suporte a consultas filtradas (por força, superfície e nome), renomeação, metadados arbitrários, busca de posição de spawn livre (findFreeSpawnPosition) e auto-limpeza de entidades inválidas.
+    - Adicionado módulo de runtime LDARuntime.gui (runtime/modules/gui.lua) com helpers de interface gráfica: busca recursiva de elementos (findElementByName e findElementsByType), padronização de janelas modais vinculadas ao ciclo de vida player.opened com titlebar arrastável e botão fechar, e barras de status de energia formatadas (createEnergyBar, updateEnergyBar, formatEnergy e formatPower).
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.15
 Date: 24/10/2026

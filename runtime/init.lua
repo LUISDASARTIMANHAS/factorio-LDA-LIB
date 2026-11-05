@@ -7,13 +7,15 @@ local entity = require("runtime.modules.entity")
 local world = require("runtime.modules.world")
 local item = require("runtime.modules.item")
 local network = require("runtime.modules.network")
+local gui = require("runtime.modules.gui")
 
 local Runtime = {
     player = player,
     entity = entity,
     world = world,
     item = item,
-    network = network
+    network = network,
+    gui = gui
 }
 
 if storage then
@@ -55,7 +57,16 @@ if remote and not remote.interfaces["LDA-LIB"] then
         network_set_metadata = network.setMetadata,
         network_find_free_spawn_position = network.findFreeSpawnPosition,
         network_cleanup = network.cleanup,
-        network_count = network.count
+        network_count = network.count,
+        gui_find_element_by_name = gui.findElementByName,
+        gui_create_window = gui.createWindow,
+        gui_close_window = gui.closeWindow,
+        gui_get_window = gui.getWindow,
+        gui_toggle_window = gui.toggleWindow,
+        gui_create_energy_bar = gui.createEnergyBar,
+        gui_update_energy_bar = gui.updateEnergyBar,
+        gui_format_energy = gui.formatEnergy,
+        gui_format_power = gui.formatPower
     })
 end
 
