@@ -210,6 +210,26 @@ local rota = LDA.createSpaceConnection(
 data:extend({rota})
 ```
 
+### 4. Acumulador Elétrico Modular (`createAccumulator`)
+Crie estruturas de armazenamento de energia (acumuladores) com total controle de buffer e limites de fluxo. Útil para entidades que precisam armazenar energia (como portais ou supercapacitores) sem abrir menus de receita, permitindo inclusive fluxo de saída zerado (`"0kW"` ou `0`) para retenção exclusiva de scripts:
+
+```lua
+local acumulador = LDA.createAccumulator({
+    name = "quantum-teleporter-portal",
+    collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    buffer_capacity = "50MJ",
+    input_flow_limit = "5MW",
+    output_flow_limit = "0kW", -- Não devolve carga para a rede; energia mantida para scripts
+    max_health = 500,
+    resistances = {
+        {type = "fire", percent = 100},
+        {type = "impact", percent = 80}
+    }
+})
+data:extend({acumulador})
+```
+
 ## Utilidades de Runtime (`control.lua`)
 
 Para lógica de scripts, eventos e manipulação de jogo durante a partida, importe o módulo de runtime:

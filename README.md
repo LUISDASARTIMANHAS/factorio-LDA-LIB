@@ -106,6 +106,7 @@ LDA.setBasePath('Seu-Mod-Nome')
 | `LDA.createItemGroup` | Cria grupos de itens e categorias no inventário. |
 | `LDA.createItemSearch` | Cria itens de busca/pesquisa (ex: science packs). |
 | `LDA.createEntity` | Cria uma entidade base (ex: painel solar customizado). |
+| `LDA.createAccumulator` | Cria um protótipo de acumulador elétrico modular (com controle de buffer, fluxo de entrada/saída, gráficos estáticos ou carregáveis). |
 
 ### Generic Functions (Combos Item + Receita)
 | Função | Descrição Rápida |
