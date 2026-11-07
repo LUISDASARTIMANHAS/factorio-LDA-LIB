@@ -8,6 +8,7 @@ local world = require("runtime.modules.world")
 local item = require("runtime.modules.item")
 local network = require("runtime.modules.network")
 local gui = require("runtime.modules.gui")
+local equipment_grid = require("runtime.modules.equipment_grid")
 
 local Runtime = {
     player = player,
@@ -16,6 +17,7 @@ local Runtime = {
     item = item,
     network = network,
     gui = gui,
+    equipment_grid = equipment_grid,
     commands = commands
 }
 
@@ -75,7 +77,13 @@ if remote and not remote.interfaces["LDA-LIB"] then
         gui_create_energy_bar = gui.createEnergyBar,
         gui_update_energy_bar = gui.updateEnergyBar,
         gui_format_energy = gui.formatEnergy,
-        gui_format_power = gui.formatPower
+        gui_format_power = gui.formatPower,
+        equipment_grid_get_energy = equipment_grid.getEnergy,
+        equipment_grid_get_max_energy = equipment_grid.getMaxEnergy,
+        equipment_grid_has_energy = equipment_grid.hasEnergy,
+        equipment_grid_drain_energy = equipment_grid.drainEnergy,
+        equipment_grid_add_energy = equipment_grid.addEnergy,
+        equipment_grid_get_grid = equipment_grid.getGrid
     })
 end
 

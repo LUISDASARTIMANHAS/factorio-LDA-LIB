@@ -20,7 +20,7 @@ d-----        24/10/2026     17:26                shared
 -a----        24/10/2026     16:58           3615 AGENTS.md                                                            
 -a----        31/12/2025     11:31           2381 autoupdate.cmd                                                       
 -a----        24/10/2026     20:51              0 bugs.txt                                                             
--a----        07/11/2026     12:23          14092 changelog.txt                                                        
+-a----        07/11/2026     12:30          14582 changelog.txt                                                        
 -a----        24/10/2026     15:35             23 control.lua                                                          
 -a----        24/10/2026     20:55            147 data.lua                                                             
 -a----        24/10/2026     17:12            110 exclusions.txt                                                       
@@ -36,9 +36,9 @@ d-----        24/10/2026     17:26                shared
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        24/10/2026     16:32             32 runtime.lua                                                          
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        07/11/2026     12:24              0 structure.txt                                                        
+-a----        07/11/2026     12:30              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
--a----        05/11/2026     18:38          10312 USAGE.md                                                             
+-a----        07/11/2026     12:29          11226 USAGE.md                                                             
 
 
     Diretório: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\.vscode
@@ -3714,10 +3714,10 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        05/11/2026     18:36                modules                                                              
+d-----        07/11/2026     12:29                modules                                                              
 -a----        07/11/2026     12:23            781 commands.lua                                                         
 -a----        24/10/2026     15:35            540 function-registry.lua                                                
--a----        07/11/2026     12:23           2978 init.lua                                                             
+-a----        07/11/2026     12:29           3459 init.lua                                                             
 
 
     Diretório: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\runtime\modules
@@ -3726,6 +3726,7 @@ d-----        05/11/2026     18:36                modules
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        24/10/2026     16:33           5403 entity.lua                                                           
+-a----        07/11/2026     12:29           8238 equipment_grid.lua                                                   
 -a----        05/11/2026     18:38          14534 gui.lua                                                              
 -a----        24/10/2026     16:40           7082 item.lua                                                             
 -a----        05/11/2026     18:32          13663 network.lua                                                          

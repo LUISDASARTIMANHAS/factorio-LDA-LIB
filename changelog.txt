@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.17
 Date: 07/11/2026
+  features:
+    - Adicionado módulo de runtime LDARuntime.equipment_grid (runtime/modules/equipment_grid.lua) com utilitários para leitura e manipulação de energia em grades de equipamento (getEnergy, getMaxEnergy, hasEnergy, drainEnergy e addEnergy), suportando jogadores (armadura), veículos, entidades e itens de forma atômica e distribuída.
   bugfixes:
     - Corrigido erro fatal de colisão "A script command already exists with the name: lda-list" quando mods consumidores importam __LDA-LIB__/runtime.init. Agora o registro de comandos e on_init é restrito ao mod base (script.mod_name == "LDA-LIB") e commands.register() possui verificação de idempotência (commands.commands["lda-list"]).
 ---------------------------------------------------------------------------------------------------

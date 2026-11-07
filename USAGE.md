@@ -314,6 +314,19 @@ script.on_event(defines.events.on_gui_closed, function(event)
         LDARuntime.gui.closeWindow(game.get_player(event.player_index), event.element)
     end
 end)
+
+-- Exemplo: Grade de Equipamento e Energia na Armadura
+local custo_teleporte = 2000000 -- 2 MJ
+
+-- Verifica e drena energia da armadura do jogador de forma atômica
+if LDARuntime.equipment_grid.hasEnergy(player, custo_teleporte) then
+    local sucesso, drenado = LDARuntime.equipment_grid.drainEnergy(player, custo_teleporte)
+    if sucesso then
+        player.print("Teletransporte energizado! Consumidos: " .. LDARuntime.gui.formatEnergy(drenado))
+    end
+else
+    player.print("Energia insuficiente na armadura! Necessário: " .. LDARuntime.gui.formatEnergy(custo_teleporte))
+end
 ```
 
 ### Módulos disponíveis no Runtime:
@@ -323,6 +336,7 @@ end)
 - `LDARuntime.item`: `isValid`, `toTable`, `canFit`, `getEmptySlotCount`, `transfer`, `spill`, `findOnGround`, `collectFromGround`, `getStackSize`, `getSubgroup`.
 - `LDARuntime.network`: `register`, `unregister`, `get`, `getAll`, `setName`, `setMetadata`, `findFreeSpawnPosition`, `cleanup`, `count`, `clear`, `getNetworks` (gerenciamento genérico de redes de entidades persistidas em `storage` com auto-limpeza de entidades inválidas).
 - `LDARuntime.gui`: `findElementByName` (busca recursiva em profundidade/largura), `findElementsByType`, `createWindow` (janela modal padrão vinculada a `player.opened` com titlebar arrastável e botão fechar), `closeWindow`, `getWindow`, `toggleWindow`, `createEnergyBar`, `updateEnergyBar`, `formatEnergy`, `formatPower`, `clearChildren`.
+- `LDARuntime.equipment_grid`: `getGrid` (resolução inteligente a partir de player, entity, item stack ou grid), `isValid`, `getEnergy` (leitura somada de Joules em baterias/geradores), `getMaxEnergy`, `hasEnergy`, `drainEnergy` (dreno distribuído e atômico entre equipamentos), `addEnergy`, `getEquipment`, `countEquipment`.
 
 ## Observações
 
