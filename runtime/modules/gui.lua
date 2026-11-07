@@ -291,8 +291,11 @@ function GuiUtils.closeWindow(player, window_or_name)
     local frame = nil
     if type(window_or_name) == "string" then
         frame = player.gui.screen[window_or_name]
-    elseif type(window_or_name) == "table" and window_or_name.valid then
-        frame = window_or_name
+    else
+        local ok, is_valid = pcall(function() return window_or_name.valid end)
+        if ok and is_valid then
+            frame = window_or_name
+        end
     end
 
     if not frame or not frame.valid then

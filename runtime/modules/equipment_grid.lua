@@ -1,45 +1,64 @@
 local EquipmentGridUtils = {}
 
 --- Obtém a LuaEquipmentGrid a partir de um jogador, entidade, item_stack ou da própria grade.
+--- Suporta tanto objetos nativos Factorio (userdata) quanto tabelas encapsuladas.
 ---
 --- @param target LuaPlayer|LuaEntity|LuaItemStack|LuaEquipmentGrid|nil
 --- @return LuaEquipmentGrid|nil
 function EquipmentGridUtils.getGrid(target)
-    if not target then return nil end
-
-    -- 1. Se já for uma LuaEquipmentGrid
-    if type(target) == "table" and target.valid and target.equipment ~= nil and target.width ~= nil then
-        return target
-    end
-
-    -- 2. Se for um LuaPlayer
-    if type(target) == "table" and target.valid and target.is_player and target.is_player() then
-        -- Tenta pegar do character do jogador
-        local character = target.character
-        if character and character.valid then
-            local inv = character.get_inventory(defines.inventory.character_armor)
-            if inv and inv.valid and not inv.is_empty() and inv[1].valid_for_read and inv[1].grid then
-                return inv[1].grid
-            end
-        end
-
-        -- Fallback: inventário direto do player
-        local inv = target.get_inventory(defines.inventory.character_armor)
-        if inv and inv.valid and not inv.is_empty() and inv[1].valid_for_read and inv[1].grid then
-            return inv[1].grid
-        end
-
+    if not target or type(target) == "number" or type(target) == "string" or type(target) == "boolean" then
         return nil
     end
 
+    local ok_valid, is_valid = pcall(function() return target.valid end)
+    local ok_valid_read, is_valid_read = pcall(function() return target.valid_for_read end)
+
+    -- 1. Se já for uma LuaEquipmentGrid (possui .equipment e .width)
+    if ok_valid and is_valid then
+        local ok_eq, eq = pcall(function() return target.equipment end)
+        local ok_w, w = pcall(function() return target.width end)
+        if ok_eq and eq ~= nil and ok_w and w ~= nil then
+            return target
+        end
+    end
+
+    -- 2. Se for um LuaPlayer
+    if ok_valid and is_valid then
+        local ok_is_p, is_p = pcall(function() return target.is_player and target.is_player() end)
+        if ok_is_p and is_p then
+            -- Tenta pegar do character do jogador
+            local ok_char, character = pcall(function() return target.character end)
+            if ok_char and character and character.valid then
+                local inv = character.get_inventory(defines.inventory.character_armor)
+                if inv and inv.valid and not inv.is_empty() and inv[1].valid_for_read and inv[1].grid then
+                    return inv[1].grid
+                end
+            end
+
+            -- Fallback: inventário direto do player
+            local inv = target.get_inventory(defines.inventory.character_armor)
+            if inv and inv.valid and not inv.is_empty() and inv[1].valid_for_read and inv[1].grid then
+                return inv[1].grid
+            end
+
+            return nil
+        end
+    end
+
     -- 3. Se for uma LuaEntity (ex: veículo, spidertron, character)
-    if type(target) == "table" and target.valid and target.grid ~= nil then
-        return target.grid
+    if ok_valid and is_valid then
+        local ok_g, grid = pcall(function() return target.grid end)
+        if ok_g and grid ~= nil and grid.valid then
+            return grid
+        end
     end
 
     -- 4. Se for um LuaItemStack com grade (armadura no inventário)
-    if type(target) == "table" and target.valid_for_read and target.grid ~= nil then
-        return target.grid
+    if ok_valid_read and is_valid_read then
+        local ok_g, grid = pcall(function() return target.grid end)
+        if ok_g and grid ~= nil and grid.valid then
+            return grid
+        end
     end
 
     return nil

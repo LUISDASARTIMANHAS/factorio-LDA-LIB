@@ -1,6 +1,7 @@
 local PlayerUtils = {}
 
---- Obtém e valida uma referência de jogador por índice, nome ou objeto.
+--- Obtém e valida uma referência de jogador por índice, nome ou objeto LuaPlayer.
+--- No Factorio, LuaPlayer é um objeto userdata (não table).
 --- @param player_or_id number|string|LuaPlayer
 --- @return LuaPlayer|nil
 function PlayerUtils.get(player_or_id)
@@ -8,8 +9,12 @@ function PlayerUtils.get(player_or_id)
     local p = nil
     if type(player_or_id) == "number" or type(player_or_id) == "string" then
         p = game and game.get_player(player_or_id)
-    elseif type(player_or_id) == "table" and player_or_id.valid then
-        p = player_or_id
+    else
+        -- Aceita diretamente objetos Factorio LuaPlayer (userdata) com .valid
+        local ok, is_valid = pcall(function() return player_or_id.valid end)
+        if ok and is_valid then
+            p = player_or_id
+        end
     end
     return (p and p.valid) and p or nil
 end
@@ -18,7 +23,11 @@ end
 --- @param player LuaPlayer
 --- @return boolean
 function PlayerUtils.isValid(player)
-    return player ~= nil and player.valid
+    if not player or type(player) == "number" or type(player) == "string" or type(player) == "boolean" then
+        return false
+    end
+    local ok, valid = pcall(function() return player.valid end)
+    return ok and (valid == true)
 end
 
 --- Obtém a entidade Character do jogador se estiver vivo.

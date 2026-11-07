@@ -29,19 +29,21 @@ end
 --- @param entity_or_id LuaEntity|table|number|string
 --- @return number|nil
 local function extract_unit_number(entity_or_id)
+    if not entity_or_id then return nil end
     if type(entity_or_id) == "number" then
         return entity_or_id
     end
     if type(entity_or_id) == "string" then
         return tonumber(entity_or_id)
     end
-    if type(entity_or_id) == "table" then
-        if entity_or_id.unit_number then
-            return entity_or_id.unit_number
-        end
-        if entity_or_id.entity and entity_or_id.entity.valid and entity_or_id.entity.unit_number then
-            return entity_or_id.entity.unit_number
-        end
+    -- Suporta LuaEntity nativa (userdata) ou nó de rede (table)
+    local ok_unit, unit_num = pcall(function() return entity_or_id.unit_number end)
+    if ok_unit and unit_num then
+        return unit_num
+    end
+    local ok_ent, ent = pcall(function() return entity_or_id.entity end)
+    if ok_ent and ent and ent.valid and ent.unit_number then
+        return ent.unit_number
     end
     return nil
 end
@@ -282,19 +284,24 @@ function NetworkUtils.findFreeSpawnPosition(entity_or_position, target_name, rad
     local target = target_name or "character"
     local max_radius = radius or 5
 
-    if type(entity_or_position) == "table" and entity_or_position.valid and entity_or_position.position then
+    -- Suporta LuaEntity (userdata ou table), nó de rede ou coordenadas puras {x, y}
+    local ok_ent, is_valid_ent = pcall(function() return entity_or_position.valid and entity_or_position.position end)
+    if ok_ent and is_valid_ent then
         -- LuaEntity
-        surface = entity_or_position.surface
+        surface = surface or entity_or_position.surface
         center_pos = entity_or_position.position
-    elseif type(entity_or_position) == "table" and entity_or_position.entity and entity_or_position.entity.valid then
-        -- Node da rede
-        surface = entity_or_position.entity.surface
-        center_pos = entity_or_position.entity.position
-    elseif type(entity_or_position) == "table" then
-        -- {x = ..., y = ...}
-        center_pos = entity_or_position
-        if not surface and game then
-            surface = game.surfaces[1]
+    else
+        local ok_node, has_node = pcall(function() return entity_or_position.entity and entity_or_position.entity.valid end)
+        if ok_node and has_node then
+            -- Node da rede
+            surface = surface or entity_or_position.entity.surface
+            center_pos = entity_or_position.entity.position
+        elseif type(entity_or_position) == "table" then
+            -- {x = ..., y = ...}
+            center_pos = entity_or_position
+            if not surface and game then
+                surface = game.surfaces[1]
+            end
         end
     end
 

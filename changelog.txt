@@ -5,6 +5,7 @@ Date: 07/11/2026
     - Adicionado módulo de runtime LDARuntime.equipment_grid (runtime/modules/equipment_grid.lua) com utilitários para leitura e manipulação de energia em grades de equipamento (getEnergy, getMaxEnergy, hasEnergy, drainEnergy e addEnergy), suportando jogadores (armadura), veículos, entidades e itens de forma atômica e distribuída.
   bugfixes:
     - Corrigido erro fatal de colisão "A script command already exists with the name: lda-list" quando mods consumidores importam __LDA-LIB__/runtime.init. Agora o registro de comandos e on_init é restrito ao mod base (script.mod_name == "LDA-LIB") e commands.register() possui verificação de idempotência (commands.commands["lda-list"]).
+    - Corrigido resolver de objetos Factorio em runtime/modules/player.lua (player.get) e runtime/modules/world.lua (world.getSurface) que rejeitavam objetos nativos LuaPlayer e LuaSurface por checarem type(...) == "table" (no Factorio esses objetos são do tipo userdata). Agora todos os módulos de runtime aceitam diretamente instâncias nativas válidas (.valid) além de IDs e nomes.
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.16
 Date: 24/10/2026

@@ -1,10 +1,14 @@
 local EntityUtils = {}
 
---- Verifica com segurança se a entidade existe e está válida no jogo.
+--- Verifica com segurança se a entidade existe e está válida no jogo (suporta userdata do Factorio).
 --- @param entity LuaEntity
 --- @return boolean
 function EntityUtils.isValid(entity)
-    return entity ~= nil and entity.valid
+    if not entity or type(entity) == "number" or type(entity) == "string" or type(entity) == "boolean" then
+        return false
+    end
+    local ok, valid = pcall(function() return entity.valid end)
+    return ok and (valid == true)
 end
 
 --- Obtém a vida atual da entidade.

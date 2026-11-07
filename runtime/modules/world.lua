@@ -1,6 +1,7 @@
 local WorldUtils = {}
 
---- Obtém e valida uma superfície do Factorio por nome, índice ou objeto.
+--- Obtém e valida uma superfície do Factorio por nome, índice ou objeto LuaSurface.
+--- No Factorio, LuaSurface é um objeto userdata (não table).
 --- @param surface_or_id LuaSurface|string|number|nil
 --- @return LuaSurface|nil
 function WorldUtils.getSurface(surface_or_id)
@@ -11,7 +12,9 @@ function WorldUtils.getSurface(surface_or_id)
     if type(surface_or_id) == "string" or type(surface_or_id) == "number" then
         return game.get_surface(surface_or_id)
     end
-    if type(surface_or_id) == "table" and surface_or_id.valid then
+    -- Aceita diretamente objetos Factorio LuaSurface (userdata) com .valid
+    local ok, is_valid = pcall(function() return surface_or_id.valid end)
+    if ok and is_valid then
         return surface_or_id
     end
     return nil
