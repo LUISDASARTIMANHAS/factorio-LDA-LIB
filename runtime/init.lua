@@ -15,23 +15,32 @@ local Runtime = {
     world = world,
     item = item,
     network = network,
-    gui = gui
+    gui = gui,
+    commands = commands
 }
 
 if storage then
     storage.lda = storage.lda or {function_names = {}}
 end
 
-if script then
-    script.on_init(function()
-        functionRegistry.initialize(apiRegistry)
-        if game then
-            game.print("[LDA-LIB] LOADED LIB.")
-        end
-    end)
-end
+-- Registra comandos e lifecycle hooks apenas quando o runtime é executado diretamente pelo mod LDA-LIB.
+-- Quando importado por mods consumidores como biblioteca (ex: require("__LDA-LIB__/runtime.init")),
+-- não executamos script.on_init (para não sobrescrever o handler do mod) nem commands.register()
+-- incondicionalmente no top-level (evitando colisão "A script command already exists with the name: lda-list").
+local is_own_mod = script and script.mod_name == "LDA-LIB"
 
-commands.register()
+if is_own_mod then
+    if script then
+        script.on_init(function()
+            functionRegistry.initialize(apiRegistry)
+            if game then
+                game.print("[LDA-LIB] LOADED LIB.")
+            end
+        end)
+    end
+
+    commands.register()
+end
 
 if remote and not remote.interfaces["LDA-LIB"] then
     remote.add_interface("LDA-LIB", {

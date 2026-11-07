@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.17
+Date: 07/11/2026
+  bugfixes:
+    - Corrigido erro fatal de colisão "A script command already exists with the name: lda-list" quando mods consumidores importam __LDA-LIB__/runtime.init. Agora o registro de comandos e on_init é restrito ao mod base (script.mod_name == "LDA-LIB") e commands.register() possui verificação de idempotência (commands.commands["lda-list"]).
+---------------------------------------------------------------------------------------------------
 Version: 0.0.16
 Date: 24/10/2026
   major_changes:
