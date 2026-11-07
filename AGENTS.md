@@ -3,7 +3,7 @@
 ## Contexto do projeto
 
 - LDA-LIB é uma biblioteca Lua para Factorio (compatível com Factorio 2.0+). A API pública é montada em [init.lua](init.lua).
-- Consulte [README.md](README.md) para o catálogo de funções e [USAGE.md](USAGE.md) para exemplos de integração em outros mods. Prefira links para essa documentação em vez de duplicá-la aqui.
+- Consulte [README.md](README.md) para o catálogo de funções e a pasta `docs/` (com índice em [USAGE.md](USAGE.md)) para exemplos detalhados e guias de integração em outros mods. Prefira links para essa documentação em vez de duplicá-la aqui.
 
 ## Arquitetura
 
@@ -25,6 +25,8 @@
 - Funções de criação normalmente devem retornar tabelas de protótipos; o consumidor decide quando chamar `data:extend(...)`.
 - Use `require` explícito e referencie caminhos canônicos (`data-stage.builders.*`, `shared.*`). Novos módulos devem ser colocados em seus respectivos componentes encapsulados.
 - Ao adicionar ou alterar uma função pública, registre-a em `api/registry.lua` e `api/modules.lua`.
+- **Exemplos obrigatórios**: Toda função pública ou documentada deve obrigatoriamente possuir pelo menos 1 exemplo prático e funcional de uso (tanto em documentações quanto nos testes/guias).
+- **Modularização da documentação (`docs/`)**: Para reduzir a complexidade e evitar sobrecarga em um único arquivo, é obrigatório modularizar a documentação em múltiplos arquivos `.md` dentro do diretório `docs/` organizados por domínio (ex: `docs/builders.md`, `docs/runtime.md`, `docs/utils.md`, `docs/space.md`, etc.), mantendo `USAGE.md` como índice principal/sumário rápido de navegação.
 - Chame `LDA.setBasePath("Nome-do-Mod")` antes de qualquer helper que resolva imagens ou sons do mod consumidor. Esse caminho é estado compartilhado do módulo.
 - Verifique tipos e categorias conforme as APIs do Factorio 2.0+. Receitas devem aceitar apenas ingredientes e resultados compatíveis com os protótipos suportados pelo projeto.
 - Não introduza dependências ou conteúdo global novo sem verificar o impacto em mods consumidores. `data.lua` já carrega os add-ons internos automaticamente.

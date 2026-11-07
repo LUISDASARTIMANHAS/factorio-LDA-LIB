@@ -9,7 +9,7 @@ d-----        15/11/2025     18:37                .vscode
 d-----        24/10/2026     15:37                api                                                                  
 d-----        25/12/2025     17:52                audios                                                               
 d-----        24/10/2026     15:55                data-stage                                                           
-d-----        24/10/2026     17:12                docs                                                                 
+d-----        07/11/2026     13:09                docs                                                                 
 d-----        24/10/2026     20:47                graphics                                                             
 d-----        16/03/2026     22:38                gui                                                                  
 d-----        31/12/2025     23:13                locale                                                               
@@ -17,7 +17,7 @@ d-----        24/10/2026     16:30                runtime
 d-----        24/10/2026     17:26                shared                                                               
 -a----        15/11/2025     11:26             25 .env                                                                 
 -a----        24/10/2026     17:12             77 .gitignore                                                           
--a----        24/10/2026     16:58           3615 AGENTS.md                                                            
+-a----        07/11/2026     13:07           4276 AGENTS.md                                                            
 -a----        31/12/2025     11:31           2381 autoupdate.cmd                                                       
 -a----        24/10/2026     20:51              0 bugs.txt                                                             
 -a----        07/11/2026     12:37          14972 changelog.txt                                                        
@@ -31,13 +31,13 @@ d-----        24/10/2026     17:26                shared
 -a----        07/11/2026     12:15        3403312 LDA-LIB_0.0.16.zip                                                   
 -a----        15/11/2025     11:06          35823 LICENSE                                                              
 -a----        24/10/2026     16:58           2239 migration.md                                                         
--a----        05/11/2026     18:21          12173 README.md                                                            
+-a----        07/11/2026     13:09          14601 README.md                                                            
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        24/10/2026     16:32             32 runtime.lua                                                          
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        07/11/2026     12:37              0 structure.txt                                                        
+-a----        07/11/2026     13:09              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
--a----        07/11/2026     12:29          11226 USAGE.md                                                             
+-a----        07/11/2026     13:09           3187 USAGE.md                                                             
 
 
     Diretório: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\.vscode
@@ -151,6 +151,10 @@ Mode                 LastWriteTime         Length Name
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 d-----        24/10/2026     17:12                factorio-docs                                                        
+-a----        07/11/2026     13:08          13338 builders.md                                                          
+-a----        07/11/2026     13:09          11016 runtime.md                                                           
+-a----        07/11/2026     13:08           4136 space.md                                                             
+-a----        07/11/2026     13:08           7900 utils.md                                                             
 
 
     Diretório: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs

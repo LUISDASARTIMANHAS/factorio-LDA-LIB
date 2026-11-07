@@ -130,6 +130,17 @@ LDA.setBasePath('Seu-Mod-Nome')
 | `LDA.createTechnologyCraftEntityTrigger` | Tecnologia desbloqueada ao fabricar um item específico. |
 | `LDA.createTechnologyMineEntityTrigger` | Tecnologia desbloqueada ao minerar uma entidade específica. |
 
+### Espaço e Planetas (Space Age / Factorio 2.0+)
+| Função | Descrição Rápida |
+| :--- | :--- |
+| `LDA.createPlanet` | Constrói o conjunto completo de protótipos de um planeta, órbita e conexões. |
+| `LDA.createSpaceConnection` | Cria rotas espaciais entre planetas com configuração de asteroides. |
+| `LDA.generateAsteroidSpawns` | Gera configurações e probabilidades de surgimento de asteroides. |
+| `LDA.createCliffSettings` | Cria configurações de penhascos para geração de mapa do planeta. |
+| `LDA.createMapGenSettings` | Monta a estrutura `PlanetPrototypeMapGenSettings` para planetas. |
+| `LDA.createSurfaceProperties` | Configura propriedades físicas da superfície (gravidade, pressão, etc.). |
+| `LDA.surfacePropertiesPresets` | Predefinições prontas para planetas (nauvis, vulcanus, fulgora, gleba, aquilo). |
+
 ---
 
 ## 🛠️ Utilitários (Utils)
@@ -236,6 +247,25 @@ LDA.setBasePath('Seu-Mod-Nome')
 
 ---
 
+## ⚡ Módulo de Runtime (LDARuntime.*)
+
+Para lógica de scripts e controle durante a partida (`control.lua`), o módulo `LDARuntime` fornece utilitários para:
+
+- **`LDARuntime.player`**: Manipulação e consulta de jogadores, inventários, entregas seguras com spill e notificações.
+- **`LDARuntime.entity`**: Vida, dano, cura, energia em Joules, ghosts e destruição segura.
+- **`LDARuntime.world`**: Superfícies, buscas por raio ou área, spawn seguro sem colisão e manipulação de tiles.
+- **`LDARuntime.item`**: Transferências entre inventários, spill, recolhimento de itens caídos no chão e metadados.
+- **`LDARuntime.network`**: Gerenciamento de redes de entidades (como portais ou reatores) persistidas em `storage` com auto-limpeza.
+- **`LDARuntime.gui`**: Criação de janelas modulares com titlebar arrastável, busca recursiva em containers e barras de energia.
+- **`LDARuntime.equipment_grid`**: Inspeção de grades de armaduras/veículos, drenagem atômica de energia e recargas.
+
+---
+
 ## 📘 Documentação de uso
 
-Para exemplos detalhados de uso e padrões de chamada, consulte o arquivo `USAGE.md`.
+Para **exemplos práticos e funcionais** de cada uma das funções listadas, consulte o sumário em [USAGE.md](USAGE.md) ou navegue diretamente pelos guias modulares em `docs/`:
+
+- [**docs/builders.md**](docs/builders.md) – Protótipos de itens, fluidos, gases, receitas, minérios e tecnologias.
+- [**docs/space.md**](docs/space.md) – Planetas, propriedades de superfície, cliffs e conexões espaciais.
+- [**docs/utils.md**](docs/utils.md) – Animações, fontes de energia, bounding boxes, áudios e efeitos visuais.
+- [**docs/runtime.md**](docs/runtime.md) – Scripts em `control.lua` (player, entity, world, item, network, gui, equipment_grid).
