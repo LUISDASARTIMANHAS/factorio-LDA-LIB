@@ -8,7 +8,7 @@
     "description": "Biblioteca utilitária para criação rápida de itens, receitas e outros protótipos Factorio..",
     "factorio_version": "2.1",
     "dependencies": [
-        "base >= 2.1.23",
+        "base >= 2.1.24",
         "flib"
     ],
     "license": "GNU General Public License v3.0",
