@@ -72,6 +72,7 @@ script.on_event(defines.events.on_built_entity, function(event)
     local surface = LDARuntime.entity.getSurface(entity)
     local force = LDARuntime.entity.getForce(entity)
     local box = LDARuntime.entity.getBoundingBox(entity)
+    local pos_entidade = LDARuntime.entity.getPosition(entity) -- {x = ..., y = ...}
 
     -- Alterar vida ou curar
     LDARuntime.entity.setHealth(entity, 150)
@@ -236,13 +237,31 @@ local function abrir_painel(player)
         max_value = 10000000
     })
 
-    -- Atualização dinâmica
+    -- Atualização dinâmica via método do objeto
     energy_bar.update(7500000, 10000000)
+
+    -- Atualização direta através de updateEnergyBar com elementos da GUI
+    LDARuntime.gui.updateEnergyBar(energy_bar.progressbar, 8000000, 10000000, energy_bar.label)
+
+    -- Esvaziar filhos de um container para reconstrução de lista
+    LDARuntime.gui.clearChildren(win.content)
 
     -- Busca recursiva em profundidade no container
     local bar = LDARuntime.gui.findElementByName(win.frame, "energy_progressbar")
     local botoes = LDARuntime.gui.findElementsByType(win.frame, "button")
 end
+
+-- Consulta se a janela já está aberta no player.gui.screen
+local janela_aberta = LDARuntime.gui.getWindow(player, "meu_painel")
+if janela_aberta then
+    player.print("A janela já está visível na tela!")
+end
+
+-- Criação de uma barra de título customizada avulsa em um frame qualquer
+local frame_custom = player.gui.screen.add({type = "frame", direction = "vertical"})
+local titlebar = LDARuntime.gui.createTitlebar(frame_custom, "Título Avulso", "fechar_btn", {
+    tooltip = "Fechar janela customizada"
+})
 
 -- Fechamento nativo por evento
 script.on_event(defines.events.on_gui_closed, function(event)

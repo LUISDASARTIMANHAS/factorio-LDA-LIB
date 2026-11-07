@@ -35,7 +35,7 @@ d-----        24/10/2026     17:26                shared
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        24/10/2026     16:32             32 runtime.lua                                                          
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        07/11/2026     13:09              0 structure.txt                                                        
+-a----        07/11/2026     13:18            204 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
 -a----        07/11/2026     13:09           3187 USAGE.md                                                             
 
@@ -152,7 +152,7 @@ Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----                                                                 
 d-----        24/10/2026     17:12                factorio-docs                                                        
 -a----        07/11/2026     13:08          13338 builders.md                                                          
--a----        07/11/2026     13:09          11016 runtime.md                                                           
+-a----        07/11/2026     13:18          11930 runtime.md                                                           
 -a----        07/11/2026     13:08           4136 space.md                                                             
 -a----        07/11/2026     13:08           7900 utils.md                                                             
 
