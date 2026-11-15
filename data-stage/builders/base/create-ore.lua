@@ -29,12 +29,13 @@ function Module.createOre(name, stack_size, fuel_category, fuel_value, order)
 
     -- 1. Cria o Item do minério através do módulo atômico
     local item_prototype = controlOreItem.createOreItem(
-        name,
-        stack_size,
-        fuel_category,
-        fuel_value,
-        opts.item_options or opts
-    )
+    name,
+    stack_size,
+    fuel_category,
+    fuel_value,
+    opts.item_order or order,
+    opts.item_options
+)
 
     -- 2. Autoplace Control para menu de geração de mapa
     local autoplace_order = opts.autoplace_order or order or "a-d"

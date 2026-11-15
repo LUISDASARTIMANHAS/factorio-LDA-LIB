@@ -4,7 +4,7 @@ local item_tints = require("__base__.prototypes.item-tints")
 local controlGetModPath = require("shared.control-get-mod-path")
 local utils = require("shared.control-utils")
 
---- Cria um protótipo base genérico de item (ItemPrototype).
+--- Cria um protótipo base genérico de item (ItemPrototype). seguindo o estilo de herança
 --- Função genérica e extensível para qualquer subtipo ou variação de item.
 ---
 --- Usage:
