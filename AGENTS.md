@@ -24,6 +24,8 @@
 - Mantenha a separação entre APIs de protótipo do estágio data e APIs runtime como `storage`, `script`, `commands` e `game`.
 - Funções de criação normalmente devem retornar tabelas de protótipos; o consumidor decide quando chamar `data:extend(...)`.
 - Use `require` explícito e referencie caminhos canônicos (`data-stage.builders.*`, `shared.*`). Novos módulos devem ser colocados em seus respectivos componentes encapsulados.
+- **Evite código repetido**: não duplique lógica. Quando um comportamento começar a se repetir, extraia-o para uma função genérica reutilizável, parametrizando as diferenças entre os casos para reduzir erros e facilitar a manutenção.
+- **Priorize herança para reutilização**: use herança sempre que apropriado para que construtores especializados reutilizem a implementação dos construtores base e implementem apenas o que for específico. Por exemplo, `create-item-ore` deve herdar de `create-item-base` e reutilizar suas funções.
 - Ao adicionar ou alterar uma função pública, registre-a em `api/registry.lua` e `api/modules.lua`.
 - **Exemplos obrigatórios**: Toda função pública ou documentada deve obrigatoriamente possuir pelo menos 1 exemplo prático e funcional de uso (tanto em documentações quanto nos testes/guias).
 - **Modularização da documentação (`docs/`)**: Para reduzir a complexidade e evitar sobrecarga em um único arquivo, é obrigatório modularizar a documentação em múltiplos arquivos `.md` dentro do diretório `docs/` organizados por domínio (ex: `docs/builders.md`, `docs/runtime.md`, `docs/utils.md`, `docs/space.md`, etc.), mantendo `USAGE.md` como índice principal/sumário rápido de navegação.
