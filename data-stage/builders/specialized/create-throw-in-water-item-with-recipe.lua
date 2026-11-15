@@ -1,10 +1,4 @@
-local createItemWithRecipe = require("data-stage.builders.composites.create-item-with-recipe")
--- category = "science-matrices" feito em Matrix Lab
--- category = "advanced-crafting" maquinas de montagem tier 2 e 3
--- category = "basic-crafting" maquinas de montagem tier 1
--- category = "crafting" feito a mão
--- category = "smelting" feito em fornalhas
--- category = "centrifuging" feito na centrifuge
+local categoryMachines = require("data-stage.builders.specialized.create-category-machines-item-with-recipe")
 
 local Module = {}
 
@@ -17,12 +11,6 @@ function Module.createThrowInWaterItemWithRecipe(
     requiredWaterValue,
     alternative_unlock_methods,
     isEnabled)
-    local results = {
-        {type = "item", name = name, amount = qtde}
-    }
-    local crafted_in = "throw-in-water"
-    local subgroup = "intermediate-product"
-    local size = stack_size or 200
     local requiredIngredient = {
         type = "fluid",
         name = "water",
@@ -30,20 +18,17 @@ function Module.createThrowInWaterItemWithRecipe(
     }
 
     table.insert(ingredients, requiredIngredient)
-    local itemAndRecipe =
-        createItemWithRecipe.createItemWithRecipe(
+
+    return categoryMachines.createCategoryMachineItemWithRecipe(
+        "throw-in-water",
         name,
-        subgroup,
-        size,
-        crafted_in,
         time,
+        qtde,
         ingredients,
-        results,
+        stack_size or 200,
         alternative_unlock_methods,
         isEnabled
     )
-
-    return itemAndRecipe
 end
 
 -- example

@@ -9,11 +9,13 @@ Todas as funções retornam tabelas no formato do Factorio prontas para serem pa
 ## Sumário
 
 1. [Itens Básicos](#1-itens-básicos)
+   - [LDA.createBaseItem](#ldacreatebaseitem)
    - [LDA.createItem](#ldacreateitem)
    - [LDA.createBlockItem](#ldacreateblockitem)
    - [LDA.createEquipmentItem](#ldacreateequipmentitem)
    - [LDA.createItemSearch](#ldacreateitemsearch)
 2. [Fluidos e Gases](#2-fluidos-e-gases)
+   - [LDA.createBaseFluid](#ldacreatebasefluid)
    - [LDA.createFluid](#ldacreatefluid)
    - [LDA.createGas](#ldacreategas)
 3. [Grupos e Subgrupos](#3-grupos-e-subgrupos)
@@ -22,11 +24,13 @@ Todas as funções retornam tabelas no formato do Factorio prontas para serem pa
    - [LDA.createRecipe](#ldacreaterecipe)
    - [LDA.createGenericRecipe](#ldacreategenericrecipe)
    - [LDA.formatResultsList](#ldaformatresultslist)
+   - [LDA.createCompositePrototype](#ldacreatecompositeprototype)
    - [LDA.createItemWithRecipe](#ldacreateitemwithrecipe)
    - [LDA.createFluidWithRecipe](#ldacreatefluidwithrecipe)
    - [LDA.createBlockItemWithRecipe](#ldacreateblockitemwithrecipe)
    - [LDA.createEquipmentItemWithRecipe](#ldacreateequipmentitemwithrecipe)
 5. [Máquinas Especializadas](#5-máquinas-especializadas)
+   - [LDA.createCategoryMachineItemWithRecipe](#ldacreatecategorymachineitemwithrecipe)
    - [LDA.createAssemblerItemWithRecipe](#ldacreateassembleritemwithrecipe)
    - [LDA.createSmeltingItemWithRecipe](#ldacreatesmeltingitemwithrecipe)
    - [LDA.createChemicalPlantItemWithRecipe](#ldacreatechemicalplantitemwithrecipe)
@@ -35,6 +39,7 @@ Todas as funções retornam tabelas no formato do Factorio prontas para serem pa
 6. [Recursos de Terreno e Minérios](#6-recursos-de-terreno-e-minérios)
    - [LDA.createAutoplaceControl](#ldacreateautoplacecontrol)
    - [LDA.createResource](#ldacreateresource)
+   - [LDA.createOreItem](#ldacreateoreitem)
    - [LDA.createOre](#ldacreateore)
 7. [Entidades e Estruturas](#7-entidades-e-estruturas)
    - [LDA.createEntity](#ldacreateentity)
@@ -42,12 +47,27 @@ Todas as funções retornam tabelas no formato do Factorio prontas para serem pa
 8. [Tecnologias e Gatilhos](#8-tecnologias-e-gatilhos)
    - [LDA.createTechnology](#ldacreatetechnology)
    - [LDA.createTechnologyTrigger](#ldacreatetechnologytrigger)
+   - [LDA.createTechnologyTypedTrigger](#ldacreatetechnologytypedtrigger)
    - [LDA.createTechnologyCraftEntityTrigger](#ldacreatetechnologycraftentitytrigger)
    - [LDA.createTechnologyMineEntityTrigger](#ldacreatetechnologymineentitytrigger)
 
 ---
 
 ## 1. Itens Básicos
+
+### `LDA.createBaseItem`
+Função genérica e extensível para construir qualquer variante de item (ItemPrototype), consolidando regras de ícones, sons, peso e empilhamento.
+
+```lua
+local item_custom = LDA.createBaseItem({
+    name = "circuito-quantico",
+    subgroup = "intermediate-product",
+    stack_size = 50,
+    weight = 10,
+    place_result = "circuito-quantico-entidade" -- Opcional
+})
+data:extend({ item_custom })
+```
 
 ### `LDA.createItem`
 Cria um protótipo de item comum (`type = "item"`). O ícone é buscado automaticamente em `graphics/icons/<name>.png`.
@@ -109,6 +129,20 @@ data:extend({ pack_ciencia })
 ---
 
 ## 2. Fluidos e Gases
+
+### `LDA.createBaseFluid`
+Função genérica para construção de qualquer variante de fluido (líquido ou gás):
+```lua
+local fluido = LDA.createBaseFluid({
+    name = "vapor-superaquecido",
+    heat_capacity = "0.8kJ",
+    subgroup = "fluid",
+    max_temperature = 2500,
+    gas_temperature = 100,
+    auto_barrel = false
+})
+data:extend({ fluido })
+```
 
 ### `LDA.createFluid`
 Cria um líquido com capacidade térmica e cores de fluxo. Ícone em `graphics/icons/fluid/<name>.png`.
@@ -196,6 +230,23 @@ local formatados = LDA.formatResultsList({
     "liquid-biofuel",
     {name = "copper-cable", amount = 5}
 })
+```
+
+### `LDA.createCompositePrototype`
+Função genérica de empacotamento compósito que associa qualquer protótipo a uma receita correspondente:
+
+```lua
+local item = LDA.createItem("placa-liga", "intermediate-product", 100)
+local combo = LDA.createCompositePrototype(
+    item,
+    "icons",
+    "placa-liga",
+    "crafting",
+    3.0,
+    {{type = "item", name = "iron-plate", amount = 2}},
+    {{type = "item", name = "placa-liga", amount = 1}}
+)
+data:extend(combo)
 ```
 
 ### `LDA.createItemWithRecipe`
@@ -287,6 +338,20 @@ data:extend(combo_equip)
 ---
 
 ## 5. Máquinas Especializadas
+
+### `LDA.createCategoryMachineItemWithRecipe`
+Função genérica para gerar receitas de máquinas de qualquer categoria configurada:
+```lua
+local item_fornalha = LDA.createCategoryMachineItemWithRecipe(
+    "smelting",
+    "barra-cobre-pura",
+    3.2,
+    1,
+    {{type = "item", name = "copper-ore", amount = 2}},
+    100
+)
+data:extend(item_fornalha)
+```
 
 ### `LDA.createAssemblerItemWithRecipe`
 ```lua
@@ -401,18 +466,57 @@ local recurso = LDA.createResource(
 data:extend({ recurso })
 ```
 
-### `LDA.createOre`
-Gera de uma só vez a trinca: item, controle de autoplace e entidade de recurso mineral:
+### `LDA.createOreItem`
+Cria de forma atômica e isolada o protótipo do **item** do minério (`type = "item"` com prefixo automático `-ore`), sem gerar entidades de recurso no chão ou controles de mapa. Ideal para minérios sintéticos, itens de receitas especiais ou recursos manipulados via script:
 
 ```lua
+-- Chamada posicional rápida
+local itemMinerio = LDA.createOreItem(
+    "lithium",      -- Gera o item "lithium-ore"
+    200,            -- stack_size (padrão 100)
+    "chemical",     -- fuel_categories: string ("chemical") ou table ({"chemical", "nuclear"})
+    "2.5MJ"         -- fuel_value (opcional)
+)
+data:extend({ itemMinerio })
+
+-- Chamada via tabela de opções detalhadas
+local cristalItem = LDA.createOreItem({
+    name = "quantum-crystal",
+    stack_size = 50,
+    fuel_categories = {"chemical"},
+    fuel_value = "5MJ",
+    subgroup = "raw-resource",
+    weight = 20
+})
+data:extend({ cristalItem })
+```
+
+### `LDA.createOre`
+Gera de uma só vez a trinca de protótipos: item (`createOreItem`), controle de autoplace (`createAutoplaceControl`) e entidade de recurso mineral (`createResource`). Suporta a chamada clássica posicional ou tabela rica de configurações para controle total da geração de terreno e mineração:
+
+```lua
+-- 1. Chamada clássica posicional (100% retrocompatível)
 local minerio = LDA.createOre(
-    "titanium",  -- Gera "titanium-ore"
-    100,         -- stack_size
-    nil,         -- fuel_category
-    nil,         -- fuel_value
-    "b"          -- Ordem
+    "titanium",     -- Gera "titanium-ore"
+    100,            -- stack_size (opcional, padrão 100)
+    "chemical",     -- fuel_categories (string ou table, opcional)
+    "1.80MJ",       -- fuel_value (opcional)
+    "b"             -- Ordem (opcional)
 )
 data:extend(minerio)
+
+-- 2. Chamada avançada via tabela (permite customizar cor no mapa, tempo de mineração e densidade)
+local uranioRico = LDA.createOre({
+    name = "rich-uranium",
+    stack_size = 100,
+    fuel_categories = {"nuclear"},
+    fuel_value = "10MJ",
+    map_color = {0.0, 1.0, 0.2},
+    mining_time = 2.5,
+    base_density = 15,
+    mining_visualisation_tint = {r = 0.2, g = 1.0, b = 0.4, a = 1.0}
+})
+data:extend(uranioRico)
 ```
 
 ---
@@ -489,6 +593,20 @@ local tech_trigger = LDA.createTechnologyTrigger(
     }
 )
 data:extend({ tech_trigger })
+```
+
+### `LDA.createTechnologyTypedTrigger`
+Função genérica para criar tecnologias baseadas em qualquer tipo de trigger do Factorio 2.0+ (craft-item, mine-entity, build-entity, send-item-to-orbit, etc.):
+
+```lua
+local tech_orbit = LDA.createTechnologyTypedTrigger(
+    "satelite-cientifico",
+    {"telescopio-espacial"},
+    {"space-science-pack"},
+    "send-item-to-orbit",
+    {item = "satellite"}
+)
+data:extend({ tech_orbit })
 ```
 
 ### `LDA.createTechnologyCraftEntityTrigger`

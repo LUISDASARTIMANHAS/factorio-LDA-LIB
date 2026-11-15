@@ -9,6 +9,7 @@ return {
     createAutoplaceControl = {module = "data-stage.builders.base.autoplace-control", member = "createAutoplaceControl"},
     createResource = {module = "data-stage.builders.base.resource", member = "createResource"},
     createOre = {module = "data-stage.builders.base.create-ore", member = "createOre"},
+    createOreItem = {module = "data-stage.builders.base.create-ore-item", member = "createOreItem"},
     createItemGroup = {module = "data-stage.builders.base.create-item-group", member = "createItemGroup"},
     createItem = {module = "data-stage.builders.base.create-item", member = "createItem"},
     createEquipmentItem = {module = "data-stage.builders.base.create-equipment-item", member = "createEquipmentItem"},
@@ -40,5 +41,14 @@ return {
     createSpaceConnection = {module = "data-stage.builders.base.create-space-connection", member = "createSpaceConnection"},
     generateAsteroidSpawns = {module = "data-stage.builders.base.create-space-connection", member = "generateAsteroidSpawns"},
     createPlanet = {module = "data-stage.builders.base.create-planet", member = "createPlanet"},
-    createAccumulator = {module = "data-stage.builders.base.create-accumulator", member = "createAccumulator"}
+    createAccumulator = {module = "data-stage.builders.base.create-accumulator", member = "createAccumulator"},
+    resolveAssetPath = {module = "shared.control-utils", member = "resolveAssetPath"},
+    applyIconOrPictures = {module = "shared.control-utils", member = "applyIconOrPictures"},
+    isFactorioObjectValid = {module = "shared.control-utils", member = "isFactorioObjectValid"},
+    formatMetricUnit = {module = "shared.control-utils", member = "formatMetricUnit"},
+    createBaseItem = {module = "data-stage.builders.base.create-item", member = "createBaseItem"},
+    createBaseFluid = {module = "data-stage.builders.base.create-fluid", member = "createBaseFluid"},
+    createCompositePrototype = {module = "data-stage.builders.composites.create-item-with-recipe", member = "createCompositePrototype"},
+    createCategoryMachineItemWithRecipe = {module = "data-stage.builders.specialized.create-category-machines-item-with-recipe", member = "createCategoryMachineItemWithRecipe"},
+    createTechnologyTypedTrigger = {module = "data-stage.builders.base.create-technology-trigger", member = "createTechnologyTypedTrigger"}
 }

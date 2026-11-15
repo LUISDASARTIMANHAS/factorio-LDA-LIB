@@ -3,56 +3,65 @@ local item_sounds = require("__base__.prototypes.item_sounds")
 local item_tints = require("__base__.prototypes.item-tints")
 local controlGetModPath = require("shared.control-get-mod-path")
 local utils = require("shared.control-utils")
--- graphics/icons - icones de itens
 
--- stone-brick
--- subgroup = terrain 
+--- Cria um protótipo base genérico de item (ItemPrototype).
+--- Função genérica e extensível para qualquer subtipo ou variação de item.
+---
+--- Usage:
+--- ```lua
+--- local item = LDA.createBaseItem({
+---     name = "my-custom-item",
+---     subgroup = "raw-material",
+---     stack_size = 50,
+---     place_result = "my-entity"
+--- })
+--- ```
+---
+--- @param params table Configurações do item
+--- @return table ItemPrototype
+function Module.createBaseItem(params)
+    if type(params) ~= "table" or not params.name then
+        error("[LDA-LIB] [createBaseItem] Parâmetro 'name' é obrigatório.")
+    end
 
--- wood,coal,iron-ore
--- subgroup = raw-resource
+    local name = params.name
+    local stack_size = params.stack_size or 100
+    local icon_path = params.icon or utils.resolveAssetPath("icons", name)
+    local subgroup = params.subgroup or "basic-crafting"
+    local order = params.order or ("b[" .. subgroup .. "]-a[" .. name .. "item]")
 
--- iron-plate, copper-plate
--- subgroup = raw-material
+    local item_data = {
+        type = params.type or "item",
+        name = name,
+        icon = icon_path,
+        subgroup = subgroup,
+        order = order,
+        stack_size = stack_size,
+        weight = params.weight or (stack_size / 2),
+        color_hint = params.color_hint or {text = "1"},
+        inventory_move_sound = params.inventory_move_sound or item_sounds.metal_small_inventory_move,
+        pick_sound = params.pick_sound or item_sounds.metal_small_inventory_pickup,
+        drop_sound = params.drop_sound or item_sounds.metal_small_inventory_move,
+        random_tint_color = params.random_tint_color or item_tints.iron_rust,
+        ingredient_to_weight_coefficient = params.ingredient_to_weight_coefficient
+    }
 
--- copper-cable,iron-stick,iron-gear-wheel
--- subgroup = intermediate-product
+    if params.place_result then
+        item_data.place_result = params.place_result
+    end
 
--- wooden-chest,
--- subgroup = storage
+    if params.place_as_equipment_result then
+        item_data.place_as_equipment_result = params.place_as_equipment_result
+    end
 
--- stone-furnace
--- subgroup = rawsmelting-machine
+    utils.applyIconOrPictures(item_data, params.pictures, params.icon_size or 128)
 
--- burner-mining-drill,electric-mining-drill
--- subgroup = extraction-machine
+    if params.extra and type(params.extra) == "table" then
+        utils.tableMerge(item_data, params.extra, true)
+    end
 
--- burner-inserter,inserter
--- subgroup = inserter
-
--- pipe,small-electric-pole
--- subgroup = energy-pipe-distribution
-
--- boiler,steam-engine
--- subgroup = energy
-
--- radar
--- subgroup = defensive-structure
-
--- small-lamp
--- subgroup = circuit-network
-
--- assembling-machine-1
--- subgroup = production-machine
-
--- red-wire,green-wire
--- subgroup = spawnables
-
--- repair-pack,automation-science-pack
--- subgroup = tool
-
--- car
--- subgroup = transport
-
+    return item_data
+end
 
 --- Cria um protótipo de Item (ItemPrototype).
 -- @param name (string) Nome único do item (e.g., "iron-gear-wheel").
@@ -61,44 +70,13 @@ local utils = require("shared.control-utils")
 -- @param pictures (array[SpritePath], optional) Lista de sprites/pictures (impede o uso de icon_size).
 -- @return (table) ItemPrototype
 function Module.createItem(name, subgroup, stack_size, pictures)
-    -- Assumindo que controlGetModPath.getModPath() está acessível.
-    local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graphics/icons/" .. name .. ".png"
-    
-    -- 1. Cria a tabela base com campos comuns
-    local item_data = {
-        type = "item",
+    return Module.createBaseItem({
         name = name,
-        icon = icon_path,
         subgroup = subgroup or "basic-crafting",
-        order = "b[".. (subgroup or "basic-crafting") .. "]-a[" .. name .. "item" .. "]",
-        
-        -- Detalhes visuais e de som
-        color_hint = {text = "1"},
-        inventory_move_sound = item_sounds.metal_small_inventory_move,
-        pick_sound = item_sounds.metal_small_inventory_pickup,
-        drop_sound = item_sounds.metal_small_inventory_move,
-        random_tint_color = item_tints.iron_rust,
-        
-        -- Detalhes de empilhamento/peso
         stack_size = stack_size or 100,
-        weight = (stack_size or 100) / 2, -- O peso deve ser baseado no stack_size final
-        ingredient_to_weight_coefficient = 0.28,
-    }
-
-    -- 2. Adiciona 'pictures' e decide sobre 'icon_size'
-    if pictures and #pictures > 0 then
-        -- Se 'pictures' existe e tem elementos, adiciona 'pictures' e NÃO adiciona 'icon_size'
-        item_data.pictures = pictures
-        -- item_data.icon_size é omitido
-    else
-        -- Se 'pictures' é nulo, vazio ou não foi fornecido, adiciona 'icon_size'
-        item_data.icon_size = 128
-        -- item_data.pictures é omitido (ou será nil, mas Factorio prefere omitir)
-        item_data.pictures = nil -- Garante que a chave pictures não vá com nil se for o caso
-    end
-    
-    return item_data
+        pictures = pictures,
+        ingredient_to_weight_coefficient = 0.28
+    })
 end
 
 -- example

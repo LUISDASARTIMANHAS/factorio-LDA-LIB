@@ -1,26 +1,18 @@
+local createFluid = require("data-stage.builders.base.create-fluid")
 local Module = {}
-local controlGetModPath = require("shared.control-get-mod-path")
--- graphics/icons/fluid - icones de fluidos
 
 function Module.createGas(name, energy)
-    local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graphics/icons/gas/" .. name .. ".png"
-    return {
-        type = "fluid",
+    return createFluid.createBaseFluid({
         name = name,
-        subgroup = "fluid",
-        default_temperature = 15,
-        max_temperature = 5000,
-        --"0.2kJ",
         heat_capacity = energy,
-        icon = icon_path,
-        icon_size = 128,
+        subgroup = "fluid",
+        max_temperature = 5000,
         base_color = {0.5, 0.5, 0.5},
         flow_color = {1.0, 1.0, 1.0},
-        order = "a[fluid]-a[" .. name .. "]-a[" .. name .. "]",
+        icon_folder = "icons/gas",
         gas_temperature = 15,
         auto_barrel = false
-    }
+    })
 end
 
 -- example

@@ -1,14 +1,11 @@
+local controlUtils = require("shared.control-utils")
 local ItemUtils = {}
 
 --- Verifica se um LuaItemStack é válido e possui conteúdo para leitura (não é slot vazio, suporta userdata).
 --- @param stack LuaItemStack
 --- @return boolean
 function ItemUtils.isValid(stack)
-    if not stack or type(stack) == "number" or type(stack) == "string" or type(stack) == "boolean" then
-        return false
-    end
-    local ok, valid = pcall(function() return stack.valid and stack.valid_for_read end)
-    return ok and (valid == true)
+    return controlUtils.isFactorioObjectValid(stack, true)
 end
 
 --- Converte um LuaItemStack em uma tabela simples com suas propriedades.

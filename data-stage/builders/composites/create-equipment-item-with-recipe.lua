@@ -1,5 +1,5 @@
 local createEquipment = require("data-stage.builders.base.create-equipment-item")
-local createRecipe = require("data-stage.builders.base.create-recipe")
+local compositeHelper = require("data-stage.builders.composites.create-item-with-recipe")
 
 local Module = {}
 
@@ -10,11 +10,9 @@ local Module = {}
 -- @param time tempo que demora para ser construido em segundos (ex: 10) 10s.
 -- @param ingredients tabela de ingredientes que são necessarios para construir o item.
 -- @param results tabela de saidas depois de construido o item .
-function Module.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
-    local item = createEquipment.createEquipmentItem(name,subgroup, weight)
-    local recipe = createRecipe.createRecipe("equipment",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
-
-    return {item, recipe}
+function Module.createEquipmentItemWithRecipe(name, subgroup, weight, crafted_in, time, ingredients, results, alternative_unlock_methods, isEnabled, pictures)
+    local item = createEquipment.createEquipmentItem(name, subgroup, weight)
+    return compositeHelper.createCompositePrototype(item, "equipment", name, crafted_in, time, ingredients, results, alternative_unlock_methods, isEnabled, pictures)
 end
 
 

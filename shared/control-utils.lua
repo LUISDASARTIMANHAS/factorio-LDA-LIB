@@ -1,4 +1,5 @@
 -- control-utils.lua
+local controlGetModPath = require("shared.control-get-mod-path")
 local Module = {}
 -- Constante para o shift padrão do ícone (Factorio base costuma usar {0, 0})
 local DEFAULT_MODULE_SHIFT = {0, 0}
@@ -431,6 +432,113 @@ function Module.getRandomPositionAround(centerX, centerY,SPAWN_RADIUS_MIN,SPAWN_
         x = centerX + math.cos(angle) * distance,
         y = centerY + math.sin(angle) * distance
     }
+end
+
+--- Resolve o caminho canônico de um asset gráfico respeitando o mod atual.
+--- Exemplo: resolveAssetPath("icons", "iron-ore") -> "__ModName__/graphics/icons/iron-ore.png"
+---
+--- Usage:
+--- ```lua
+--- local icon = LDA.resolveAssetPath("icons", "my-item")
+--- local tech_icon = LDA.resolveAssetPath("technology", "my-tech-256x256")
+--- ```
+---
+--- @param folder string Subpasta dentro de graphics (ex: "icons", "entities", "technology", "icons/fluid")
+--- @param name string Nome do arquivo (sem extensão por padrão)
+--- @param extension string|nil Extensão do arquivo (padrão: ".png")
+--- @return string Caminho completo do asset no formato Factorio
+function Module.resolveAssetPath(folder, name, extension)
+    local mod_path = controlGetModPath.getModPath()
+    local ext = extension or ".png"
+    if folder and folder ~= "" then
+        return mod_path .. "graphics/" .. folder .. "/" .. name .. ext
+    else
+        return mod_path .. "graphics/" .. name .. ext
+    end
+end
+
+--- Configura de forma unificada e mutuamente exclusiva `pictures` ou `icon_size` em protótipos Factorio.
+--- Elimina a repetição de bloco `if pictures and #pictures > 0 then ... else ... end`.
+---
+--- Usage:
+--- ```lua
+--- LDA.applyIconOrPictures(prototype_table, pictures, 128)
+--- ```
+---
+--- @param target table Tabela do protótipo que será modificada
+--- @param pictures table|nil Array de Sprite/Pictures
+--- @param default_size number|nil Tamanho do ícone caso pictures não exista (padrão: 128)
+--- @return table A mesma tabela target com os campos ajustados
+function Module.applyIconOrPictures(target, pictures, default_size)
+    if not target or type(target) ~= "table" then
+        return target
+    end
+    if pictures and #pictures > 0 then
+        target.pictures = pictures
+        target.icon_size = nil
+    else
+        target.icon_size = default_size or 128
+        target.pictures = nil
+    end
+    return target
+end
+
+--- Valida com segurança objetos do Factorio (userdata ou tabelas) verificando .valid (e opcionalmente .valid_for_read).
+--- Evita repetição da checagem de tipos primitivos e pcall em múltiplos módulos runtime.
+---
+--- Usage:
+--- ```lua
+--- if not LDA.isFactorioObjectValid(entity) then return end
+--- if LDA.isFactorioObjectValid(stack, true) then ... end
+--- ```
+---
+--- @param obj any Objeto a ser testado
+--- @param check_read boolean|nil Se true, exige também valid_for_read == true (útil para ItemStack)
+--- @return boolean
+function Module.isFactorioObjectValid(obj, check_read)
+    if not obj or type(obj) == "number" or type(obj) == "string" or type(obj) == "boolean" then
+        return false
+    end
+    local ok, valid = pcall(function()
+        if not obj.valid then return false end
+        if check_read then
+            return obj.valid_for_read == true
+        end
+        return true
+    end)
+    return ok and (valid == true)
+end
+
+--- Formata um número de acordo com escalas métricas padrão (K, M, G, T, P, etc.).
+--- Usado genericamente para energia (J, kJ, MJ...), potência (W, kW, MW...), bytes, etc.
+---
+--- Usage:
+--- ```lua
+--- local formatted = LDA.formatMetricUnit(5200000, { {threshold = 1e6, suffix = "MJ"} }, "J", 1)
+--- ```
+---
+--- @param value number Valor numérico
+--- @param scales table Lista de pares {threshold = number, suffix = string}, ordenada do maior para o menor
+--- @param base_suffix string Sufixo da unidade base (ex: "J", "W")
+--- @param decimals number|nil Casas decimais para valores escalados (padrão: 1)
+--- @return string Texto formatado
+function Module.formatMetricUnit(value, scales, base_suffix, decimals)
+    if not value or type(value) ~= "number" then
+        return "0 " .. (base_suffix or "")
+    end
+    local dec = decimals or 1
+    local fmt = "%." .. tostring(dec) .. "f %s"
+    local abs_v = math.abs(value)
+
+    if scales then
+        for _, scale in ipairs(scales) do
+            if abs_v >= scale.threshold then
+                return string.format(fmt, value / scale.threshold, scale.suffix)
+            end
+        end
+    end
+
+    return string.format("%d %s", math.floor(value), base_suffix or "")
 end
 
 return Module

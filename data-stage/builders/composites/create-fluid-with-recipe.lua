@@ -1,13 +1,11 @@
 local createFluid = require("data-stage.builders.base.create-fluid")
-local createRecipe = require("data-stage.builders.base.create-recipe")
+local compositeHelper = require("data-stage.builders.composites.create-item-with-recipe")
 
 local Module = {}
 
-function Module.createFluidWithRecipe(name, heatEnergy, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
+function Module.createFluidWithRecipe(name, heatEnergy, crafted_in, time, ingredients, results, alternative_unlock_methods, isEnabled, pictures)
     local item = createFluid.createFluid(name, heatEnergy)
-    local recipe = createRecipe.createRecipe("fluid",name, crafted_in, time, ingredients, results,alternative_unlock_methods,isEnabled,pictures)
-
-    return {item, recipe}
+    return compositeHelper.createCompositePrototype(item, "fluid", name, crafted_in, time, ingredients, results, alternative_unlock_methods, isEnabled, pictures)
 end
 
 -- example

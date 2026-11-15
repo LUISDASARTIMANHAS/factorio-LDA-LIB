@@ -35,6 +35,7 @@
 --       gravity = 15
 --     },
 
+local utils = require("shared.control-utils")
 local Module = {}
 
 local DEFAULT_PROPERTIES = {
@@ -45,29 +46,17 @@ local DEFAULT_PROPERTIES = {
     ["day-night-cycle"] = 300
 }
 
---- Combina duas tabelas sem modificar as originais.
---- @param base table Valores padrão.
---- @param overrides table Valores personalizados.
---- @return table Tabela combinada.
-local function tableMerge(base, overrides)
-    local result = {}
-
-    for key, value in pairs(base) do
-        result[key] = value
-    end
-
-    for key, value in pairs(overrides) do
-        result[key] = value
-    end
-
-    return result
+--- Combina duas tabelas usando a função utilitária genérica sem modificar as originais.
+local function mergeProperties(base, overrides)
+    local target = utils.tableMerge({}, base, true)
+    return utils.tableMerge(target, overrides, true)
 end
 
 --- Cria propriedades de superfície usando IDs oficiais do Factorio.
 --- @param custom_props table|nil Propriedades personalizadas.
 --- @return table<string, number> Propriedades do planeta.
 function Module.createSurfaceProperties(custom_props)
-    local properties = tableMerge(
+    local properties = mergeProperties(
         DEFAULT_PROPERTIES,
         custom_props or {}
     )
@@ -89,7 +78,7 @@ end
 local function createPreset(defaults)
     return function(overrides)
         return Module.createSurfaceProperties(
-            tableMerge(defaults, overrides or {})
+            mergeProperties(defaults, overrides or {})
         )
     end
 end

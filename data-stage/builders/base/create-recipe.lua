@@ -1,27 +1,25 @@
+local utils = require("shared.control-utils")
 local Module = {}
-local controlGetModPath = require("shared.control-get-mod-path")
 
+local function validateIngredientResults(list, label, name)
+    if not list then return end
+    for _, v in ipairs(list) do
+        if v.type ~= "item" and v.type ~= "fluid" then
+            error("Tipo de " .. label .. " inválido: '" .. tostring(v.type) .. "' em " .. name)
+        end
+    end
+end
 
 -- @param typeIcon {string} concatena pastas com base no tipo do item, ex "graphics/typeIcon/name.png"
-function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results,alternative_unlock_methods,enabled,pictures)
-    local path_main = controlGetModPath.getModPath()
-    for _, v in ipairs(ingredients) do
-        if v.type ~= "item" and v.type ~= "fluid" then
-            error("Tipo de ingrediente inválido: '" .. tostring(v.type) .. "' em " .. name)
-        end
-    end
-    for _, v in ipairs(results) do
-        if v.type ~= "item" and v.type ~= "fluid" then
-            error("Tipo de resultado inválido: '" .. tostring(v.type) .. "' em " .. name)
-        end
-    end
+function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, results, alternative_unlock_methods, enabled, pictures)
+    validateIngredientResults(ingredients, "ingrediente", name)
+    validateIngredientResults(results, "resultado", name)
 
-    -- cada tipo de receita tem sua pasta de icones ex: graphics/entities, graphics/itens, graphics/fluids, etc
-    local icon_path = path_main .. "graphics/" .. typeIcon .. "/" .. name .. ".png"
+    local icon_path = utils.resolveAssetPath(typeIcon, name)
 
     local item_data = {
         type = "recipe",
-        name =  name,
+        name = name,
         categories = {crafted_in},
         enabled = enabled or false,
         energy_required = time,
@@ -35,18 +33,7 @@ function Module.createRecipe(typeIcon, name, crafted_in, time, ingredients, resu
         alternative_unlock_methods = alternative_unlock_methods
     }
 
-    
-    -- 2. Adiciona 'pictures' e decide sobre 'icon_size'
-    if pictures and #pictures > 0 then
-        -- Se 'pictures' existe e tem elementos, adiciona 'pictures' e NÃO adiciona 'icon_size'
-        item_data.pictures = pictures
-        -- item_data.icon_size é omitido
-    else
-        -- Se 'pictures' é nulo, vazio ou não foi fornecido, adiciona 'icon_size'
-        item_data.icon_size = 128
-        -- item_data.pictures é omitido (ou será nil, mas Factorio prefere omitir)
-        item_data.pictures = nil -- Garante que a chave pictures não vá com nil se for o caso
-    end
+    utils.applyIconOrPictures(item_data, pictures, 128)
     return item_data
 end
 

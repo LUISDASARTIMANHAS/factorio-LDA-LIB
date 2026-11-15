@@ -35,6 +35,10 @@ Este documento detalha todos os utilitários compartilhados da **LDA-LIB** para 
    - [getSequentialAudioList](#getsequentialaudiolist)
    - [Sons Ambientes (CreateBaseAmbientSound, CreateInterludeAmbientSound, CreateMenuAmbientSound)](#sons-ambientes)
    - [Imagens e Sprites (getPicture, getSequentialPictureList)](#imagens-e-sprites)
+   - [resolveAssetPath](#resolveassetpath)
+   - [applyIconOrPictures](#applyiconorpictures)
+   - [isFactorioObjectValid](#isfactorioobjectvalid)
+   - [formatMetricUnit](#formatmetricunit)
 5. [Efeitos Ambientais In-Game (`LDA.utilsAmbientEffects`)](#5-efeitos-ambientais-in-game-ldautilsambienteffects)
    - [createExplosion](#createexplosion)
    - [createCrashFire](#createcrashfire)
@@ -221,6 +225,53 @@ local som_base = LDA.utils.CreateBaseAmbientSound("ambiente-nauvis", "main-track
 ```lua
 local picture = LDA.utils.getPicture("__meu-mod__/graphics/icons/cristal", 64, 0.5, 4)
 local pictures = LDA.utils.getSequentialPictureList("__meu-mod__/graphics/icons/cristal", 1, 4, 64, 0.5, 4)
+```
+
+### `resolveAssetPath`
+Gera de forma padronizada o caminho canônico do asset dentro do mod ativo:
+```lua
+local icon_path = LDA.resolveAssetPath("icons", "meu-item")
+-- Retorna: "__meu-mod__/graphics/icons/meu-item.png"
+
+local entity_path = LDA.resolveAssetPath("entities", "minha-maquina")
+-- Retorna: "__meu-mod__/graphics/entities/minha-maquina.png"
+```
+
+### `applyIconOrPictures`
+Aplica de forma mutuamente exclusiva `pictures` ou `icon_size` em tabelas de protótipos, evitando erros de esquema:
+```lua
+local proto = {type = "item", name = "cristal"}
+LDA.applyIconOrPictures(proto, nil, 128)
+-- proto.icon_size = 128, proto.pictures = nil
+
+local anim_pics = LDA.utils.getSequentialPictureList("__meu-mod__/graphics/icons/cristal", 1, 4, 64, 0.5, 4)
+LDA.applyIconOrPictures(proto, anim_pics)
+-- proto.pictures = anim_pics, proto.icon_size = nil
+```
+
+### `isFactorioObjectValid`
+Valida com proteção `pcall` objetos nativos do Factorio (userdata ou tabelas) verificando `.valid` (e opcionalmente `.valid_for_read`):
+```lua
+-- Validação geral de entidade/jogador/superfície
+if LDA.isFactorioObjectValid(entity) then
+    entity.health = 100
+end
+
+-- Validação de ItemStack para leitura
+if LDA.isFactorioObjectValid(item_stack, true) then
+    player.print("Item válido: " .. item_stack.name)
+end
+```
+
+### `formatMetricUnit`
+Formatação genérica de grandezas com escalas métricas (ex: J, W, Bytes, etc.):
+```lua
+local escalas_energia = {
+    {threshold = 1e6, suffix = "MJ"},
+    {threshold = 1e3, suffix = "kJ"}
+}
+local texto = LDA.formatMetricUnit(5200000, escalas_energia, "J", 1)
+-- Retorna: "5.2 MJ"
 ```
 
 ---

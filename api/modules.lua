@@ -8,6 +8,7 @@ return {
     ["data-stage.builders.base.autoplace-control"] = require("data-stage.builders.base.autoplace-control"),
     ["data-stage.builders.base.resource"] = require("data-stage.builders.base.resource"),
     ["data-stage.builders.base.create-ore"] = require("data-stage.builders.base.create-ore"),
+    ["data-stage.builders.base.create-ore-item"] = require("data-stage.builders.base.create-ore-item"),
     ["data-stage.builders.base.create-item-group"] = require("data-stage.builders.base.create-item-group"),
     ["data-stage.builders.base.create-item"] = require("data-stage.builders.base.create-item"),
     ["data-stage.builders.base.create-equipment-item"] = require("data-stage.builders.base.create-equipment-item"),

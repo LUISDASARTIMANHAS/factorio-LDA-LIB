@@ -1,6 +1,6 @@
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -20,7 +20,7 @@ d-----        24/10/2026     17:26                shared
 -a----        07/11/2026     13:07           4276 AGENTS.md                                                            
 -a----        31/12/2025     11:31           2381 autoupdate.cmd                                                       
 -a----        24/10/2026     20:51              0 bugs.txt                                                             
--a----        07/11/2026     12:37          14972 changelog.txt                                                        
+-a----        15/11/2026     17:03          15910 changelog.txt                                                        
 -a----        24/10/2026     15:35             23 control.lua                                                          
 -a----        24/10/2026     20:55            147 data.lua                                                             
 -a----        24/10/2026     17:12            110 exclusions.txt                                                       
@@ -29,18 +29,19 @@ d-----        24/10/2026     17:26                shared
 -a----        24/10/2026     15:37            315 init.lua                                                             
 -a----        24/10/2026     16:47        3166896 LDA-LIB_0.0.15.zip                                                   
 -a----        07/11/2026     12:15        3403312 LDA-LIB_0.0.16.zip                                                   
+-a----        07/11/2026     13:21        3418849 LDA-LIB_0.0.17.zip                                                   
 -a----        15/11/2025     11:06          35823 LICENSE                                                              
 -a----        24/10/2026     16:58           2239 migration.md                                                         
--a----        07/11/2026     13:09          14601 README.md                                                            
+-a----        15/11/2026     17:02          14837 README.md                                                            
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        24/10/2026     16:32             32 runtime.lua                                                          
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        07/11/2026     13:18            204 structure.txt                                                        
+-a----        15/11/2026     17:16              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
 -a----        07/11/2026     13:09           3187 USAGE.md                                                             
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\.vscode
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\.vscode
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -49,16 +50,16 @@ Mode                 LastWriteTime         Length Name
 -a----        07/11/2026     12:06            940 settings.json                                                        
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\api
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\api
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        05/11/2026     18:21           3850 modules.lua                                                          
--a----        05/11/2026     18:21           4779 registry.lua                                                         
+-a----        15/11/2026     17:01           3954 modules.lua                                                          
+-a----        15/11/2026     17:11           5901 registry.lua                                                         
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\audios
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\audios
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -67,97 +68,99 @@ Mode                 LastWriteTime         Length Name
 -a----        25/12/2025     17:24         241400 water.ogg                                                            
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        24/10/2026     19:21                addons                                                               
+d-----        15/11/2026     17:10                addons                                                               
 d-----        24/10/2026     15:55                builders                                                             
--a----        24/10/2026     20:40            200 init.lua                                                             
+-a----        15/11/2026     17:11            156 init.lua                                                             
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\addons
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\addons
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        24/10/2026     19:56          12948 desert-planet.lua                                                    
+-a----        15/11/2026     17:11           3102 desert-planet.lua                                                    
 -a----        24/10/2026     15:58           1744 items.lua                                                            
+-a----        15/11/2026     17:10           8295 ores.lua                                                             
 -a----        24/10/2026     15:58           9177 throw-in-water.lua                                                   
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        05/11/2026     18:20                base                                                                 
+d-----        15/11/2026     17:01                base                                                                 
 d-----        24/10/2026     15:55                composites                                                           
 d-----        24/10/2026     15:55                specialized                                                          
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders\base
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders\base
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        24/10/2026     15:56           1115 autoplace-control.lua                                                
 -a----        05/11/2026     18:25          10733 create-accumulator.lua                                               
--a----        24/10/2026     15:56           1740 create-block-item.lua                                                
+-a----        15/11/2026     17:07           1426 create-block-item.lua                                                
 -a----        24/10/2026     15:56           3904 create-entity.lua                                                    
--a----        24/10/2026     15:56           1417 create-equipment-item.lua                                            
--a----        24/10/2026     15:56           1141 create-fluid.lua                                                     
--a----        24/10/2026     15:56           1241 create-gas.lua                                                       
+-a----        15/11/2026     17:07            836 create-equipment-item.lua                                            
+-a----        15/11/2026     17:08           2605 create-fluid.lua                                                     
+-a----        15/11/2026     17:08            937 create-gas.lua                                                       
 -a----        24/10/2026     15:56           5960 create-item-group.lua                                                
 -a----        24/10/2026     15:56           1616 create-item-search.lua                                               
--a----        24/10/2026     15:56           3969 create-item.lua                                                      
--a----        24/10/2026     15:57           4022 create-ore.lua                                                       
+-a----        15/11/2026     17:07           3746 create-item.lua                                                      
+-a----        15/11/2026     17:09           3352 create-ore-item.lua                                                  
+-a----        15/11/2026     17:10           4560 create-ore.lua                                                       
 -a----        24/10/2026     19:23           6644 create-planet.lua                                                    
--a----        24/10/2026     15:56           2944 create-recipe.lua                                                    
+-a----        15/11/2026     17:07           2202 create-recipe.lua                                                    
 -a----        24/10/2026     20:14           3937 create-space-connection.lua                                          
--a----        24/10/2026     15:56           1957 create-technology-trigger.lua                                        
--a----        24/10/2026     15:56           2321 create-technology.lua                                                
+-a----        15/11/2026     17:10           3111 create-technology-trigger.lua                                        
+-a----        15/11/2026     17:10           2229 create-technology.lua                                                
 -a----        24/10/2026     15:56           2267 formatResultsList.lua                                                
--a----        24/10/2026     15:56          10253 resource.lua                                                         
+-a----        15/11/2026     17:12          10370 resource.lua                                                         
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders\composites
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders\composites
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        24/10/2026     15:57           2792 create-block-item-with-recipe.lua                                    
--a----        24/10/2026     15:57           2532 create-equipment-item-with-recipe.lua                                
--a----        24/10/2026     15:57           1349 create-fluid-with-recipe.lua                                         
+-a----        15/11/2026     17:08           2809 create-block-item-with-recipe.lua                                    
+-a----        15/11/2026     17:09           2543 create-equipment-item-with-recipe.lua                                
+-a----        15/11/2026     17:09           1359 create-fluid-with-recipe.lua                                         
 -a----        24/10/2026     15:57           2120 create-generic-recipe.lua                                            
--a----        24/10/2026     15:57           2679 create-item-with-recipe.lua                                          
+-a----        15/11/2026     17:08           4120 create-item-with-recipe.lua                                          
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders\specialized
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\builders\specialized
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        24/10/2026     15:57           4091 create-category-machines-item-with-recipe.lua                        
--a----        24/10/2026     15:57           1319 create-technology-trigger-craft-entity.lua                           
--a----        24/10/2026     15:57           1408 create-technology-trigger-mine-entity.lua                            
--a----        24/10/2026     15:57           2615 create-throw-in-water-item-with-recipe.lua                           
+-a----        15/11/2026     17:09           4163 create-category-machines-item-with-recipe.lua                        
+-a----        15/11/2026     17:10           1165 create-technology-trigger-craft-entity.lua                           
+-a----        15/11/2026     17:10           1254 create-technology-trigger-mine-entity.lua                            
+-a----        15/11/2026     17:09           2068 create-throw-in-water-item-with-recipe.lua                           
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 d-----        24/10/2026     17:12                factorio-docs                                                        
--a----        07/11/2026     13:08          13338 builders.md                                                          
+-a----        15/11/2026     17:16          17463 builders.md                                                          
 -a----        07/11/2026     13:18          11930 runtime.md                                                           
 -a----        07/11/2026     13:08           4136 space.md                                                             
--a----        07/11/2026     13:08           7900 utils.md                                                             
+-a----        15/11/2026     17:14           9706 utils.md                                                             
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -165,7 +168,7 @@ Mode                 LastWriteTime         Length Name
 d-----        24/10/2026     17:11                doc-html                                                             
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -193,7 +196,7 @@ d-----        24/10/2026     17:11                types
 -a----        24/10/2026     14:17         465780 types.html                                                           
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\auxiliary
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\auxiliary
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -214,7 +217,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     14:20          17151 storage.html                                                         
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\classes
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\classes
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -378,7 +381,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     14:19         167022 LuaWireConnector.html                                                
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\concepts
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\concepts
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -881,7 +884,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     14:20         136057 ZoomSpecification.html                                               
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\prototypes
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\prototypes
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -1167,7 +1170,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     14:17         318173 WallPrototype.html                                                   
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -1190,7 +1193,7 @@ d-----        24/10/2026     17:11                pagefind
 -a----        24/10/2026     14:22           8232 style_docs.css                                                       
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static\images
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static\images
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -1205,7 +1208,7 @@ Mode                 LastWriteTime         Length Name
 -a----        01/12/2024     16:03           1211 too-far-from-roboport-icon.png                                       
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static\pagefind
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static\pagefind
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -1226,7 +1229,7 @@ d-----        24/10/2026     17:11                index
 -a----        23/06/2026     12:06          68024 wasm.unknown.pagefind                                                
 
 
-    Diret贸rio: D:\Meus Projetos do 
+    Diretio: X:\Meus Projetos do 
     VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static\pagefind\fragment
 
 
@@ -2851,7 +2854,7 @@ Mode                 LastWriteTime         Length Name
 -a----        23/06/2026     12:05           1260 unknown_ffd3d46.pf_fragment                                          
 
 
-    Diret贸rio: D:\Meus Projetos do 
+    Diretio: X:\Meus Projetos do 
     VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\static\pagefind\index
 
 
@@ -2967,7 +2970,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     14:21          28786 unknown_ff892bb.pf_index                                             
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\types
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\docs\factorio-docs\doc-html\types
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3634,7 +3637,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     14:22         154327 WorldAmbientSoundDefinition.html                                     
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3644,7 +3647,7 @@ d-----        24/10/2026     20:47                icons
 d-----        24/10/2026     20:37                technology                                                           
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\entities
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\entities
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3652,7 +3655,7 @@ Mode                 LastWriteTime         Length Name
 -a----        29/12/2025     12:25          33580 throw-in-water.png                                                   
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\icons
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\icons
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3669,7 +3672,7 @@ d-----        24/10/2026     20:58                planets
 -a----        01/12/2024     16:00           8806 yumako-seed-x2.png                                                   
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\icons\planets
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\icons\planets
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3677,7 +3680,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     20:50          87039 desert-planet.png                                                    
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\technology
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\graphics\technology
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3685,7 +3688,7 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     20:50          87039 planet-discovery-desert-planet.png                                   
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\locale
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\locale
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3694,25 +3697,25 @@ d-----        31/12/2025     23:13                en-us
 d-----        31/12/2025     23:14                pt-BR                                                                
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\locale\en-us
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\locale\en-us
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        21/06/2026     10:23           1896 base.cfg                                                             
+-a----        15/11/2026     17:14           3850 base.cfg                                                             
 -a----        31/12/2025     23:13            227 settings.cfg                                                         
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\locale\pt-BR
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\locale\pt-BR
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        21/06/2026     10:25           2352 base.cfg                                                             
+-a----        15/11/2026     17:13           4588 base.cfg                                                             
 -a----        31/12/2025     23:14            225 settings.cfg                                                         
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\runtime
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\runtime
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3723,21 +3726,21 @@ d-----        07/11/2026     12:29                modules
 -a----        07/11/2026     12:29           3459 init.lua                                                             
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\runtime\modules
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\runtime\modules
 
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
--a----        07/11/2026     12:36           5627 entity.lua                                                           
+-a----        15/11/2026     17:06           5499 entity.lua                                                           
 -a----        07/11/2026     12:35           9116 equipment_grid.lua                                                   
--a----        07/11/2026     12:36          14597 gui.lua                                                              
--a----        07/11/2026     12:36           7290 item.lua                                                             
+-a----        15/11/2026     17:06          14083 gui.lua                                                              
+-a----        15/11/2026     17:06           7147 item.lua                                                             
 -a----        07/11/2026     12:36          14038 network.lua                                                          
--a----        07/11/2026     12:35           6648 player.lua                                                           
+-a----        15/11/2026     17:06           6337 player.lua                                                           
 -a----        07/11/2026     12:35           7212 world.lua                                                            
 
 
-    Diret贸rio: D:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\shared
+    Diretio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\shared
 
 
 Mode                 LastWriteTime         Length Name                                                                 
@@ -3746,9 +3749,9 @@ Mode                 LastWriteTime         Length Name
 -a----        24/10/2026     15:56          10423 control-animations.lua                                               
 -a----        24/10/2026     16:57          18128 control-energy-sources.lua                                           
 -a----        29/11/2025     09:25           1028 control-get-mod-path.lua                                             
--a----        21/06/2026     11:06          16453 control-utils.lua                                                    
+-a----        15/11/2026     17:05          20744 control-utils.lua                                                    
 -a----        24/10/2026     17:28           2986 planet-mapgen-util.lua                                               
--a----        24/10/2026     20:07           3875 planet-surface-properties.lua                                        
+-a----        15/11/2026     17:05           3761 planet-surface-properties.lua                                        
 -a----        05/01/2026     16:04           1098 tech-util.lua                                                        
 
 

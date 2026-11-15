@@ -1,101 +1,113 @@
 local Module = {}
-local item_sounds = require("__base__.prototypes.item_sounds")
 local controlGetModPath = require("shared.control-get-mod-path")
-local utils = require("shared.control-utils")
+local controlOreItem = require("data-stage.builders.base.create-ore-item")
 local controlAutoplace = require("data-stage.builders.base.autoplace-control")
 local controlResource = require("data-stage.builders.base.resource")
 
--- graphics/icons - icones de itens
+--- Cria o conjunto completo de protótipos para um minério: Item, AutoplaceControl e ResourceEntity.
+-- Suporta chamada posicional clássica ou tabela de opções detalhadas.
+-- @param name (string|table) Nome base do minério ou tabela com todas as opções.
+-- @param stack_size (number, optional) Tamanho da pilha do item (padrão: 100).
+-- @param fuel_category (string|table, optional) Categoria(s) de combustível ("chemical" ou {"chemical"}).
+-- @param fuel_value (string, optional) Valor de combustível (ex: "2MJ").
+-- @param order (string, optional) Ordem do protótipo no inventário e geração.
+-- @return (table) Array de protótipos Factorio: { ItemPrototype, AutoplaceControl, ResourceEntity }
+function Module.createOre(name, stack_size, fuel_category, fuel_value, order)
+    local opts = {}
+    if type(name) == "table" then
+        opts = name
+        name = opts.name
+        stack_size = opts.stack_size
+        fuel_category = opts.fuel_categories or opts.fuel_category
+        fuel_value = opts.fuel_value
+        order = opts.order
+    end
 
-function Module.createOre(name, stack_size, fuel_category, fuel_value,order)
-    local path_main = controlGetModPath.getModPath()
-    local icon_path = path_main .. "graphics/icons/" .. name .. "-ore"
-    return {
-        -- Ore Item
-        {
-            type = "item",
-            name = name .. "-ore",
-            icon = icon_path .. ".png",
-            icon_size = 128,
-            pictures = utils.getSequentialPictureList(icon_path, 1, 4, 64, 0.5, 4),
-            fuel_category = fuel_category or nil,
-            -- "4MJ"
-            fuel_value = fuel_value or nil,
-            subgroup = "raw-resource",
-            color_hint = {text = "I"},
-            order = "e[" .. name .. "-ore" .. "]",
-            inventory_move_sound = item_sounds.resource_inventory_move,
-            pick_sound = item_sounds.resource_inventory_pickup,
-            drop_sound = item_sounds.resource_inventory_move,
-            stack_size = stack_size or 100,
-            weight = stack_size / 2
-        },
-        -- Autoplace Control for Map Generation Menu
-        controlAutoplace.createAutoplaceControl(name, "a-d", nil, 128),
-        -- Resource Definition
-        controlResource.createResource(
-            name,
-            order or name,
-            -- particleName
-            nil,
-            -- resource_parameters
+    if not name or type(name) ~= "string" then
+        error("LDA.createOre: 'name' é obrigatório e deve ser uma string.")
+    end
+
+    -- 1. Cria o Item do minério através do módulo atômico
+    local item_prototype = controlOreItem.createOreItem(
+        name,
+        stack_size,
+        fuel_category,
+        fuel_value,
+        opts.item_options or opts
+    )
+
+    -- 2. Autoplace Control para menu de geração de mapa
+    local autoplace_order = opts.autoplace_order or order or "a-d"
+    local autoplace_control = controlAutoplace.createAutoplaceControl(
+        name,
+        autoplace_order,
+        opts.autoplace_tint,
+        opts.autoplace_icon_size or opts.icon_size or 128,
+        opts.autoplace_icon_mipmaps
+    )
+    if opts.autoplace_icons or opts.icons then
+        autoplace_control.icons = opts.autoplace_icons or opts.icons
+    elseif opts.autoplace_icon or opts.icon then
+        autoplace_control.icons = {
             {
-                order = order or name,
-                map_color = {0.415, 0.525, 0.580},
-                mining_visualisation_tint = {r = 0.895, g = 0.965, b = 1.000, a = 1.000} -- #e4f6ffff
-            },
-            -- autoplace_parameters
-            {
-                base_density = 10,
-                regular_rq_factor_multiplier = 1.10,
-                starting_rq_factor_multiplier = 1.5,
-                candidate_spot_count = 22 -- To match 0.17.50 placement
+                icon = opts.autoplace_icon or opts.icon,
+                icon_size = opts.autoplace_icon_size or opts.icon_size or 64,
+                tint = opts.autoplace_tint
             }
-        )
+        }
+    end
+
+    -- 3. Definição da Entidade de Recurso no mapa
+    local res_order = order or opts.order or name
+    local resource_parameters = opts.resource_parameters or {
+        order = res_order,
+        map_color = opts.map_color or {0.415, 0.525, 0.580},
+        mining_visualisation_tint = opts.mining_visualisation_tint or {r = 0.895, g = 0.965, b = 1.000, a = 1.000},
+        mining_time = opts.mining_time or 1,
+        category = opts.category,
+        subgroup = opts.subgroup,
+        walking_sound = opts.walking_sound,
+        driving_sound = opts.driving_sound,
+        collision_mask = opts.collision_mask,
+        icon = opts.resource_icon or opts.icon,
+        icons = opts.resource_icons or opts.icons,
+        icon_size = opts.resource_icon_size or opts.icon_size or 128
+    }
+    if not resource_parameters.order then
+        resource_parameters.order = res_order
+    end
+    if resource_parameters.icon == nil and opts.icon ~= nil then
+        resource_parameters.icon = opts.icon
+    end
+    if resource_parameters.icons == nil and opts.icons ~= nil then
+        resource_parameters.icons = opts.icons
+    end
+
+    local autoplace_parameters = opts.autoplace_parameters or {
+        base_density = opts.base_density or 10,
+        regular_rq_factor_multiplier = opts.regular_rq_factor_multiplier or 1.10,
+        starting_rq_factor_multiplier = opts.starting_rq_factor_multiplier or 1.5,
+        candidate_spot_count = opts.candidate_spot_count or 22,
+        base_spots_per_km2 = opts.base_spots_per_km2,
+        tile_restriction = opts.tile_restriction
+    }
+
+    local resource_entity = controlResource.createResource(
+        name,
+        res_order,
+        opts.particle_name or opts.mining_particle,
+        resource_parameters,
+        autoplace_parameters
+    )
+
+    return {
+        item_prototype,
+        autoplace_control,
+        resource_entity
     }
 end
--- by factorio 
--- resource(
---     {
---       name = "iron-ore",
---       order = "b",
---       map_color = {0.415, 0.525, 0.580},
---       mining_time = 1,
---       walking_sound = tile_sounds.walking.ore,
---       driving_sound = tile_sounds.driving.stone,
---       mining_visualisation_tint = {r = 0.895, g = 0.965, b = 1.000, a = 1.000}, -- #e4f6ffff
---       factoriopedia_simulation = simulations.factoriopedia_iron_ore,
---     },
---     {
---       base_density = 10,
---       regular_rq_factor_multiplier = 1.10,
---       starting_rq_factor_multiplier = 1.5,
---       candidate_spot_count = 22, -- To match 0.17.50 placement
---     }
---   )
 
--- example
--- {
---     type = "item",
---     name = "coal",
---     icon = "__base__/graphics/icons/coal.png",
---     dark_background_icon = "__base__/graphics/icons/coal-dark-background.png",
---     pictures =
---     {
---       {size = 64, filename = "__base__/graphics/icons/coal.png", scale = 0.5, mipmap_count = 4},
---       {size = 64, filename = "__base__/graphics/icons/coal-1.png", scale = 0.5, mipmap_count = 4},
---       {size = 64, filename = "__base__/graphics/icons/coal-2.png", scale = 0.5, mipmap_count = 4},
---       {size = 64, filename = "__base__/graphics/icons/coal-3.png", scale = 0.5, mipmap_count = 4}
---     },
---     fuel_category = "chemical",
---     fuel_value = "4MJ",
---     subgroup = "raw-resource",
---     order = "b[coal]",
---     inventory_move_sound = item_sounds.resource_inventory_move,
---     pick_sound = item_sounds.resource_inventory_pickup,
---     drop_sound = item_sounds.resource_inventory_move,
---     stack_size = 50,
---     weight = 2 * kg,
---     random_tint_color = item_tints.yellowing_coal
---   },
+-- Exporta também a função createOreItem diretamente neste módulo
+Module.createOreItem = controlOreItem.createOreItem
+
 return Module

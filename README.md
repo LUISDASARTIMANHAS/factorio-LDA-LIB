@@ -96,7 +96,8 @@ LDA.setBasePath('Seu-Mod-Nome')
 | :--- | :--- |
 | `LDA.createAutoplaceControl` | Cria controles de autoplace para geração de recursos no mapa. |
 | `LDA.createResource` | Cria a entidade de recurso (o minério físico no chão). |
-| `LDA.createOre` | Cria o item do minério (adiciona automaticamente o prefixo `-ore`). |
+| `LDA.createOreItem` | Cria o protótipo isolado do item do minério (`type = "item"`, prefixo `-ore`). |
+| `LDA.createOre` | Cria o conjunto completo do minério (item, autoplace control e entidade física). |
 | `LDA.createItem` | Cria um item simples com sons e ícone. |
 | `LDA.createBlockItem` | Cria itens do tipo bloco estrutural. |
 | `LDA.createEquipmentItem` | Cria itens do tipo equipamento (colocáveis em grids). |
@@ -192,7 +193,8 @@ LDA.setBasePath('Seu-Mod-Nome')
 ### Recursos e Itens
 - `LDA.createAutoplaceControl(name, order, tint, icon_size, icon_mipmaps)`
 - `LDA.createResource(name, order, particleName, resource_parameters, autoplace_parameters)`
-- `LDA.createOre(name, stack_size, fuel_category, fuel_value)`
+- `LDA.createOreItem(name, stack_size, fuel_categories, fuel_value, options)`
+- `LDA.createOre(name, stack_size, fuel_categories, fuel_value, order)` (ou via tabela de opções)
 - `LDA.createItem(name, subgroup, stack_size, pictures)`
 - `LDA.createBlockItem(name, subgroup, stack_size)`
 - `LDA.createEquipmentItem(name, subgroup, weight)`

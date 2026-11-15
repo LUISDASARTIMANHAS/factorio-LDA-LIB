@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.18
+Date: 15/11/2026
+  features:
+    - Adicionado builder atômico `LDA.createOreItem` (data-stage/builders/base/create-ore-item.lua) para criação isolada de protótipos de item de minério com suporte a fuel_categories, peso e opções avançadas, desacoplando o item de minério da entidade física.
+    - Modularizado o agregador `LDA.createOre` (data-stage/builders/base/create-ore.lua) para compor `createOreItem`, `createAutoplaceControl` e `createResource`, mantendo retrocompatibilidade posicional e adicionando suporte a chamadas via tabela de opções completas (customização de map_color, mining_time, densidade, etc.).
+  bugfixes:
+    - Corrigido construtor de minério `createOre` (data-stage/builders/base/create-ore.lua): migrado de `fuel_category` para `fuel_categories` em conformidade com as especificações do Factorio 2.0+ / 2.1+, aceitando tanto string única quanto tabela de categorias e garantindo fallback seguro de stack_size para cálculo de peso.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.17
 Date: 07/11/2026
   features:

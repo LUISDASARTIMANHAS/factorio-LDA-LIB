@@ -1,3 +1,5 @@
+local controlUtils = require("shared.control-utils")
+local WorldUtils = require("runtime.modules.world")
 local PlayerUtils = {}
 
 --- Obtém e valida uma referência de jogador por índice, nome ou objeto LuaPlayer.
@@ -9,12 +11,8 @@ function PlayerUtils.get(player_or_id)
     local p = nil
     if type(player_or_id) == "number" or type(player_or_id) == "string" then
         p = game and game.get_player(player_or_id)
-    else
-        -- Aceita diretamente objetos Factorio LuaPlayer (userdata) com .valid
-        local ok, is_valid = pcall(function() return player_or_id.valid end)
-        if ok and is_valid then
-            p = player_or_id
-        end
+    elseif controlUtils.isFactorioObjectValid(player_or_id) then
+        p = player_or_id
     end
     return (p and p.valid) and p or nil
 end
@@ -23,11 +21,7 @@ end
 --- @param player LuaPlayer
 --- @return boolean
 function PlayerUtils.isValid(player)
-    if not player or type(player) == "number" or type(player) == "string" or type(player) == "boolean" then
-        return false
-    end
-    local ok, valid = pcall(function() return player.valid end)
-    return ok and (valid == true)
+    return controlUtils.isFactorioObjectValid(player)
 end
 
 --- Obtém a entidade Character do jogador se estiver vivo.
@@ -62,9 +56,7 @@ end
 function PlayerUtils.getGps(player)
     local p = PlayerUtils.get(player)
     if not p or not p.surface then return "" end
-    local pos = p.position
-    local surface_name = p.surface.name
-    return string.format("[gps=%.1f,%.1f,%s]", pos.x, pos.y, surface_name)
+    return WorldUtils.formatGps(p.position, p.surface)
 end
 
 --- Obtém a quantidade total de um item que o jogador possui no inventário principal.

@@ -1,28 +1,58 @@
-local controlGetModPath = require("shared.control-get-mod-path")
 local techUtil = require("shared.tech-util")
+local utils = require("shared.control-utils")
 
 local Module = {}
--- graphics/technology - icones de pesquisa
 
--- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").
--- @param unlocksList lista de receitas a desbloquear tecnologia (ex: ["processor"]).
--- @param prerequisites tabela de pre requisitos necessarios para pesquisar essa pesquisa (ex: "tech-dyston-sphere-program").
+--- Constrói uma tecnologia acionada por gatilho (research_trigger).
+--- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").
+--- @param unlocksList table Lista de receitas a desbloquear pela tecnologia.
+--- @param prerequisitesList table Lista de pré-requisitos necessários.
+--- @param research_trigger table Definição do trigger do Factorio.
+--- @return table Protótipo de Technology
 function Module.createTechnologyTrigger(name, unlocksList, prerequisitesList, research_trigger)
-    local path_main = controlGetModPath.getModPath()
+    local icon_path = utils.resolveAssetPath("technology", name .. "-256x256")
 
-    local technologyTrigger ={
+    local technologyTrigger = {
         type = "technology",
         name = name,
-        icon = path_main .. "graphics/technology/" .. name .. "-256x256.png",
+        icon = icon_path,
         icon_size = 256,
         icon_mipmaps = 4,
         prerequisites = prerequisitesList,
         effects = techUtil.createEffectsUnlocksRecipes(unlocksList),
-        -- so e permitido 1 trigger
         research_trigger = research_trigger,
         order = "a-b-" .. name
     }
     return technologyTrigger
+end
+
+--- Constrói uma tecnologia acionada por gatilho genérico com tipo e payload customizáveis.
+---
+--- Usage:
+--- ```lua
+--- local tech = LDA.createTechnologyTypedTrigger(
+---     "steel-axe",
+---     {"steel-axe"},
+---     {"steel-processing"},
+---     "craft-item",
+---     {item = "steel-plate", count = 50}
+--- )
+--- ```
+---
+--- @param name string Nome da tecnologia
+--- @param unlocksList table Lista de receitas a desbloquear
+--- @param prerequisitesList table Lista de pré-requisitos
+--- @param trigger_type string Tipo de gatilho (ex: "craft-item", "mine-entity", "send-item-to-orbit")
+--- @param trigger_payload table|nil Campos adicionais do gatilho (ex: item, count, entity, etc.)
+--- @return table Protótipo de Technology
+function Module.createTechnologyTypedTrigger(name, unlocksList, prerequisitesList, trigger_type, trigger_payload)
+    local trigger = {type = trigger_type}
+    if type(trigger_payload) == "table" then
+        for k, v in pairs(trigger_payload) do
+            trigger[k] = v
+        end
+    end
+    return Module.createTechnologyTrigger(name, unlocksList, prerequisitesList, trigger)
 end
 
 -- example

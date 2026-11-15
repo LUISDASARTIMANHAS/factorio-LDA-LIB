@@ -1,8 +1,6 @@
-local controlGetModPath = require("shared.control-get-mod-path")
 local techUtil = require("shared.tech-util")
+local utils = require("shared.control-utils")
 local Module = {}
--- graphics/technology - icones de pesquisa
-
 
 -- @param name string O nome da tecnologia (ex: "sphere-program", "electromagnetism").
 -- @param ingredients tabela de pacotes cientificos necessarios para a pesquisa (ex: "energy-matrix").
@@ -16,12 +14,12 @@ function Module.createTechnology(
     time,
     pack_count,
     isUpgrade)
-    local path_main = controlGetModPath.getModPath()
+    local icon_path = utils.resolveAssetPath("technology", name .. "-256x256")
 
     local technology = {
         type = "technology",
         name = name,
-        icon = path_main .. "graphics/technology/" .. name .. "-256x256.png",
+        icon = icon_path,
         icon_size = 256,
         icon_mipmaps = 4,
         prerequisites = prerequisitesList,

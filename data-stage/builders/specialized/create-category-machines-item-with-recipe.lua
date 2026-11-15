@@ -1,49 +1,65 @@
 local createItemWithRecipe = require("data-stage.builders.composites.create-item-with-recipe")
--- category = "science-matrices" feito em Matrix Lab
--- category = "advanced-crafting" maquinas de montagem tier 2 e 3
--- category = "basic-crafting" maquinas de montagem tier 1
--- category = "crafting" feito a mão
--- category = "smelting" feito em fornalhas
--- category = "centrifuging" feito na centrifuge
--- category = "organic" feito na Biochamber
--- category = "chemistry" feito na Chemical plant
 
 local Module = {}
 
--- metodo padrão pra adicionar a receita uma maquina que constroi baseado na category, por exemplo: uma maquina de montagem tier 1 que resulta em um item, a receita dessa maquina tem que ser feita na category "basic-crafting", e assim por diante.
-local function constructor(name, time, qtde, ingredients, stack_size,crafted_in,alternative_unlock_methods,isEnabled)
+--- Construtor genérico para itens e receitas voltados a categorias de máquinas específicas.
+--- Cria automaticamente o par item + receita na categoria desejada.
+---
+--- Usage:
+--- ```lua
+--- local pair = LDA.createCategoryMachineItemWithRecipe(
+---     "advanced-crafting",
+---     "electronic-component",
+---     2, 1,
+---     { {type = "item", name = "copper-cable", amount = 3} },
+---     100
+--- )
+--- ```
+---
+--- @param category string Categoria de crafting (ex: "advanced-crafting", "chemistry", "organic", "smelting")
+--- @param name string Nome do item e da receita
+--- @param time number Tempo de fabricação
+--- @param qtde number Quantidade produzida
+--- @param ingredients table Lista de ingredientes
+--- @param stack_size number|nil Tamanho do stack (padrão: 100)
+--- @param alternative_unlock_methods table|nil Tecnologias alternativas
+--- @param isEnabled boolean|nil Habilitado inicialmente
+--- @return table Array {item, recipe}
+function Module.createCategoryMachineItemWithRecipe(category, name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
     local results = {
         {type = "item", name = name, amount = qtde}
     }
-    local crafted_in_Resolved = crafted_in or "basic-crafting"
+    local crafted_in = category or "basic-crafting"
     local subgroup = "intermediate-product"
     local size = stack_size or 100
 
-    local itemAndRecipe =
-        createItemWithRecipe.createItemWithRecipe(name,subgroup, size, crafted_in_Resolved, time, ingredients, results,alternative_unlock_methods,isEnabled)
-
-    return itemAndRecipe
+    return createItemWithRecipe.createItemWithRecipe(
+        name,
+        subgroup,
+        size,
+        crafted_in,
+        time,
+        ingredients,
+        results,
+        alternative_unlock_methods,
+        isEnabled
+    )
 end
 
--- metodos filhos que ja tem a category pre-definida, pra facilitar a criação de itens com receita para maquinas especificas, por exemplo: uma maquina de montagem tier 1 que resulta em um item, a receita dessa maquina tem que ser feita na category "advanced-crafting", e assim por diante.
-function Module.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size,alternative_unlock_methods,isEnabled)
-    local crafted_in = "advanced-crafting"
-    return constructor(name, time, qtde, ingredients, stack_size,crafted_in,alternative_unlock_methods,isEnabled)
+function Module.createAssemblerItemWithRecipe(name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
+    return Module.createCategoryMachineItemWithRecipe("advanced-crafting", name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
 end
 
-function Module.createChemicalPlantItemWithRecipe(name, time, qtde, ingredients, stack_size,alternative_unlock_methods,isEnabled)
-    local crafted_in = "chemistry"
-    return constructor(name, time, qtde, ingredients, stack_size,crafted_in,alternative_unlock_methods,isEnabled)
+function Module.createChemicalPlantItemWithRecipe(name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
+    return Module.createCategoryMachineItemWithRecipe("chemistry", name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
 end
 
-function Module.createBiochamberItemWithRecipe(name, time, qtde, ingredients, stack_size,alternative_unlock_methods,isEnabled)
-    local crafted_in = "organic"
-    return constructor(name, time, qtde, ingredients, stack_size,crafted_in,alternative_unlock_methods,isEnabled)
+function Module.createBiochamberItemWithRecipe(name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
+    return Module.createCategoryMachineItemWithRecipe("organic", name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
 end
 
-function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients, stack_size,alternative_unlock_methods,isEnabled)
-    local crafted_in = "smelting"
-    return constructor(name, time, qtde, ingredients, stack_size,crafted_in,alternative_unlock_methods,isEnabled)
+function Module.createSmeltingItemWithRecipe(name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
+    return Module.createCategoryMachineItemWithRecipe("smelting", name, time, qtde, ingredients, stack_size, alternative_unlock_methods, isEnabled)
 end
 
 

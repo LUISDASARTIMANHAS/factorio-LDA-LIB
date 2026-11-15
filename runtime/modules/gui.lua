@@ -1,53 +1,39 @@
+local controlUtils = require("shared.control-utils")
 local GuiUtils = {}
 
+local ENERGY_SCALES = {
+    {threshold = 1e15, suffix = "PJ"},
+    {threshold = 1e12, suffix = "TJ"},
+    {threshold = 1e9, suffix = "GJ"},
+    {threshold = 1e6, suffix = "MJ"},
+    {threshold = 1e3, suffix = "kJ"}
+}
+
+local POWER_SCALES = {
+    {threshold = 1e12, suffix = "TW"},
+    {threshold = 1e9, suffix = "GW"},
+    {threshold = 1e6, suffix = "MW"},
+    {threshold = 1e3, suffix = "kW"}
+}
+
 --- Formata um valor em Joules para uma string legível com unidade apropriada (J, kJ, MJ, GJ, TJ, PJ).
+--- Utiliza a função utilitária genérica de escala métrica.
 ---
 --- @param joules number Quantidade de energia em Joules
 --- @param decimals number|nil Número de casas decimais (padrão: 1)
 --- @return string Ex: "5.2 MJ", "300.0 kJ"
 function GuiUtils.formatEnergy(joules, decimals)
-    if not joules or type(joules) ~= "number" then return "0 J" end
-    local dec = decimals or 1
-    local fmt = "%." .. tostring(dec) .. "f %s"
-
-    local abs_j = math.abs(joules)
-    if abs_j >= 1e15 then
-        return string.format(fmt, joules / 1e15, "PJ")
-    elseif abs_j >= 1e12 then
-        return string.format(fmt, joules / 1e12, "TJ")
-    elseif abs_j >= 1e9 then
-        return string.format(fmt, joules / 1e9, "GJ")
-    elseif abs_j >= 1e6 then
-        return string.format(fmt, joules / 1e6, "MJ")
-    elseif abs_j >= 1e3 then
-        return string.format(fmt, joules / 1e3, "kJ")
-    else
-        return string.format("%d J", math.floor(joules))
-    end
+    return controlUtils.formatMetricUnit(joules, ENERGY_SCALES, "J", decimals)
 end
 
 --- Formata um valor em Watts para uma string legível de potência (W, kW, MW, GW, TW).
+--- Utiliza a função utilitária genérica de escala métrica.
 ---
 --- @param watts number Potência em Watts
 --- @param decimals number|nil Número de casas decimais (padrão: 1)
 --- @return string Ex: "500.0 kW", "10.5 MW"
 function GuiUtils.formatPower(watts, decimals)
-    if not watts or type(watts) ~= "number" then return "0 W" end
-    local dec = decimals or 1
-    local fmt = "%." .. tostring(dec) .. "f %s"
-
-    local abs_w = math.abs(watts)
-    if abs_w >= 1e12 then
-        return string.format(fmt, watts / 1e12, "TW")
-    elseif abs_w >= 1e9 then
-        return string.format(fmt, watts / 1e9, "GW")
-    elseif abs_w >= 1e6 then
-        return string.format(fmt, watts / 1e6, "MW")
-    elseif abs_w >= 1e3 then
-        return string.format(fmt, watts / 1e3, "kW")
-    else
-        return string.format("%d W", math.floor(watts))
-    end
+    return controlUtils.formatMetricUnit(watts, POWER_SCALES, "W", decimals)
 end
 
 --- Busca recursiva segura de um elemento de GUI por nome dentro de uma hierarquia de containers.
