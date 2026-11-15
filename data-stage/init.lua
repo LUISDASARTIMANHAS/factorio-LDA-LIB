@@ -1,4 +1,5 @@
 require("data-stage.addons.throw-in-water")
 require("data-stage.addons.items")
 require("data-stage.addons.desert-planet")
+require("data-stage.addons.gold")
 require("data-stage.addons.ores")

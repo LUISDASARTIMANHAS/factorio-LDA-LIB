@@ -21,9 +21,8 @@ local function makeOreIcon(tint, base_icon)
     }
 end
 
--- ══════════════════════════════════════════════════════════════════════════════════
 -- 1. BAUXITA (Minério principal de Alumínio)
--- ══════════════════════════════════════════════════════════════════════════════════
+
 -- Bauxita: Rocha sedimentar rica em hidróxidos de alumínio e óxidos de ferro (tom terracota).
 local bauxite_tint = {r = 0.85, g = 0.45, b = 0.25, a = 1.0}
 data:extend(
@@ -41,9 +40,7 @@ data:extend(
     })
 )
 
--- ══════════════════════════════════════════════════════════════════════════════════
 -- 2. FAMÍLIA DO LÍTIO (Lithium)
--- ══════════════════════════════════════════════════════════════════════════════════
 
 -- Recurso Primário no Terreno: Espodumênio (Principal fonte de lítio no Brasil - Vale do Jequitinhonha/MG)
 local spodumene_tint = {r = 0.80, g = 0.92, b = 0.85, a = 1.0}
@@ -121,9 +118,7 @@ data:extend({
     })
 })
 
--- ══════════════════════════════════════════════════════════════════════════════════
 -- 3. FAMÍLIA DO ZINCO (Zinc)
--- ══════════════════════════════════════════════════════════════════════════════════
 
 -- Recurso Primário no Terreno: Esfalerita / Blenda (ZnS - Sulfeto de zinco, principal minério no mundo)
 local sphalerite_tint = {r = 0.45, g = 0.35, b = 0.25, a = 1.0}

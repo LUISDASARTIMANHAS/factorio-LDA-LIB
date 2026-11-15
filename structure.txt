@@ -20,23 +20,24 @@ d-----        24/10/2026     17:26                shared
 -a----        07/11/2026     13:07           4276 AGENTS.md                                                            
 -a----        31/12/2025     11:31           2381 autoupdate.cmd                                                       
 -a----        24/10/2026     20:51              0 bugs.txt                                                             
--a----        15/11/2026     17:03          15910 changelog.txt                                                        
+-a----        15/11/2026     17:20          16072 changelog.txt                                                        
 -a----        24/10/2026     15:35             23 control.lua                                                          
 -a----        24/10/2026     20:55            147 data.lua                                                             
 -a----        24/10/2026     17:12            110 exclusions.txt                                                       
 -a----        15/11/2025     11:56            128 generate-structure.cmd                                               
--a----        07/11/2026     12:16            571 info.json                                                            
+-a----        15/11/2026     17:18            571 info.json                                                            
 -a----        24/10/2026     15:37            315 init.lua                                                             
 -a----        24/10/2026     16:47        3166896 LDA-LIB_0.0.15.zip                                                   
 -a----        07/11/2026     12:15        3403312 LDA-LIB_0.0.16.zip                                                   
--a----        07/11/2026     13:21        3418849 LDA-LIB_0.0.17.zip                                                   
+-a----        15/11/2026     17:18        3418849 LDA-LIB_0.0.17.zip                                                   
+-a----        15/11/2026     17:22        3426259 LDA-LIB_0.0.18.zip                                                   
 -a----        15/11/2025     11:06          35823 LICENSE                                                              
 -a----        24/10/2026     16:58           2239 migration.md                                                         
 -a----        15/11/2026     17:02          14837 README.md                                                            
 -a----        15/11/2025     11:06            120 renovate.json                                                        
 -a----        24/10/2026     16:32             32 runtime.lua                                                          
 -a----        15/11/2025     11:42            437 settings.lua                                                         
--a----        15/11/2026     17:16              0 structure.txt                                                        
+-a----        15/11/2026     18:00              0 structure.txt                                                        
 -a----        15/11/2025     11:50        1789684 thumbnail.png                                                        
 -a----        07/11/2026     13:09           3187 USAGE.md                                                             
 
@@ -73,9 +74,9 @@ Mode                 LastWriteTime         Length Name
 
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        15/11/2026     17:10                addons                                                               
+d-----        15/11/2026     17:59                addons                                                               
 d-----        24/10/2026     15:55                builders                                                             
--a----        15/11/2026     17:11            156 init.lua                                                             
+-a----        15/11/2026     18:00            190 init.lua                                                             
 
 
     Diret¢rio: X:\Meus Projetos do VSCode\Factorio-mods\factorio-LDA-LIB\data-stage\addons
@@ -84,8 +85,9 @@ d-----        24/10/2026     15:55                builders
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
 -a----        15/11/2026     17:11           3102 desert-planet.lua                                                    
+-a----        15/11/2026     17:59           5002 gold.lua.lua                                                         
 -a----        24/10/2026     15:58           1744 items.lua                                                            
--a----        15/11/2026     17:10           8295 ores.lua                                                             
+-a----        15/11/2026     17:46           6796 ores.lua                                                             
 -a----        24/10/2026     15:58           9177 throw-in-water.lua                                                   
 
 
