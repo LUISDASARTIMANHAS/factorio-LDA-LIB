@@ -8,10 +8,14 @@
 ## Arquitetura
 
 - `data.lua` delega a carga de conteúdo para `data-stage/init.lua`; os add-ons concretos ficam em `data-stage/addons/`.
-- `data-stage/builders/` contém os construtores de protótipos encapsulados:
-  - `base/`: construtores individuais de protótipos (itens, fluidos, entidades, receitas base, tecnologias).
-  - `composites/`: combina construtores (item + receita, fluido + receita, bloco + receita, etc.).
-  - `specialized/`: construtores especializados (máquinas categorizadas, triggers de tecnologia, jogar na água).
+- `data-stage/builders/` contém os construtores de protótipos encapsulados e organizados por domínio com herança explícita:
+  - `items/`: `base.lua` (ItemPrototype base) e especializados (`item`, `ore-item`, `block-item`, `equipment-item`, `item-group`, `item-search`).
+  - `fluids/`: `base.lua` (FluidPrototype base) e especializados (`fluid`, `gas`).
+  - `entities/`: `base.lua` (EntityPrototype base) e especializados (`entity`, `accumulator`).
+  - `technologies/`: `base.lua` (TechnologyPrototype base), `technology`, `trigger`, e triggers especializados (`trigger-craft`, `trigger-mine`).
+  - `recipes/`: `base.lua` (RecipePrototype base), `recipe` e `format-results`.
+  - `composites/`: `base.lua` (Composite base) e combinações (`item-with-recipe`, `block-item-with-recipe`, `equipment-item-with-recipe`, `fluid-with-recipe`, `generic-recipe`, `category-machines`, `throw-in-water`).
+  - `world/`: recursos e ambiente (`autoplace-control`, `resource`, `ore`, `planet`, `space-connection`).
 - `shared/`: utilitários compartilhados de assets, animação, energia, efeitos ambientais, caminhos e tecnologias.
 - `runtime/`: registro de funções e comandos no estágio de controle; `control.lua` delega para `runtime/init.lua`.
 - `api/registry.lua` e `api/modules.lua`: registro canônico e catálogo central de funções públicas montadas por [init.lua](init.lua).
@@ -25,7 +29,7 @@
 - Funções de criação normalmente devem retornar tabelas de protótipos; o consumidor decide quando chamar `data:extend(...)`.
 - Use `require` explícito e referencie caminhos canônicos (`data-stage.builders.*`, `shared.*`). Novos módulos devem ser colocados em seus respectivos componentes encapsulados.
 - **Evite código repetido**: não duplique lógica. Quando um comportamento começar a se repetir, extraia-o para uma função genérica reutilizável, parametrizando as diferenças entre os casos para reduzir erros e facilitar a manutenção.
-- **Priorize herança para reutilização**: use herança sempre que apropriado para que construtores especializados reutilizem a implementação dos construtores base e implementem apenas o que for específico. Por exemplo, `create-item-ore` deve herdar de `create-item-base` e reutilizar suas funções.
+- **Priorize herança para reutilização**: use herança sempre que apropriado para que construtores especializados reutilizem a implementação dos construtores base e implementem apenas o que for específico. Por exemplo, `items/ore-item.lua` herda de `items/base.lua`, `entities/accumulator.lua` herda de `entities/base.lua`, e `technologies/trigger.lua` herda de `technologies/base.lua`.
 - Ao adicionar ou alterar uma função pública, registre-a em `api/registry.lua` e `api/modules.lua`.
 - **Exemplos obrigatórios**: Toda função pública ou documentada deve obrigatoriamente possuir pelo menos 1 exemplo prático e funcional de uso (tanto em documentações quanto nos testes/guias).
 - **Modularização da documentação (`docs/`)**: Para reduzir a complexidade e evitar sobrecarga em um único arquivo, é obrigatório modularizar a documentação em múltiplos arquivos `.md` dentro do diretório `docs/` organizados por domínio (ex: `docs/builders.md`, `docs/runtime.md`, `docs/utils.md`, `docs/space.md`, etc.), mantendo `USAGE.md` como índice principal/sumário rápido de navegação.

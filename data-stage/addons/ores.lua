@@ -5,8 +5,8 @@
 -- 2. Família do Lítio (Espodumênio, Lepidolita, Petalita, Ambligonita, Montebrasita)
 -- 3. Família do Zinco (Esfalerita, Smithsonita, Hemimorfita, Willemita, Wurtzita, Zincita, Franklinita, Marmatita)
 
-local createOre = require("data-stage.builders.base.create-ore").createOre
-local createOreItem = require("data-stage.builders.base.create-ore-item").createOreItem
+local createOre = require("data-stage.builders.world.ore").createOre
+local createOreItem = require("data-stage.builders.items.ore-item").createOreItem
 
 -- Helper local para gerar ícones tintados sobre a base de minério do Factorio
 local function makeOreIcon(tint, base_icon)

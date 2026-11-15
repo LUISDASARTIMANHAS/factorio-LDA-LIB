@@ -2,7 +2,7 @@
 -- Um planeta desértico de exemplo demonstrando o uso de createPlanet().
 -- Para usar em outro mod, apenas copie este arquivo e adapte os parâmetros.
 
-local createPlanet = require("data-stage.builders.base.create-planet")
+local createPlanet = require("data-stage.builders.world.planet")
 local surfaceProps = require("shared.planet-surface-properties")
 local mapgenUtil = require("shared.planet-mapgen-util")
 

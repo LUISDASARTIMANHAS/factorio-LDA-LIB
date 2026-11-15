@@ -21,6 +21,7 @@ Todas as funções retornam tabelas no formato do Factorio prontas para serem pa
 3. [Grupos e Subgrupos](#3-grupos-e-subgrupos)
    - [LDA.createItemGroup](#ldacreateitemgroup)
 4. [Receitas e Combos](#4-receitas-e-combos)
+   - [LDA.createBaseRecipe](#ldacreatebaserecipe)
    - [LDA.createRecipe](#ldacreaterecipe)
    - [LDA.createGenericRecipe](#ldacreategenericrecipe)
    - [LDA.formatResultsList](#ldaformatresultslist)
@@ -42,9 +43,11 @@ Todas as funções retornam tabelas no formato do Factorio prontas para serem pa
    - [LDA.createOreItem](#ldacreateoreitem)
    - [LDA.createOre](#ldacreateore)
 7. [Entidades e Estruturas](#7-entidades-e-estruturas)
+   - [LDA.createBaseEntity](#ldacreatebaseentity)
    - [LDA.createEntity](#ldacreateentity)
    - [LDA.createAccumulator](#ldacreateaccumulator)
 8. [Tecnologias e Gatilhos](#8-tecnologias-e-gatilhos)
+   - [LDA.createBaseTechnology](#ldacreatebasetechnology)
    - [LDA.createTechnology](#ldacreatetechnology)
    - [LDA.createTechnologyTrigger](#ldacreatetechnologytrigger)
    - [LDA.createTechnologyTypedTrigger](#ldacreatetechnologytypedtrigger)
@@ -190,6 +193,28 @@ data:extend(categorias)
 ---
 
 ## 4. Receitas e Combos
+
+### `LDA.createBaseRecipe`
+Construtor raiz para `RecipePrototype`, aceitando tabela de configuração completa e permitindo controle total sobre categorias, produtividade, módulos permitidos e qualidade:
+
+```lua
+local receita = LDA.createBaseRecipe({
+    name = "placa-composta",
+    crafted_in = "advanced-crafting",
+    time = 3.2,
+    ingredients = {
+        {type = "item", name = "steel-plate", amount = 2},
+        {type = "item", name = "copper-plate", amount = 4}
+    },
+    results = {
+        {type = "item", name = "placa-composta", amount = 1}
+    },
+    maximum_productivity = 2.5,
+    allow_quality = true,
+    enabled = false
+})
+data:extend({ receita })
+```
 
 ### `LDA.createRecipe`
 Cria uma receita avulsa independente.
@@ -523,6 +548,21 @@ data:extend(uranioRico)
 
 ## 7. Entidades e Estruturas
 
+### `LDA.createBaseEntity`
+Construtor raiz genérico para protótipos de entidades (`EntityPrototype`), centralizando resolução de colisão, seleção, mineração, resistências e gráficos:
+
+```lua
+local entidadeBase = LDA.createBaseEntity({
+    type = "electric-pole",
+    name = "poste-subestacao-avancada",
+    max_health = 400,
+    collision_box = 0.8,
+    selection_box = 1.0,
+    flags = {"placeable-neutral", "player-creation"}
+})
+data:extend({ entidadeBase })
+```
+
 ### `LDA.createEntity`
 Cria um protótipo de entidade base (como painel solar modular) com colisão e camadas visuais:
 
@@ -559,6 +599,19 @@ data:extend({ acumulador })
 ---
 
 ## 8. Tecnologias e Gatilhos
+
+### `LDA.createBaseTechnology`
+Construtor raiz genérico para protótipos de tecnologia (`TechnologyPrototype`), unificando resolução de ícones, pré-requisitos, efeitos e ordens:
+
+```lua
+local techBase = LDA.createBaseTechnology({
+    name = "ciencia-quantica",
+    prerequisites = {"space-science-pack"},
+    unlocks = {"supercondutor-quantico"},
+    order = "c-a-quantica"
+})
+data:extend({ techBase })
+```
 
 ### `LDA.createTechnology`
 Cria pesquisas laboratoriais padrão com custo de frascos de ciência e tempo:

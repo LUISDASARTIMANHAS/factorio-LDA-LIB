@@ -3,9 +3,9 @@
 local utils = require("shared.control-utils")
 local utilsEnergySource = require("shared.control-energy-sources")
 local utilsAnimations = require("shared.control-animations")
-local controlCreateBlocItemWithRecipe = require("data-stage.builders.composites.create-block-item-with-recipe")
+local controlCreateBlocItemWithRecipe = require("data-stage.builders.composites.block-item-with-recipe")
 local controlGetModPath = require("shared.control-get-mod-path")
-local controlCreateItemWithRecipe = require("data-stage.builders.composites.create-item-with-recipe")
+local controlCreateItemWithRecipe = require("data-stage.builders.composites.item-with-recipe")
 local PATH = controlGetModPath.setBasePath("LDA-LIB")
 local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
 local defaultFilename = PATH .. "graphics/entities/throw-in-water"

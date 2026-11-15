@@ -24,10 +24,14 @@ O objetivo é **reduzir trabalho repetitivo** e manter um **padrão uniforme** e
 ## Arquitetura do repositório
 
 - `data.lua` carrega `data-stage/init.lua`; os add-ons próprios ficam em `data-stage/addons/`.
-- `data-stage/builders/` organiza os construtores de protótipos modulares e encapsulados:
-  - `base/`: construtores individuais de protótipos (itens, fluidos, gases, entidades, receitas).
-  - `composites/`: combinações reutilizáveis (item + receita, fluido + receita, bloco + receita).
-  - `specialized/`: construtores especializados (máquinas categorizadas, triggers de tecnologia).
+- `data-stage/builders/` organiza os construtores de protótipos organizados por domínio e herança:
+  - `items/`: protótipo base (`base.lua`) e itens especializados (`item`, `ore-item`, `block-item`, `equipment-item`, `item-group`, `item-search`).
+  - `fluids/`: protótipo base (`base.lua`) e fluidos especializados (`fluid`, `gas`).
+  - `entities/`: protótipo base (`base.lua`) e entidades especializadas (`entity`, `accumulator`).
+  - `technologies/`: tecnologia base (`base.lua`), `technology`, `trigger`, `trigger-craft` e `trigger-mine`.
+  - `recipes/`: receita base (`base.lua`), `recipe` e formatadores.
+  - `composites/`: base de compósitos (`base.lua`), `item-with-recipe`, `block-item-with-recipe`, `equipment-item-with-recipe`, `fluid-with-recipe`, `generic-recipe`, `category-machines`, `throw-in-water`.
+  - `world/`: recursos de mapa e espaço (`autoplace-control`, `resource`, `ore`, `planet`, `space-connection`).
 - `shared/` reúne utilitários compartilhados (animações, fontes de energia, mod paths, efeitos).
 - `runtime/` concentra lógica de runtime (`control.lua`, comandos `/lda-list` e registros de estado).
 - `api/registry.lua` e `api/modules.lua` centralizam a API pública consumida através de `init.lua`.
