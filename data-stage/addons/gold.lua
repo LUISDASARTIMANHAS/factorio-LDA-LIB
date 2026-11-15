@@ -42,7 +42,7 @@ end
 -- Ouro nativo: Ouro metálico encontrado naturalmente,
 -- frequentemente associado a pequenas quantidades de prata e cobre.
 
-local native_gold_tint = {
+local gold_tint = {
     r = 1.00,
     g = 0.78,
     b = 0.15,
@@ -51,17 +51,17 @@ local native_gold_tint = {
 
 data:extend(
     createOre({
-        name = "native_gold",
+        name = "gold",
         stack_size = 100,
         order = "e[gold]-a[native-gold]",
         icons = makeOreIcon(
-            native_gold_tint,
+            gold_tint,
             "__base__/graphics/icons/copper-ore.png"
         ),
         icon_size = 64,
         map_color = {1.00, 0.78, 0.15},
         mining_time = 1.5,
-        mining_visualisation_tint = native_gold_tint,
+        mining_visualisation_tint = gold_tint,
         base_density = 8,
         regular_rq_factor_multiplier = 1.2
     })

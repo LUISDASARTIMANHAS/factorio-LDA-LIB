@@ -10,7 +10,7 @@ function Module.createAutoplaceControl(name, order, tint, icon_size, icon_mipmap
     return {
         type = "autoplace-control",
         name = name .. "-ore",
-        localised_name = {"", "[entity=" .. name .. "] ", {"entity-name." .. name}},
+        localised_name = {"", "[item=" .. name .. "] ", {"item-name." .. name}},
         richness = true,
         order = "a-" .. order,
         category = "resource",
